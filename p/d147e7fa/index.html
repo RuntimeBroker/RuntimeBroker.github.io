@@ -1,0 +1,980 @@
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.29.1" theme-name="Stellar" theme-version="1.29.1">
+  
+  <meta name="generator" content="Hexo 7.3.0">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  
+  <title>汇编入门学习 - RuntimeBroker Blog's</title>
+
+  
+    <meta name="description" content="汇编一、指令1 mov可以立即数到内存，寄存器到内存。内存到寄存器 1.1 mov指令操作的四种形式 [立即数] [reg] reg代表寄存器 可以是8个通用寄存器中的任意一个 [reg+立即数] [reg+reg*{1,2,4,8}]  1.2 指令格式 MOV r&#x2F;m8,r8      r通用寄存器 MOV r&#x2F;m16,r16   m代表内存 MOV r&#x2F;m32,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="汇编入门学习">
+<meta property="og:url" content="https://gbk.cx/p/d147e7fa/index.html">
+<meta property="og:site_name" content="RuntimeBroker Blog&#39;s">
+<meta property="og:description" content="汇编一、指令1 mov可以立即数到内存，寄存器到内存。内存到寄存器 1.1 mov指令操作的四种形式 [立即数] [reg] reg代表寄存器 可以是8个通用寄存器中的任意一个 [reg+立即数] [reg+reg*{1,2,4,8}]  1.2 指令格式 MOV r&#x2F;m8,r8      r通用寄存器 MOV r&#x2F;m16,r16   m代表内存 MOV r&#x2F;m32,">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/19/tzdTVzkA9nSuhP3vM6p01729344068916.png">
+<meta property="og:image" content="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/19/IDqXn7QaUsncKSoprbes1729344086548.png">
+<meta property="og:image" content="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/19/FA7VNMp2h04dlYk2uiOY1729344094077.png">
+<meta property="og:image" content="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/19/2jddoYVTheo4vVBfG6Pe1729344096976.png">
+<meta property="og:image" content="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/19/PwH0TLISl2GN2FgrYHIw1729344103144.png">
+<meta property="og:image" content="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/19/EXei6gcBRwac3PrdL7l31729344109884.png">
+<meta property="article:published_time" content="2024-10-19T13:25:45.000Z">
+<meta property="article:modified_time" content="2024-10-19T13:46:26.346Z">
+<meta property="article:author" content="RuntimeBroker">
+<meta property="article:tag" content="Assembly">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/19/tzdTVzkA9nSuhP3vM6p01729344068916.png">
+  
+  
+  
+  <meta name="keywords" content="Assembly">
+
+  <!-- feed -->
+  
+    <link rel="alternate" href="/atom.xml" title="RuntimeBroker Blog's" type="application/atom+xml">
+  
+
+  <link rel="stylesheet" href="/css/main.css?v=1.29.1">
+
+  
+
+  
+
+  
+</head>
+<body>
+
+<div class="l_body s:aa content tech" id="start" layout="post" ><aside class="l_left"><div class="leftbar-container">
+
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="undefined" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">RuntimeBroker Blog's</div></a></div></header>
+
+<div class="nav-area">
+<div class="search-wrapper" id="search-wrapper"><form class="search-form"><a class="search-button" onclick="document.getElementById(&quot;search-input&quot;).focus();"><svg t="1705074644177" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1560" width="200" height="200"><path d="M1008.839137 935.96571L792.364903 719.491476a56.783488 56.783488 0 0 0-80.152866 0 358.53545 358.53545 0 1 1 100.857314-335.166073 362.840335 362.840335 0 0 1-3.689902 170.145468 51.248635 51.248635 0 1 0 99.217358 26.444296 462.057693 462.057693 0 1 0-158.255785 242.303546l185.930047 185.725053a51.248635 51.248635 0 0 0 72.568068 0 51.248635 51.248635 0 0 0 0-72.978056z" p-id="1561"></path><path d="M616.479587 615.969233a50.428657 50.428657 0 0 0-61.498362-5.534852 174.655348 174.655348 0 0 1-177.525271 3.484907 49.403684 49.403684 0 0 0-58.833433 6.76482l-3.074918 2.869923a49.403684 49.403684 0 0 0 8.609771 78.10292 277.767601 277.767601 0 0 0 286.992355-5.739847 49.403684 49.403684 0 0 0 8.404776-76.667958z" p-id="1562"></path></svg></a><input type="text" class="search-input" id="search-input" placeholder="站内搜索"></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div>
+
+
+<nav class="menu dis-select"><a class="nav-item" title="主页" href="/" style="color:#1BCDFC"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M5.879 2.879C5 3.757 5 5.172 5 8v8c0 2.828 0 4.243.879 5.121C6.757 22 8.172 22 11 22h2c2.828 0 4.243 0 5.121-.879C19 20.243 19 18.828 19 16V8c0-2.828 0-4.243-.879-5.121C17.243 2 15.828 2 13 2h-2c-2.828 0-4.243 0-5.121.879M8.25 17a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75M9 12.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zM8.25 9A.75.75 0 0 1 9 8.25h6a.75.75 0 0 1 0 1.5H9A.75.75 0 0 1 8.25 9" clip-rule="evenodd"/><path fill="currentColor" d="M5.235 4.058C5 4.941 5 6.177 5 8v8c0 1.823 0 3.058.235 3.942L5 19.924c-.975-.096-1.631-.313-2.121-.803C2 18.243 2 16.828 2 14v-4c0-2.829 0-4.243.879-5.121c.49-.49 1.146-.707 2.121-.803zm13.53 15.884C19 19.058 19 17.822 19 16V8c0-1.823 0-3.059-.235-3.942l.235.018c.975.096 1.631.313 2.121.803C22 5.757 22 7.17 22 9.999v4c0 2.83 0 4.243-.879 5.122c-.49.49-1.146.707-2.121.803z" opacity=".5"/></svg></a><a class="nav-item" title="分类" href="/categories/" style="color:#3DC550"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M14.25 4.48v3.057c0 .111 0 .27.02.406a.936.936 0 0 0 .445.683a.96.96 0 0 0 .783.072c.13-.04.272-.108.378-.159L17 8.005l1.124.534c.106.05.248.119.378.16a.958.958 0 0 0 .783-.073a.936.936 0 0 0 .444-.683c.021-.136.021-.295.021-.406V3.031c.113-.005.224-.01.332-.013C21.154 2.98 22 3.86 22 4.933v11.21c0 1.112-.906 2.01-2.015 2.08c-.97.06-2.108.179-2.985.41c-1.082.286-1.99 1.068-3.373 1.436c-.626.167-1.324.257-1.627.323V5.174c.32-.079 1.382-.203 1.674-.371c.184-.107.377-.216.576-.323m5.478 8.338a.75.75 0 0 1-.546.91l-4 1a.75.75 0 0 1-.364-1.456l4-1a.75.75 0 0 1 .91.546" clip-rule="evenodd"/><path fill="currentColor" d="M18.25 3.151c-.62.073-1.23.18-1.75.336a8.2 8.2 0 0 0-.75.27v3.182l.75-.356l.008-.005a1.13 1.13 0 0 1 .492-.13c.047 0 .094.004.138.01c.175.029.315.1.354.12l.009.005l.749.356V3.647z"/><path fill="currentColor" d="M12 5.214c-.334-.064-1.057-.161-1.718-.339C8.938 4.515 8.05 3.765 7 3.487c-.887-.234-2.041-.352-3.018-.412C2.886 3.007 2 3.9 2 4.998v11.146c0 1.11.906 2.01 2.015 2.079c.97.06 2.108.179 2.985.41c.486.129 1.216.431 1.873.726c1.005.451 2.052.797 3.127 1.034z" opacity=".5"/><path fill="currentColor" d="M4.273 12.818a.75.75 0 0 1 .91-.545l4 1a.75.75 0 1 1-.365 1.455l-4-1a.75.75 0 0 1-.545-.91m.909-4.545a.75.75 0 1 0-.364 1.455l4 1a.75.75 0 0 0 .364-1.455z"/></svg></a><a class="nav-item" title="探索" href="/explore/" style="color:#FA6400"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M20 12a8 8 0 1 1-16 0a8 8 0 0 1 16 0" opacity=".5"/><path fill="currentColor" d="M17.712 5.453c1.047-.193 2.006-.259 2.797-.152c.77.103 1.536.393 1.956 1.064c.446.714.312 1.542-.012 2.258c-.33.728-.918 1.499-1.672 2.268c-1.516 1.547-3.836 3.226-6.597 4.697c-2.763 1.472-5.495 2.484-7.694 2.92c-1.095.217-2.098.299-2.923.201c-.8-.095-1.6-.383-2.032-1.075c-.47-.752-.296-1.63.07-2.379c.375-.768 1.032-1.586 1.872-2.403L4 12.416c0 .219.083.71.168 1.146c.045.23.09.444.123.596c-.652.666-1.098 1.263-1.339 1.756c-.277.567-.208.825-.145.925c.072.116.305.305.937.38c.609.073 1.44.018 2.455-.183c2.02-.4 4.613-1.351 7.28-2.772c2.667-1.42 4.85-3.015 6.23-4.423c.694-.707 1.15-1.334 1.377-1.836c.233-.515.167-.75.107-.844c-.07-.112-.289-.294-.883-.374c-.542-.072-1.272-.041-2.163.112L16.87 5.656c.338-.101.658-.17.842-.203"/></svg></a><a class="nav-item" title="友链" href="/friends/" style="color:#F44336"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="m13.629 20.472l-.542.916c-.483.816-1.69.816-2.174 0l-.542-.916c-.42-.71-.63-1.066-.968-1.262c-.338-.197-.763-.204-1.613-.219c-1.256-.021-2.043-.098-2.703-.372a5 5 0 0 1-2.706-2.706C2 14.995 2 13.83 2 11.5v-1c0-3.273 0-4.91.737-6.112a5 5 0 0 1 1.65-1.651C5.59 2 7.228 2 10.5 2h3c3.273 0 4.91 0 6.113.737a5 5 0 0 1 1.65 1.65C22 5.59 22 7.228 22 10.5v1c0 2.33 0 3.495-.38 4.413a5 5 0 0 1-2.707 2.706c-.66.274-1.447.35-2.703.372c-.85.015-1.275.022-1.613.219c-.338.196-.548.551-.968 1.262" opacity=".5"/><path fill="currentColor" d="M10.99 14.308c-1.327-.978-3.49-2.84-3.49-4.593c0-2.677 2.475-3.677 4.5-1.609c2.025-2.068 4.5-1.068 4.5 1.609c0 1.752-2.163 3.615-3.49 4.593c-.454.335-.681.502-1.01.502c-.329 0-.556-.167-1.01-.502"/></svg></a></nav>
+</div>
+<div class="widgets">
+
+
+<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span><a class="cap-action" id="rss" title="Subscribe" href="/atom.xml"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M5 21q-.825 0-1.412-.587T3 19q0-.825.588-1.412T5 17q.825 0 1.413.588T7 19q0 .825-.587 1.413T5 21m13.5 0q-.65 0-1.088-.475T16.9 19.4q-.275-2.425-1.312-4.537T12.9 11.1q-1.65-1.65-3.762-2.687T4.6 7.1q-.65-.075-1.125-.512T3 5.5q0-.65.45-1.062t1.075-.363q3.075.275 5.763 1.563t4.737 3.337q2.05 2.05 3.338 4.738t1.562 5.762q.05.625-.363 1.075T18.5 21m-6 0q-.625 0-1.075-.437T10.85 19.5q-.225-1.225-.787-2.262T8.65 15.35q-.85-.85-1.888-1.412T4.5 13.15q-.625-.125-1.062-.575T3 11.5q0-.65.45-1.075t1.075-.325q1.825.25 3.413 1.063t2.837 2.062q1.25 1.25 2.063 2.838t1.062 3.412q.1.625-.325 1.075T12.5 21"/></svg></a></div><div class="widget-body fs14"><a class="item title" href="/p/988d33e4/"><span class="title">MVC设计模式-1</span></a><a class="item title" href="/p/cf780ffd/"><span class="title">PHP-PDO&PDO类&PDO核心类&封装PDO单例</span></a><a class="item title" href="/p/980312b6/"><span class="title">PHP面向对象-2-三大特性&类常量&接口</span></a><a class="item title" href="/p/b78a5232/"><span class="title">PHP面向对象-1-类&对象&属性&访问修饰符</span></a><a class="item title" href="/p/d71be832/"><span class="title">PHP面向对象-4-命名空间&trait(原型)&迭代器</span></a><a class="item title" href="/p/a73ab557/"><span class="title">PHP基础-3-文件操作</span></a><a class="item title" href="/p/f60eefa5/"><span class="title">PHP基础-2-作用域&递归&文件夹操作</span></a><a class="item title" href="/p/be32be3e/"><span class="title">PHP面向对象-3-加载类&设计模式&魔术方法&序列化</span></a><a class="item title" href="/p/184625e/"><span class="title">MVC设计模式-2</span></a><a class="item title" href="/p/5b8fbc6e/"><span class="title">PHP基础-1-变量-常量-运算符-数据类型-判断-循环</span></a></div></widget>
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="/" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/08a41b181ce68.svg"/></a><a class="social" href="/" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/3616429.svg"/></a><a class="social" href="/about/#comments" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/942ebbf1a4b91.svg"/></a><a class="social" onclick="switchTheme()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path fill="currentColor" fill-rule="evenodd" d="M582.4 326.4c-140.8 0-256 115.2-256 256s115.2 256 256 256 256-115.2 256-256-115.2-256-256-256z m0 448c-70.4 0-131.2-36.8-164.8-92.8 12.8 3.2 27.2 4.8 40 4.8 121.6 0 219.2-99.2 219.2-219.2 0-17.6-1.6-35.2-6.4-52.8 60.8 32 102.4 96 102.4 169.6 1.6 104-84.8 190.4-190.4 190.4zM582.4 262.4c17.6 0 32-14.4 32-32v-128c0-17.6-14.4-32-32-32s-32 14.4-32 32v128c0 17.6 14.4 32 32 32zM262.4 582.4c0-17.6-14.4-32-32-32h-128c-17.6 0-32 14.4-32 32s14.4 32 32 32h128c17.6 0 32-14.4 32-32zM310.4 356.8c6.4 6.4 14.4 9.6 22.4 9.6 8 0 16-3.2 22.4-9.6 12.8-12.8 12.8-32 0-44.8l-91.2-91.2c-12.8-12.8-32-12.8-44.8 0-12.8 12.8-12.8 32 0 44.8l91.2 91.2zM944 220.8c-12.8-12.8-32-12.8-44.8 0l-91.2 91.2c-12.8 12.8-12.8 32 0 44.8 6.4 6.4 14.4 9.6 22.4 9.6 8 0 16-3.2 22.4-9.6l91.2-91.2c12.8-12.8 12.8-33.6 0-44.8zM310.4 808l-91.2 91.2c-12.8 12.8-12.8 32 0 44.8 6.4 6.4 14.4 9.6 22.4 9.6 8 0 16-3.2 22.4-9.6l91.2-91.2c12.8-12.8 12.8-32 0-44.8-11.2-11.2-32-11.2-44.8 0z"></path></svg></a></div></footer>
+</div></aside><div class="l_main" id="main">
+
+
+
+
+
+<div class="article banner top">
+  <div class="content">
+    <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+<span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Language/">Language</a></div>
+<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2024-10-19T13:25:45.000Z">2024-10-19</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2024-10-19T13:46:26.346Z">2024-10-19</time></span></div></div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>汇编入门学习</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div><article class="md-text content"><h1 id="汇编"><a href="#汇编" class="headerlink" title="汇编"></a>汇编</h1><h1 id="一、指令"><a href="#一、指令" class="headerlink" title="一、指令"></a>一、指令</h1><h2 id="1-mov"><a href="#1-mov" class="headerlink" title="1 mov"></a>1 mov</h2><p>可以立即数到内存，寄存器到内存。内存到寄存器</p>
+<h3 id="1-1-mov指令操作的四种形式"><a href="#1-1-mov指令操作的四种形式" class="headerlink" title="1.1 mov指令操作的四种形式"></a>1.1 mov指令操作的四种形式</h3><ol>
+<li>[立即数]</li>
+<li>[reg] reg代表寄存器 可以是8个通用寄存器中的任意一个</li>
+<li>[reg+立即数]</li>
+<li>[reg+reg*{1,2,4,8}]</li>
+</ol>
+<h3 id="1-2-指令格式"><a href="#1-2-指令格式" class="headerlink" title="1.2 指令格式"></a>1.2 指令格式</h3><ol>
+<li>MOV r&#x2F;m8,r8      r通用寄存器</li>
+<li>MOV r&#x2F;m16,r16   m代表内存</li>
+<li>MOV r&#x2F;m32,r32  r8代表8位通用寄存器</li>
+<li>MOV r8,r&#x2F;m8      m8代表8为内存</li>
+<li>MOV r16,r&#x2F;m16   imm8代表8位立即数</li>
+<li>MOV r32,r&#x2F;m32</li>
+<li>MOV r8,imm8</li>
+<li>MOV r16,imm16</li>
+<li>MOV r32,imm32</li>
+</ol>
+<h2 id="2-movs"><a href="#2-movs" class="headerlink" title="2 movs"></a>2 movs</h2><p>移动数据 内存-内存 （EDI-ESI）</p>
+<p>MOVS BYTE PTR ES:[EDI],BYTE PTR DS:[ESI] 简写为：MOVSB</p>
+<p>MOVS WORD PTR ES:[EDI],WORD PTR DS:[ESI] 简写为：MOVSW</p>
+<p>MOVS DWORD PTR ES:[EDI],DWORD PTR DS:[ESI] 简写为：MOVSD</p>
+<p>💡 默认DF位是0时，当完成movs操作后ESI和EDI的值会加byte,word,dword{1，2，4}</p>
+<h2 id="3-stos"><a href="#3-stos" class="headerlink" title="3 stos"></a>3 stos</h2><p>将AI&#x2F;AX&#x2F;EAX的值存储到[EDI]指定的内存单元</p>
+<p>STOS BYTE PRT ES:[EDI] 简写为STOSB</p>
+<p>STOS WORD PRT ES:[EDI] 简写为STOSW</p>
+<p>STOS DWORD PRT ES:[EDI] 简写为STOSD</p>
+<p>💡 默认DF位是0时，当完成stos操作后EDI的值会加byte,word,dword{1，2，4}</p>
+<h2 id="4-rep"><a href="#4-rep" class="headerlink" title="4 rep"></a>4 rep</h2><p>按计数寄存器ECX中指定的次数重复执行字符串指令</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable constant_">MOV</span> <span class="variable constant_">ECX</span>,<span class="number">10</span></span><br><span class="line"><span class="variable constant_">REP</span> <span class="variable constant_">MOVSD</span></span><br><span class="line"></span><br><span class="line"><span class="variable constant_">REP</span> <span class="variable constant_">STOSD</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="5-add"><a href="#5-add" class="headerlink" title="5 add"></a>5 add</h2><h3 id="5-1-指令格式"><a href="#5-1-指令格式" class="headerlink" title="5.1 指令格式"></a>5.1 指令格式</h3><ol>
+<li>ADD r&#x2F;m8,imm8</li>
+<li>ADD r&#x2F;m16,imm16</li>
+<li>ADD r&#x2F;m32,imm32 </li>
+<li>ADD r&#x2F;m16,imm8</li>
+<li>ADD r&#x2F;m32,imm8</li>
+<li>ADD r&#x2F;m8,r8</li>
+<li>ADD r&#x2F;m16,r16</li>
+<li>ADD r&#x2F;m32,r32</li>
+<li>ADD r8,,r&#x2F;m8</li>
+<li>ADD r16,r&#x2F;m16</li>
+<li>ADD r32,r&#x2F;m32</li>
+</ol>
+<h2 id="6-sub"><a href="#6-sub" class="headerlink" title="6 sub"></a>6 sub</h2><h3 id="6-1-指令格式"><a href="#6-1-指令格式" class="headerlink" title="6.1 指令格式"></a>6.1 指令格式</h3><ol>
+<li>SUB r&#x2F;m8,imm8</li>
+<li>SUB r&#x2F;m16,imm16</li>
+<li>SUB r&#x2F;m32,imm32 </li>
+<li>SUB r&#x2F;m16,imm8</li>
+<li>SUB r&#x2F;m32,imm8</li>
+<li>SUB r&#x2F;m8,r8</li>
+<li>SUB r&#x2F;m16,r16</li>
+<li>SUB r&#x2F;m32,r32</li>
+<li>SUB r8,,r&#x2F;m8</li>
+<li>SUB r16,r&#x2F;m16</li>
+<li>SUB r32,r&#x2F;m32</li>
+</ol>
+<h2 id="7-and"><a href="#7-and" class="headerlink" title="7 and"></a>7 and</h2><h3 id="7-1-指令格式"><a href="#7-1-指令格式" class="headerlink" title="7.1 指令格式"></a>7.1 指令格式</h3><ol>
+<li>AND r&#x2F;m8,imm8</li>
+<li>AND r&#x2F;m16,imm16</li>
+<li>AND r&#x2F;m32,imm32</li>
+<li>AND r&#x2F;m16,imm8</li>
+<li>AND r&#x2F;m32,imm8</li>
+<li>AND r&#x2F;m8,r8</li>
+<li>AND r&#x2F;m16,r16</li>
+<li>AND r&#x2F;m32,r32</li>
+<li>AND r8,r&#x2F;m8</li>
+<li>AND r16,r&#x2F;m16</li>
+<li>AND r32,r&#x2F;m32</li>
+</ol>
+<h2 id="8-or"><a href="#8-or" class="headerlink" title="8 or"></a>8 or</h2><h3 id="8-1-指令格式"><a href="#8-1-指令格式" class="headerlink" title="8.1 指令格式"></a>8.1 指令格式</h3><ol>
+<li>OR r&#x2F;m8,imm8</li>
+<li>OR r&#x2F;m16,imm16</li>
+<li>OR r&#x2F;m32,imm32</li>
+<li>OR r&#x2F;m16,imm8</li>
+<li>OR r&#x2F;m32,imm8</li>
+<li>OR r&#x2F;m8,r8</li>
+<li>OR r&#x2F;m16,r16</li>
+<li>OR r&#x2F;m32,r32</li>
+<li>OR r8,r&#x2F;m8</li>
+<li>OR r16,r&#x2F;m16</li>
+<li>OR r32,r&#x2F;m32</li>
+</ol>
+<h2 id="9-not"><a href="#9-not" class="headerlink" title="9 not"></a>9 not</h2><h3 id="9-1-功能"><a href="#9-1-功能" class="headerlink" title="9.1 功能"></a>9.1 功能</h3><p>进行取反操作</p>
+<h3 id="9-2-指令格式"><a href="#9-2-指令格式" class="headerlink" title="9.2 指令格式"></a>9.2 指令格式</h3><ol>
+<li>NOT r32</li>
+<li>NOT r16</li>
+<li>NOT m16</li>
+<li>NOT m32</li>
+</ol>
+<h2 id="10-xor"><a href="#10-xor" class="headerlink" title="10 xor"></a>10 xor</h2><h3 id="10-1-指令格式"><a href="#10-1-指令格式" class="headerlink" title="10.1 指令格式"></a>10.1 指令格式</h3><ol>
+<li>XOR r&#x2F;m8,imm8</li>
+<li>XOR r&#x2F;m16,imm16</li>
+<li>XOR r&#x2F;m32,imm32</li>
+<li>XOR r&#x2F;m16,imm8</li>
+<li>XOR r&#x2F;m32,imm8</li>
+<li>XOR r&#x2F;m8,r8</li>
+<li>XOR r&#x2F;m16,r16</li>
+<li>XOR r&#x2F;m32,r32</li>
+<li>XOR r8,r&#x2F;m8</li>
+<li>XOR r16,r&#x2F;m16</li>
+<li>XOR r32,r&#x2F;m32</li>
+</ol>
+<h2 id="11-push"><a href="#11-push" class="headerlink" title="11 push"></a>11 push</h2><h3 id="11-1-功能"><a href="#11-1-功能" class="headerlink" title="11.1 功能"></a>11.1 功能</h3><ol>
+<li>向堆栈中压入数据</li>
+<li>然后修改栈顶指针ESP寄存器地址，看数据类型byte,word,dword分别对应-1，-2，-4</li>
+</ol>
+<h3 id="11-2-指令格式"><a href="#11-2-指令格式" class="headerlink" title="11.2 指令格式"></a>11.2 指令格式</h3><ol>
+<li>PUSH r32</li>
+<li>PUSH r16</li>
+<li>PUSH m16</li>
+<li>PUSH m32</li>
+<li>PUSH imm8&#x2F;imm16&#x2F;imm32</li>
+<li>PUSHAD（把8个通用寄存器的值存入堆栈）</li>
+</ol>
+<h3 id="11-3-其他方式实现该功能"><a href="#11-3-其他方式实现该功能" class="headerlink" title="11.3 其他方式实现该功能"></a>11.3 其他方式实现该功能</h3><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/19/tzdTVzkA9nSuhP3vM6p01729344068916.png" alt="image"></p>
+<h2 id="12-pop"><a href="#12-pop" class="headerlink" title="12 pop"></a>12 pop</h2><h3 id="12-1-功能"><a href="#12-1-功能" class="headerlink" title="12.1 功能"></a>12.1 功能</h3><ol>
+<li>将栈顶数据存储到寄存器&#x2F;内存</li>
+<li>修改栈顶指针ESP寄存器地址，看数据类型byte,word,dword分别对应+1，+2，+4</li>
+</ol>
+<h3 id="12-2-指令格式"><a href="#12-2-指令格式" class="headerlink" title="12.2 指令格式"></a>12.2 指令格式</h3><ol>
+<li>POP r16</li>
+<li>POP r32</li>
+<li>POP m16</li>
+<li>POP m32</li>
+<li>POPAD （把存入堆栈的8个寄存器值弹出，恢复8个寄存器的值）</li>
+</ol>
+<h3 id="12-3-其他方式实现该功能"><a href="#12-3-其他方式实现该功能" class="headerlink" title="12.3 其他方式实现该功能"></a>12.3 其他方式实现该功能</h3><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/19/IDqXn7QaUsncKSoprbes1729344086548.png" alt="image"></p>
+<h2 id="13-jmp"><a href="#13-jmp" class="headerlink" title="13 jmp"></a>13 jmp</h2><h3 id="13-1-功能"><a href="#13-1-功能" class="headerlink" title="13.1 功能"></a>13.1 功能</h3><ol>
+<li>修改寄存器EIP的值</li>
+</ol>
+<h3 id="13-2-指令格式"><a href="#13-2-指令格式" class="headerlink" title="13.2 指令格式"></a>13.2 指令格式</h3><ol>
+<li>JMP 寄存器&#x2F;立即数&#x2F;内存</li>
+</ol>
+<h2 id="14-call"><a href="#14-call" class="headerlink" title="14 call"></a>14 call</h2><h3 id="14-1-功能"><a href="#14-1-功能" class="headerlink" title="14.1 功能"></a>14.1 功能</h3><ol>
+<li>PUSH当前call指令的下一行地址进入堆栈</li>
+<li>往EIP内存入立即数&#x2F;寄存器&#x2F;内存    简写：jmp 立即数&#x2F;寄存器&#x2F;内存</li>
+</ol>
+<p>💡 与JMP唯一的区别：在堆栈中存储call指令下一行内存地址</p>
+<h3 id="14-2-指令格式"><a href="#14-2-指令格式" class="headerlink" title="14.2 指令格式"></a>14.2 指令格式</h3><ol>
+<li>CALL 立即数&#x2F;寄存器&#x2F;内存</li>
+</ol>
+<h2 id="15-ret"><a href="#15-ret" class="headerlink" title="15 ret"></a>15 ret</h2><h3 id="15-1-功能"><a href="#15-1-功能" class="headerlink" title="15.1 功能"></a>15.1 功能</h3><ol>
+<li>将当前栈顶数据值存入EIP      ADD ESP,4</li>
+<li>然后当前栈顶指针+4，赋值给ESP    MOV EIP,[ESP-4]</li>
+</ol>
+<h3 id="15-2-指令格式"><a href="#15-2-指令格式" class="headerlink" title="15.2 指令格式"></a>15.2 指令格式</h3><ol>
+<li>RET</li>
+</ol>
+<h2 id="16-CMP"><a href="#16-CMP" class="headerlink" title="16 CMP"></a>16 CMP</h2><h3 id="16-1-功能"><a href="#16-1-功能" class="headerlink" title="16.1 功能"></a>16.1 功能</h3><p>该指令是比较两个操作数。</p>
+<p>实际上，它相当于SUB指令，但是相减的记过并不保存到第一个操作数中。</p>
+<p>只是根据相减的结果来改变零标志位的,当两个操作数相等的时候,零标志位置1。</p>
+<h3 id="16-2-指令格式"><a href="#16-2-指令格式" class="headerlink" title="16.2 指令格式"></a>16.2 指令格式</h3><ol>
+<li>CMP R&#x2F;M,R&#x2F;M&#x2F;IMM</li>
+</ol>
+<h2 id="17-TEST"><a href="#17-TEST" class="headerlink" title="17 TEST"></a>17 TEST</h2><h3 id="17-1-功能"><a href="#17-1-功能" class="headerlink" title="17.1 功能"></a>17.1 功能</h3><p>TEST指令相当于AND指令，只不过与的结果并不保存到第一个操作数中。</p>
+<p>该指令在一定程序上和CMP指令时类似的,两个数值进行AND操作,结果不保存,但是会改变相应标志位.</p>
+<h3 id="17-2-指令格式"><a href="#17-2-指令格式" class="headerlink" title="17.2 指令格式"></a>17.2 指令格式</h3><p>TEST r&#x2F;m,r&#x2F;m&#x2F;imm</p>
+<h2 id="18-ADC"><a href="#18-ADC" class="headerlink" title="18 ADC"></a>18 ADC</h2><h3 id="18-1-功能"><a href="#18-1-功能" class="headerlink" title="18.1 功能"></a>18.1 功能</h3><p>带进位加法，两边不能同时为内存 宽度要一样</p>
+<h3 id="18-2-指令格式"><a href="#18-2-指令格式" class="headerlink" title="18.2 指令格式"></a>18.2 指令格式</h3><ol>
+<li>ADC r&#x2F;m,r&#x2F;m&#x2F;imm</li>
+</ol>
+<h2 id="19-SBB"><a href="#19-SBB" class="headerlink" title="19 SBB"></a>19 SBB</h2><h3 id="19-1-功能"><a href="#19-1-功能" class="headerlink" title="19.1 功能"></a>19.1 功能</h3><p>带借位减法，两边不能同时为内存 宽度要一样</p>
+<h3 id="19-2-指令格式"><a href="#19-2-指令格式" class="headerlink" title="19.2 指令格式"></a>19.2 指令格式</h3><ol>
+<li>SBB r&#x2F;m,r&#x2F;m</li>
+</ol>
+<h2 id="20-XCHG"><a href="#20-XCHG" class="headerlink" title="20 XCHG"></a>20 XCHG</h2><h3 id="20-1-功能"><a href="#20-1-功能" class="headerlink" title="20.1 功能"></a>20.1 功能</h3><p>交换数据，两边不能同时为内存 宽度要一样</p>
+<h3 id="20-2-指令格式"><a href="#20-2-指令格式" class="headerlink" title="20.2 指令格式"></a>20.2 指令格式</h3><ol>
+<li>XCHG r&#x2F;m,r&#x2F;m</li>
+</ol>
+<h2 id="21-算术位移指令"><a href="#21-算术位移指令" class="headerlink" title="21 算术位移指令"></a>21 算术位移指令</h2><h3 id="21-1-SAL（算术左移）"><a href="#21-1-SAL（算术左移）" class="headerlink" title="21.1 SAL（算术左移）"></a>21.1 SAL（算术左移）</h3><p>SAR Reg&#x2F;Mem, CL&#x2F;Imm</p>
+<h3 id="21-2-SAR（算术右移）"><a href="#21-2-SAR（算术右移）" class="headerlink" title="21.2 SAR（算术右移）"></a>21.2 SAR（算术右移）</h3><p>SAR Reg&#x2F;Mem, CL&#x2F;Imm</p>
+<p>注意：算术右移时候补最高位符号位，是1补1，是0补0</p>
+<h2 id="22-逻辑移位指令"><a href="#22-逻辑移位指令" class="headerlink" title="22 逻辑移位指令"></a>22 逻辑移位指令</h2><p>注意：不管是左移还是右移都是补0</p>
+<h3 id="22-1-SHL（逻辑左移）"><a href="#22-1-SHL（逻辑左移）" class="headerlink" title="22.1 SHL（逻辑左移）"></a>22.1 SHL（逻辑左移）</h3><p>SHL Reg&#x2F;Mem, CL&#x2F;Imm</p>
+<h3 id="22-2-SHR（逻辑右移）"><a href="#22-2-SHR（逻辑右移）" class="headerlink" title="22.2 SHR（逻辑右移）"></a>22.2 SHR（逻辑右移）</h3><p>SHR Reg&#x2F;Mem, CL&#x2F;Imm</p>
+<h2 id="23-循环移位指令"><a href="#23-循环移位指令" class="headerlink" title="23 循环移位指令"></a>23 循环移位指令</h2><h3 id="23-1-ROL（循环左移）"><a href="#23-1-ROL（循环左移）" class="headerlink" title="23.1 ROL（循环左移）"></a>23.1 ROL（循环左移）</h3><p>ROL r&#x2F;m, i8 </p>
+<p>最低位是1则补1，最低位是0则补0</p>
+<h3 id="23-2-ROR（循环右移）"><a href="#23-2-ROR（循环右移）" class="headerlink" title="23.2 ROR（循环右移）"></a>23.2 ROR（循环右移）</h3><p>ROR r&#x2F;m, CL</p>
+<p>最高位是1则补1，最高位是0则补0</p>
+<h2 id="24-带进位的循环移位指令"><a href="#24-带进位的循环移位指令" class="headerlink" title="24 带进位的循环移位指令"></a>24 带进位的循环移位指令</h2><p>CF位是1则补1，反之则补0</p>
+<h3 id="24-1-RCL（带进位循环左移）"><a href="#24-1-RCL（带进位循环左移）" class="headerlink" title="24.1 RCL（带进位循环左移）"></a>24.1 RCL（带进位循环左移）</h3><p>RCL r&#x2F;m, i8 </p>
+<h3 id="24-2-RCR（带进位循环右移）"><a href="#24-2-RCR（带进位循环右移）" class="headerlink" title="24.2 RCR（带进位循环右移）"></a>24.2 RCR（带进位循环右移）</h3><p>RCR r&#x2F;m, CL</p>
+<h1 id="二、存储模式"><a href="#二、存储模式" class="headerlink" title="二、存储模式"></a>二、存储模式</h1><p>大端模式：数据高位在低位，数据低位在高位</p>
+<p>小端模式：数据高位在高位，数据低位在低位</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/19/FA7VNMp2h04dlYk2uiOY1729344094077.png" alt="image"></p>
+<h1 id="三-JCC"><a href="#三-JCC" class="headerlink" title="三 JCC"></a>三 JCC</h1><h2 id="1-标志寄存器-EFLAGS"><a href="#1-标志寄存器-EFLAGS" class="headerlink" title="1 标志寄存器 EFLAGS"></a>1 标志寄存器 EFLAGS</h2><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/19/2jddoYVTheo4vVBfG6Pe1729344096976.png" alt="image"></p>
+<h2 id="2-CF（bit-0）-Carry-flag"><a href="#2-CF（bit-0）-Carry-flag" class="headerlink" title="2 CF（bit 0）[Carry flag]"></a>2 CF（bit 0）[Carry flag]</h2><h3 id="2-1-功能"><a href="#2-1-功能" class="headerlink" title="2.1 功能"></a>2.1 功能</h3><p>若算术操作产生的结果在最高有效位发生进位或者借位则将其置1，反之清零。这个标志通常用来只是无符号整型运算的溢出状态。</p>
+<p>👉 有符号运算看O位，无符号运算看C位</p>
+<h3 id="2-2-例子"><a href="#2-2-例子" class="headerlink" title="2.2 例子"></a>2.2 例子</h3><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/19/PwH0TLISl2GN2FgrYHIw1729344103144.png" alt="image"></p>
+<h2 id="3-PF-（bit-2）-parity-flag"><a href="#3-PF-（bit-2）-parity-flag" class="headerlink" title="3 PF （bit 2）[parity flag]"></a>3 PF （bit 2）[parity flag]</h2><h3 id="3-1-功能"><a href="#3-1-功能" class="headerlink" title="3.1 功能"></a>3.1 功能</h3><p>如果结果的最低有效字节包含偶数个1位，则该位置1，否则清零。</p>
+<p>利用PF课进行奇偶校验检查：</p>
+<p>需要传输“11001110”，数据中含有5个“1”，所以其奇校验位为“0”，同时把“110011100”数据传输给接收方，接收方收到数据时后再一次计算奇偶性，“110011100”中仍然含有5个“1”，所以接收方计算出的奇校验位还是“0”，与发送方一致，表示在此次传输过程中未发生错误</p>
+<h2 id="4-AF（bit-4）-Auxiliary-carry-flag"><a href="#4-AF（bit-4）-Auxiliary-carry-flag" class="headerlink" title="4 AF（bit 4）[Auxiliary carry flag]"></a>4 AF（bit 4）[Auxiliary carry flag]</h2><h3 id="4-1-功能"><a href="#4-1-功能" class="headerlink" title="4.1 功能"></a>4.1 功能</h3><ol>
+<li>在字操作时，发生低字节向高字节进位或借位时；</li>
+<li>在字节操作时，发生低四位向高四位进位或借位时。</li>
+</ol>
+<p>辅助进位标志AF的值被置为1，否则其值为0：</p>
+<h2 id="5-ZF（bit-6）-zero-flag"><a href="#5-ZF（bit-6）-zero-flag" class="headerlink" title="5 ZF（bit 6）[zero flag]"></a>5 ZF（bit 6）[zero flag]</h2><h3 id="5-1-功能"><a href="#5-1-功能" class="headerlink" title="5.1 功能"></a>5.1 功能</h3><p>零标志ZF用来反映运算结果是否为0。</p>
+<p>若结果为0，则将其置1，反之清零</p>
+<p>经常与CMP或者TEST等指令一起使用</p>
+<h2 id="6-SF（bit-7）-Sign-flag"><a href="#6-SF（bit-7）-Sign-flag" class="headerlink" title="6 SF（bit 7）[Sign flag]"></a>6 SF（bit 7）[Sign flag]</h2><h3 id="6-1-功能"><a href="#6-1-功能" class="headerlink" title="6.1 功能"></a>6.1 功能</h3><p>该标志被设置为有符号整型的最高有效位</p>
+<p>0指示结果为正，反之则为负</p>
+<h2 id="7-OF（bit-11）-OverFlow-flag"><a href="#7-OF（bit-11）-OverFlow-flag" class="headerlink" title="7 OF（bit 11）[OverFlow flag]"></a>7 OF（bit 11）[OverFlow flag]</h2><h3 id="7-1-功能"><a href="#7-1-功能" class="headerlink" title="7.1 功能"></a>7.1 功能</h3><p>一处标志OF用于反映有符号数加减运算所得结果是否溢出。</p>
+<p>如果是无符号数运算，是否溢出看CF位。</p>
+<p>如果是有符号数运算，是否溢出看OF位。</p>
+<h2 id="8-DF（bit-10）-Oirection-flag"><a href="#8-DF（bit-10）-Oirection-flag" class="headerlink" title="8 DF（bit 10）[Oirection flag]"></a>8 DF（bit 10）[Oirection flag]</h2><h3 id="8-1-功能"><a href="#8-1-功能" class="headerlink" title="8.1 功能"></a>8.1 功能</h3><p>这个方向标志控制串指令（MOVS,CMPS,SCAS,LODS以及STOS）设置DF标志是的串指令自动递减（从高地址向低地址方向处理字符串），清楚该标志则使得指令自动递增</p>
+<p>STD以及CLD指令分别用于设置以及清楚DF标志</p>
+<h2 id="9-JCC指令"><a href="#9-JCC指令" class="headerlink" title="9 JCC指令"></a>9 JCC指令</h2><table>
+<thead>
+<tr>
+<th>1</th>
+<th>JE,，JZ</th>
+<th>结果为零则跳转(相等时跳转)</th>
+<th>ZF&#x3D;1</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2</td>
+<td>JNE，JNZ</td>
+<td>结果不为零则跳转(不相等时跳转)</td>
+<td>ZF&#x3D;0</td>
+</tr>
+<tr>
+<td>3</td>
+<td>JS</td>
+<td>结果为负则跳转</td>
+<td>SF&#x3D;1</td>
+</tr>
+<tr>
+<td>4</td>
+<td>JNS</td>
+<td>结果为非负则跳转</td>
+<td>SF&#x3D;0</td>
+</tr>
+<tr>
+<td>5</td>
+<td>JP，JPE</td>
+<td>结果中1的个数为偶数则跳转</td>
+<td>PF&#x3D;1</td>
+</tr>
+<tr>
+<td>6</td>
+<td>JNP，JPO</td>
+<td>结果中1的个数为偶数则跳转</td>
+<td>PF&#x3D;0</td>
+</tr>
+<tr>
+<td>7</td>
+<td>JO</td>
+<td>结果溢出了则跳转</td>
+<td>OF&#x3D;1</td>
+</tr>
+<tr>
+<td>8</td>
+<td>JNO</td>
+<td>结果没有溢出则跳转</td>
+<td>OF&#x3D;0</td>
+</tr>
+<tr>
+<td>9</td>
+<td>JB，JNAE</td>
+<td>小于则跳转 (无符号数)</td>
+<td>CF&#x3D;1</td>
+</tr>
+<tr>
+<td>10</td>
+<td>JNB，JAE</td>
+<td>大于等于则跳转 (无符号数)</td>
+<td>CF&#x3D;0</td>
+</tr>
+<tr>
+<td>11</td>
+<td>JBE，JNA</td>
+<td>小于等于则跳转 (无符号数)</td>
+<td>CF&#x3D;1 or ZF&#x3D;1</td>
+</tr>
+<tr>
+<td>12</td>
+<td>JNBE，JA</td>
+<td>大于则跳转(无符号数)</td>
+<td>CF&#x3D;0 and ZF&#x3D;0</td>
+</tr>
+<tr>
+<td>13</td>
+<td>JL，JNGE</td>
+<td>小于则跳转 (有符号数)</td>
+<td>SF≠ OF</td>
+</tr>
+<tr>
+<td>14</td>
+<td>JNL，JGE</td>
+<td>大于等于则跳转 (有符号数)</td>
+<td>SF&#x3D;OF</td>
+</tr>
+<tr>
+<td>15</td>
+<td>JLE，JNG</td>
+<td>小于等于则跳转 (有符号数)</td>
+<td>ZF&#x3D;1 or SF≠ OF</td>
+</tr>
+<tr>
+<td>16</td>
+<td>JNLE，JG</td>
+<td>大于则跳转(有符号数)</td>
+<td>ZF&#x3D;0 and SF&#x3D;OF</td>
+</tr>
+</tbody></table>
+<p>👉 在任何运算之前得先确定时有符号运算还是无符号运算</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/19/EXei6gcBRwac3PrdL7l31729344109884.png" alt="image"></p>
+
+<div class="article-footer fs14">
+    <section id="license">
+      <div class="header"><span>许可协议</span></div>
+      <div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div>
+    </section>
+    
+    <section id="share">
+      <div class="header"><span>分享文章</span></div>
+      <div class="body">
+        <div class="link"><input class="copy-area" readonly="true" id="copy-link" value="https://gbk.cx/p/d147e7fa/" /></div>
+        <div class="social-wrap dis-select"><a class="social share-item wechat" onclick="util.toggle(&quot;qrcode-wechat&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/b32ef3da1162a.svg" /></a><a class="social share-item weibo" target="_blank" rel="external nofollow noopener noreferrer" href="https://service.weibo.com/share/share.php?url=https://gbk.cx/p/d147e7fa/&title=汇编入门学习 - RuntimeBroker Blog's&summary=汇编一、指令1 mov可以立即数到内存，寄存器到内存。内存到寄存器
+1.1 mov指令操作的四种形式
+[立即数]
+[reg] reg代表寄存器 可以是8个通用寄存器中的任意一个
+[reg+立即数]
+[reg+reg*{1,2,4,8}..."><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/80c07e4dbb303.svg" /></a><a class="social share-item email" href="mailto:?subject=汇编入门学习 - RuntimeBroker Blog's&amp;body=https://gbk.cx/p/d147e7fa/"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/a1b00e20f425d.svg" /></a><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;复制成功&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/8411ed322ced6.svg" /></a></div>
+        
+        <div class="qrcode" id="qrcode-wechat" style="opacity:0;height:0">
+          <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=https://gbk.cx/p/d147e7fa/"/>
+        </div>
+        
+      </div>
+    </section>
+    </div>
+</article>
+<div class="related-wrap" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/p/5b8fbc6e/">PHP基础-1-变量-常量-运算符-数据类型-判断-循环</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/p/22672422/">shellcode编写</a></div></section></div>
+
+
+
+
+
+
+<footer class="page-footer footnote"><hr><div class="sitemap"><div class="sitemap-group"><span class="fs15">博客</span><a href="/">近期</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></div><div class="sitemap-group"><span class="fs15">项目</span><a href="/">开源库</a></div><div class="sitemap-group"><span class="fs15">社交</span><a href="/friends">友链</a><a href="/">留言板</a></div><div class="sitemap-group"><span class="fs15">更多</span><a href="/">关于本站</a><a target="_blank" rel="noopener" href="https://github.com/RuntimeBroker">GitHub</a></div></div><div class="text"><div style="text-align: center;">
+<p>
+    本站由 <a href="/">RuntimeBroker</a> 使用 <a href="/">Stellar</a> 主题创建。<br />
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。
+</p>
+</div>
+<!--不蒜子计数器-->
+<center>
+<script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js?id=Kb5KNSz05b5WZNTV&ck=Kb5KNSz05b5WZNTV"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!--添加一个访问量-->
+<span>
+       本"<span style="color: hsl(192 98% 55%); font-weight: bold;">页面</ a></span>"访问 <span id="busuanzi_value_page_pv" style="color: hsl(192 98% 55%); font-weight: bold;"></span> 次 | 👀总访问 <span id="busuanzi_value_site_pv" style="color: hsl(192 98% 55%); font-weight: bold;"></span>       次 | 总访客 <span id="busuanzi_value_site_uv" style="color: hsl(192 98% 55%); font-weight: bold;"></span> 人
+</span></br>
+<span id="runtime_span"></span>
+<script type="text/javascript">
+    function show_runtime() {
+        window.setTimeout("show_runtime()", 1000);
+        X = new Date("2024/09/20 17:00:00");
+        Y = new Date();
+        T = (Y.getTime() - X.getTime());
+        M = 24 * 60 * 60 * 1000;
+        a = T / M;
+        A = Math.floor(a);
+        b = (a - A) * 24;
+        B = Math.floor(b);
+        c = (b - B) * 60;
+        C = Math.floor((b - B) * 60);
+        D = Math.floor((c - C) * 60);
+        runtime_span.innerHTML = "⏱️本站已运行 " + A + "天" + B + "小时" + C + "分" + D + "秒"
+    }
+    show_runtime();
+</script>
+</center>
+</div></footer>
+<div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right">
+<div class="widgets">
+
+
+
+<widget class="widget-wrapper toc" id="data-toc" collapse="false"><div class="widget-header dis-select"><span class="name">本文目录</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B1%87%E7%BC%96"><span class="toc-text">汇编</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%8C%87%E4%BB%A4"><span class="toc-text">一、指令</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-mov"><span class="toc-text">1 mov</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-mov%E6%8C%87%E4%BB%A4%E6%93%8D%E4%BD%9C%E7%9A%84%E5%9B%9B%E7%A7%8D%E5%BD%A2%E5%BC%8F"><span class="toc-text">1.1 mov指令操作的四种形式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-text">1.2 指令格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-movs"><span class="toc-text">2 movs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-stos"><span class="toc-text">3 stos</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-rep"><span class="toc-text">4 rep</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-add"><span class="toc-text">5 add</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-text">5.1 指令格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-sub"><span class="toc-text">6 sub</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-text">6.1 指令格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-and"><span class="toc-text">7 and</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-text">7.1 指令格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-or"><span class="toc-text">8 or</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#8-1-%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-text">8.1 指令格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-not"><span class="toc-text">9 not</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#9-1-%E5%8A%9F%E8%83%BD"><span class="toc-text">9.1 功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-2-%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-text">9.2 指令格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-xor"><span class="toc-text">10 xor</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#10-1-%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-text">10.1 指令格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-push"><span class="toc-text">11 push</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#11-1-%E5%8A%9F%E8%83%BD"><span class="toc-text">11.1 功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-2-%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-text">11.2 指令格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-3-%E5%85%B6%E4%BB%96%E6%96%B9%E5%BC%8F%E5%AE%9E%E7%8E%B0%E8%AF%A5%E5%8A%9F%E8%83%BD"><span class="toc-text">11.3 其他方式实现该功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-pop"><span class="toc-text">12 pop</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#12-1-%E5%8A%9F%E8%83%BD"><span class="toc-text">12.1 功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-2-%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-text">12.2 指令格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-3-%E5%85%B6%E4%BB%96%E6%96%B9%E5%BC%8F%E5%AE%9E%E7%8E%B0%E8%AF%A5%E5%8A%9F%E8%83%BD"><span class="toc-text">12.3 其他方式实现该功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-jmp"><span class="toc-text">13 jmp</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#13-1-%E5%8A%9F%E8%83%BD"><span class="toc-text">13.1 功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-2-%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-text">13.2 指令格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-call"><span class="toc-text">14 call</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#14-1-%E5%8A%9F%E8%83%BD"><span class="toc-text">14.1 功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-2-%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-text">14.2 指令格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#15-ret"><span class="toc-text">15 ret</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#15-1-%E5%8A%9F%E8%83%BD"><span class="toc-text">15.1 功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#15-2-%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-text">15.2 指令格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#16-CMP"><span class="toc-text">16 CMP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#16-1-%E5%8A%9F%E8%83%BD"><span class="toc-text">16.1 功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#16-2-%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-text">16.2 指令格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#17-TEST"><span class="toc-text">17 TEST</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#17-1-%E5%8A%9F%E8%83%BD"><span class="toc-text">17.1 功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#17-2-%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-text">17.2 指令格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#18-ADC"><span class="toc-text">18 ADC</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#18-1-%E5%8A%9F%E8%83%BD"><span class="toc-text">18.1 功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#18-2-%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-text">18.2 指令格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#19-SBB"><span class="toc-text">19 SBB</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#19-1-%E5%8A%9F%E8%83%BD"><span class="toc-text">19.1 功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#19-2-%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-text">19.2 指令格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#20-XCHG"><span class="toc-text">20 XCHG</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#20-1-%E5%8A%9F%E8%83%BD"><span class="toc-text">20.1 功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#20-2-%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-text">20.2 指令格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#21-%E7%AE%97%E6%9C%AF%E4%BD%8D%E7%A7%BB%E6%8C%87%E4%BB%A4"><span class="toc-text">21 算术位移指令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#21-1-SAL%EF%BC%88%E7%AE%97%E6%9C%AF%E5%B7%A6%E7%A7%BB%EF%BC%89"><span class="toc-text">21.1 SAL（算术左移）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#21-2-SAR%EF%BC%88%E7%AE%97%E6%9C%AF%E5%8F%B3%E7%A7%BB%EF%BC%89"><span class="toc-text">21.2 SAR（算术右移）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#22-%E9%80%BB%E8%BE%91%E7%A7%BB%E4%BD%8D%E6%8C%87%E4%BB%A4"><span class="toc-text">22 逻辑移位指令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#22-1-SHL%EF%BC%88%E9%80%BB%E8%BE%91%E5%B7%A6%E7%A7%BB%EF%BC%89"><span class="toc-text">22.1 SHL（逻辑左移）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#22-2-SHR%EF%BC%88%E9%80%BB%E8%BE%91%E5%8F%B3%E7%A7%BB%EF%BC%89"><span class="toc-text">22.2 SHR（逻辑右移）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#23-%E5%BE%AA%E7%8E%AF%E7%A7%BB%E4%BD%8D%E6%8C%87%E4%BB%A4"><span class="toc-text">23 循环移位指令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#23-1-ROL%EF%BC%88%E5%BE%AA%E7%8E%AF%E5%B7%A6%E7%A7%BB%EF%BC%89"><span class="toc-text">23.1 ROL（循环左移）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#23-2-ROR%EF%BC%88%E5%BE%AA%E7%8E%AF%E5%8F%B3%E7%A7%BB%EF%BC%89"><span class="toc-text">23.2 ROR（循环右移）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#24-%E5%B8%A6%E8%BF%9B%E4%BD%8D%E7%9A%84%E5%BE%AA%E7%8E%AF%E7%A7%BB%E4%BD%8D%E6%8C%87%E4%BB%A4"><span class="toc-text">24 带进位的循环移位指令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#24-1-RCL%EF%BC%88%E5%B8%A6%E8%BF%9B%E4%BD%8D%E5%BE%AA%E7%8E%AF%E5%B7%A6%E7%A7%BB%EF%BC%89"><span class="toc-text">24.1 RCL（带进位循环左移）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#24-2-RCR%EF%BC%88%E5%B8%A6%E8%BF%9B%E4%BD%8D%E5%BE%AA%E7%8E%AF%E5%8F%B3%E7%A7%BB%EF%BC%89"><span class="toc-text">24.2 RCR（带进位循环右移）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%AD%98%E5%82%A8%E6%A8%A1%E5%BC%8F"><span class="toc-text">二、存储模式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89-JCC"><span class="toc-text">三 JCC</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8-EFLAGS"><span class="toc-text">1 标志寄存器 EFLAGS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-CF%EF%BC%88bit-0%EF%BC%89-Carry-flag"><span class="toc-text">2 CF（bit 0）[Carry flag]</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E5%8A%9F%E8%83%BD"><span class="toc-text">2.1 功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E4%BE%8B%E5%AD%90"><span class="toc-text">2.2 例子</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-PF-%EF%BC%88bit-2%EF%BC%89-parity-flag"><span class="toc-text">3 PF （bit 2）[parity flag]</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E5%8A%9F%E8%83%BD"><span class="toc-text">3.1 功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-AF%EF%BC%88bit-4%EF%BC%89-Auxiliary-carry-flag"><span class="toc-text">4 AF（bit 4）[Auxiliary carry flag]</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E5%8A%9F%E8%83%BD"><span class="toc-text">4.1 功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-ZF%EF%BC%88bit-6%EF%BC%89-zero-flag"><span class="toc-text">5 ZF（bit 6）[zero flag]</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E5%8A%9F%E8%83%BD"><span class="toc-text">5.1 功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-SF%EF%BC%88bit-7%EF%BC%89-Sign-flag"><span class="toc-text">6 SF（bit 7）[Sign flag]</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-%E5%8A%9F%E8%83%BD"><span class="toc-text">6.1 功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-OF%EF%BC%88bit-11%EF%BC%89-OverFlow-flag"><span class="toc-text">7 OF（bit 11）[OverFlow flag]</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-%E5%8A%9F%E8%83%BD"><span class="toc-text">7.1 功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-DF%EF%BC%88bit-10%EF%BC%89-Oirection-flag"><span class="toc-text">8 DF（bit 10）[Oirection flag]</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#8-1-%E5%8A%9F%E8%83%BD"><span class="toc-text">8.1 功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-JCC%E6%8C%87%E4%BB%A4"><span class="toc-text">9 JCC指令</span></a></li></ol></li></ol></div><div class="widget-footer">
+
+<a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12c0-4.714 0-7.071 1.464-8.536C4.93 2 7.286 2 12 2c4.714 0 7.071 0 8.535 1.464C22 4.93 22 7.286 22 12c0 4.714 0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12Z"/><path stroke-linecap="round" stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/></g></svg><span>回到顶部</span></a></div></widget>
+</div></aside><div class='float-panel blur'>
+  <button type='button' style='display:none' class='laptop-only rightbar-toggle mobile' onclick='sidebar.rightbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type='button' style='display:none' class='mobile-only leftbar-toggle mobile' onclick='sidebar.leftbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+</div><div class="scripts">
+<script type="text/javascript">
+  const ctx = {
+    date_suffix: {
+      just: `刚刚`,
+      min: `分钟前`,
+      hour: `小时前`,
+      day: `天前`,
+    },
+    root : `/`,
+  };
+
+  // required plugins (only load if needs)
+  if (`local_search`) {
+    ctx.search = {};
+    ctx.search.service = `local_search`;
+    if (ctx.search.service == 'local_search') {
+      let service_obj = Object.assign({}, `{"field":"all","path":"/search.json","content":true,"sort":"-date"}`);
+      ctx.search[ctx.search.service] = service_obj;
+    }
+  }
+  const def = {
+    avatar: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/3442075.svg`,
+    cover: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/cover/76b86c0226ffd.svg`,
+  };
+  const deps = {
+    jquery: `https://pic.gitlab.cx/npm/jquery@3.7.1/dist/jquery.min.js`,
+    marked: `https://pic.gitlab.cx/npm/marked@13.0.1/lib/marked.umd.min.js`
+  }
+  
+
+</script>
+
+<script type="text/javascript">
+  const utils = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    css: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    js: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = ctx.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    jq: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        utils.js(deps.jquery).then(fn)
+      } else {
+        fn()
+      }
+    },
+    
+    onLoading: (el) => {
+      if (el) {
+        $(el).append('<div class="loading-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" stroke-opacity=".3" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="1.3s" values="60;0"/></path><path stroke-dasharray="15" stroke-dashoffset="15" d="M12 3C16.9706 3 21 7.02944 21 12"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="15;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></g></svg></div>');
+      }
+    },
+    onLoadSuccess: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap').remove();
+      }
+    },
+    onLoadFailure: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap svg').remove();
+        $(el).find('.loading-wrap').append('<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3L21 20H3L12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="6" stroke-dashoffset="6" d="M12 10V14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="6;0"/></path></g><circle cx="12" cy="17" r="1" fill="currentColor" fill-opacity="0"><animate fill="freeze" attributeName="fill-opacity" begin="0.8s" dur="0.4s" values="0;1"/></circle></svg>');
+        $(el).find('.loading-wrap').addClass('error');
+      }
+    },
+    request: (el, url, callback, onFailure) => {
+      let retryTimes = 3;
+      utils.onLoading(el);
+      function req() {
+        return new Promise((resolve, reject) => {
+          let status = 0; // 0 等待 1 完成 2 超时
+          let timer = setTimeout(() => {
+            if (status === 0) {
+              status = 2;
+              timer = null;
+              reject('请求超时');
+              if (retryTimes == 0) {
+                onFailure();
+              }
+            }
+          }, 5000);
+          fetch(url).then(function(response) {
+            if (status !== 2) {
+              clearTimeout(timer);
+              resolve(response);
+              timer = null;
+              status = 1;
+            }
+            if (response.ok) {
+              return response.json();
+            }
+            throw new Error('Network response was not ok.');
+          }).then(function(data) {
+            retryTimes = 0;
+            utils.onLoadSuccess(el);
+            callback(data);
+          }).catch(function(error) {
+            if (retryTimes > 0) {
+              retryTimes -= 1;
+              setTimeout(() => {
+                req();
+              }, 5000);
+            } else {
+              utils.onLoadFailure(el);
+              onFailure();
+            }
+          });
+        });
+      }
+      req();
+    },
+  };
+</script>
+
+<script>
+  const sidebar = {
+    leftbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    rightbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('rightbar');
+        l_body.removeAttribute('leftbar');
+      }
+    },
+    dismiss: () => {
+      if (l_body) {
+        l_body.removeAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    toggleTOC: () => {
+      document.querySelector('#data-toc').classList.toggle('collapse');
+    }
+  }
+</script>
+<script type="text/javascript">
+  (() => {
+    const tagSwitchers = document.querySelectorAll('.tag-subtree.parent-tag > a > .tag-switcher-wrapper')
+    for (const tagSwitcher of tagSwitchers) {
+      tagSwitcher.addEventListener('click', (e) => {
+        const parent = e.target.closest('.tag-subtree.parent-tag')
+        parent.classList.toggle('expanded')
+        e.preventDefault()
+      })
+    }
+
+    // Get active tag from query string, then activate it.
+    const urlParams = new URLSearchParams(window.location.search)
+    const activeTag = urlParams.get('tag')
+    if (activeTag) {
+      let tag = document.querySelector(`.tag-subtree[data-tag="${activeTag}"]`)
+      if (tag) {
+        tag.querySelector('a').classList.add('active')
+        
+        while (tag) {
+          tag.classList.add('expanded')
+          tag = tag.parentElement.closest('.tag-subtree.parent-tag')
+        }
+      }
+    }
+  })()
+</script>
+
+
+<!-- required -->
+<script src="/js/main.js?v=1.29.1" defer></script>
+
+<script type="text/javascript">
+  const applyTheme = (theme) => {
+    if (theme === 'auto') {
+      document.documentElement.removeAttribute('data-theme')
+    } else {
+      document.documentElement.setAttribute('data-theme', theme)
+    }
+
+    applyThemeToGiscus(theme)
+  }
+
+  const applyThemeToGiscus = (theme) => {
+    theme = theme === 'auto' ? 'preferred_color_scheme' : theme
+
+    const cmt = document.getElementById('giscus')
+    if (cmt) {
+      // This works before giscus load.
+      cmt.setAttribute('data-theme', theme)
+    }
+
+    const iframe = document.querySelector('#comments > section.giscus > iframe')
+    if (iframe) {
+      // This works after giscus loaded.
+      const src = iframe.src
+      const newSrc = src.replace(/theme=[\w]+/, `theme=${theme}`)
+      iframe.src = newSrc
+    }
+  }
+
+  const switchTheme = () => {
+    // light -> dark -> auto -> light -> ...
+    const currentTheme = document.documentElement.getAttribute('data-theme')
+    let newTheme;
+    switch (currentTheme) {
+      case 'light':
+        newTheme = 'dark'
+        break
+      case 'dark':
+        newTheme = 'auto'
+        break
+      default:
+        newTheme = 'light'
+    }
+    applyTheme(newTheme)
+    window.localStorage.setItem('Stellar.theme', newTheme)
+
+    const messages = {
+      light: `切换到浅色模式`,
+      dark: `切换到深色模式`,
+      auto: `切换到跟随系统配色`,
+    }
+    hud?.toast?.(messages[newTheme])
+  }
+
+  (() => {
+    // Apply user's preferred theme, if any.
+    const theme = window.localStorage.getItem('Stellar.theme')
+    if (theme !== null) {
+      applyTheme(theme)
+    }
+  })()
+</script>
+
+
+<!-- optional -->
+
+
+
+<script defer>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.services = Object.assign({}, JSON.parse(`{"mdrender":{"js":"/js/services/mdrender.js"},"siteinfo":{"js":"/js/services/siteinfo.js","api":null},"ghinfo":{"js":"/js/services/ghinfo.js"},"sites":{"js":"/js/services/sites.js"},"friends":{"js":"/js/services/friends.js"},"timeline":{"js":"/js/services/timeline.js"},"fcircle":{"js":"/js/services/fcircle.js"},"weibo":{"js":"/js/services/weibo.js"},"memos":{"js":"/js/services/memos.js"}}`));
+    for (let id of Object.keys(ctx.services)) {
+      const js = ctx.services[id].js;
+      if (id == 'siteinfo') {
+        ctx.cardlinks = document.querySelectorAll('a.link-card[cardlink]');
+        if (ctx.cardlinks?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            setCardLink(ctx.cardlinks);
+          });
+        }
+      } else {
+        const els = document.getElementsByClassName(`ds-${id}`);
+        if (els?.length > 0) {
+          utils.jq(() => {
+            if (id == 'timeline' || 'memos' || 'marked') {
+              utils.js(deps.marked).then(function () {
+                utils.js(js, { defer: true });
+              });
+            } else {
+              utils.js(js, { defer: true });
+            }
+          });
+        }
+      }
+    }
+  });
+</script>
+
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.search = {
+      path: `/search.json`,
+    }
+    utils.js('/js/search/local-search.js', { defer: true });
+  });
+</script><script>
+  window.FPConfig = {
+    delay: 0,
+    ignoreKeywords: [],
+    maxRPS: 5,
+    hoverDelay: 25
+  };
+</script>
+<script defer src="https://pic.gitlab.cx/npm/flying-pages@2/flying-pages.min.js"></script><script defer src="https://pic.gitlab.cx/npm/vanilla-lazyload@19.1.3/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazy",
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    window.lazyLoadInstance?.update();
+  });
+</script><script>
+  ctx.fancybox = {
+    selector: `.timenode p>img`,
+    css: `https://pic.gitlab.cx/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css`,
+    js: `https://pic.gitlab.cx/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js`
+  };
+  var selector = '[data-fancybox]:not(.error)';
+  if (ctx.fancybox.selector) {
+    selector += `, ${ctx.fancybox.selector}`
+  }
+  var needFancybox = document.querySelectorAll(selector).length !== 0;
+  if (!needFancybox) {
+    const els = document.getElementsByClassName('ds-memos');
+    if (els != undefined && els.length > 0) {
+      needFancybox = true;
+    }
+  }
+  if (needFancybox) {
+    utils.css(ctx.fancybox.css);
+    utils.js(ctx.fancybox.js, { defer: true }).then(function () {
+      Fancybox.bind(selector, {
+        hideScrollbar: false,
+        Thumbs: {
+          autoStart: false,
+        },
+        caption: (fancybox, slide) => {
+          return slide.triggerEl.alt || slide.triggerEl.dataset.caption || null
+        }
+      });
+    })
+  }
+</script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const swiper_api = document.getElementById('swiper-api');
+    if (swiper_api != undefined) {
+      utils.css(`https://unpkg.com/swiper@10.3.1/swiper-bundle.min.css`);
+      utils.js(`https://unpkg.com/swiper@10.3.1/swiper-bundle.min.js`, { defer: true }).then(function () {
+        const effect = swiper_api.getAttribute('effect') || '';
+        var swiper = new Swiper('.swiper#swiper-api', {
+          slidesPerView: 'auto',
+          spaceBetween: 8,
+          centeredSlides: true,
+          effect: effect,
+          rewind: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      })
+    }
+  });
+</script>
+<script defer type="text/javascript" src="https://pic.gitlab.cx/npm/mermaid@v9/dist/mermaid.min.js"></script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    var mermaid_config = {
+      startOnLoad: true,
+      theme:
+        "" == "auto" &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "neutral",
+      logLevel: 3,
+      themeVariables: {
+        darkMode: true
+      },
+      flowchart: {
+        useMaxWidth: false,
+        htmlLabels: true,
+        curve: "linear"
+      },
+      gantt: {
+        axisFormat: "%Y/%m/%d"
+      },
+      sequence: {
+        actorMargin: 50
+      }
+    }
+    mermaid.initialize(mermaid_config);
+  });
+</script><script>
+  document.addEventListener('DOMContentLoaded', function () {
+    window.codeElements = document.querySelectorAll('.code');
+    if (window.codeElements.length > 0) {
+      ctx.copycode = {
+        default_text: `Copy`,
+        success_text: `Copied`,
+        toast: `复制成功`,
+      };
+      utils.js('/js/plugins/copycode.js');
+    }
+  });
+</script>
+
+
+<!-- inject -->
+
+</div></body></html>

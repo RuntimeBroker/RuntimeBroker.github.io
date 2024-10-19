@@ -1,0 +1,838 @@
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.29.1" theme-name="Stellar" theme-version="1.29.1">
+  
+  <meta name="generator" content="Hexo 7.3.0">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  
+  <title>PHP基础-1-变量-常量-运算符-数据类型-判断-循环 - RuntimeBroker Blog's</title>
+
+  
+    <meta name="description" content="0 输出语句12345678echo:输出print:输出，输出成功返回1print_r()：输出数组var_dump():输出数据的详细信息，带有数据类型和数据长度&lt;?php	var_dump(&#x27;abc&#x27;);	&#x2F;&#x2F;string(3) &quot;abc&quot; ?&gt;  1 变量1.1 变量的命名规则 变量必须以$开头，$符不是变量的一部分，仅表示后面的标识符是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP基础-1-变量-常量-运算符-数据类型-判断-循环">
+<meta property="og:url" content="https://gbk.cx/p/5b8fbc6e/index.html">
+<meta property="og:site_name" content="RuntimeBroker Blog&#39;s">
+<meta property="og:description" content="0 输出语句12345678echo:输出print:输出，输出成功返回1print_r()：输出数组var_dump():输出数据的详细信息，带有数据类型和数据长度&lt;?php	var_dump(&#x27;abc&#x27;);	&#x2F;&#x2F;string(3) &quot;abc&quot; ?&gt;  1 变量1.1 变量的命名规则 变量必须以$开头，$符不是变量的一部分，仅表示后面的标识符是">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-10-19T13:44:24.000Z">
+<meta property="article:modified_time" content="2024-10-19T14:09:40.818Z">
+<meta property="article:author" content="RuntimeBroker">
+<meta property="article:tag" content="PHP">
+<meta name="twitter:card" content="summary">
+  
+  
+  
+  <meta name="keywords" content="PHP">
+
+  <!-- feed -->
+  
+    <link rel="alternate" href="/atom.xml" title="RuntimeBroker Blog's" type="application/atom+xml">
+  
+
+  <link rel="stylesheet" href="/css/main.css?v=1.29.1">
+
+  
+
+  
+
+  
+</head>
+<body>
+
+<div class="l_body s:aa content tech" id="start" layout="post" ><aside class="l_left"><div class="leftbar-container">
+
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="undefined" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">RuntimeBroker Blog's</div></a></div></header>
+
+<div class="nav-area">
+<div class="search-wrapper" id="search-wrapper"><form class="search-form"><a class="search-button" onclick="document.getElementById(&quot;search-input&quot;).focus();"><svg t="1705074644177" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1560" width="200" height="200"><path d="M1008.839137 935.96571L792.364903 719.491476a56.783488 56.783488 0 0 0-80.152866 0 358.53545 358.53545 0 1 1 100.857314-335.166073 362.840335 362.840335 0 0 1-3.689902 170.145468 51.248635 51.248635 0 1 0 99.217358 26.444296 462.057693 462.057693 0 1 0-158.255785 242.303546l185.930047 185.725053a51.248635 51.248635 0 0 0 72.568068 0 51.248635 51.248635 0 0 0 0-72.978056z" p-id="1561"></path><path d="M616.479587 615.969233a50.428657 50.428657 0 0 0-61.498362-5.534852 174.655348 174.655348 0 0 1-177.525271 3.484907 49.403684 49.403684 0 0 0-58.833433 6.76482l-3.074918 2.869923a49.403684 49.403684 0 0 0 8.609771 78.10292 277.767601 277.767601 0 0 0 286.992355-5.739847 49.403684 49.403684 0 0 0 8.404776-76.667958z" p-id="1562"></path></svg></a><input type="text" class="search-input" id="search-input" placeholder="站内搜索"></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div>
+
+
+<nav class="menu dis-select"><a class="nav-item" title="主页" href="/" style="color:#1BCDFC"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M5.879 2.879C5 3.757 5 5.172 5 8v8c0 2.828 0 4.243.879 5.121C6.757 22 8.172 22 11 22h2c2.828 0 4.243 0 5.121-.879C19 20.243 19 18.828 19 16V8c0-2.828 0-4.243-.879-5.121C17.243 2 15.828 2 13 2h-2c-2.828 0-4.243 0-5.121.879M8.25 17a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75M9 12.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zM8.25 9A.75.75 0 0 1 9 8.25h6a.75.75 0 0 1 0 1.5H9A.75.75 0 0 1 8.25 9" clip-rule="evenodd"/><path fill="currentColor" d="M5.235 4.058C5 4.941 5 6.177 5 8v8c0 1.823 0 3.058.235 3.942L5 19.924c-.975-.096-1.631-.313-2.121-.803C2 18.243 2 16.828 2 14v-4c0-2.829 0-4.243.879-5.121c.49-.49 1.146-.707 2.121-.803zm13.53 15.884C19 19.058 19 17.822 19 16V8c0-1.823 0-3.059-.235-3.942l.235.018c.975.096 1.631.313 2.121.803C22 5.757 22 7.17 22 9.999v4c0 2.83 0 4.243-.879 5.122c-.49.49-1.146.707-2.121.803z" opacity=".5"/></svg></a><a class="nav-item" title="分类" href="/categories/" style="color:#3DC550"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M14.25 4.48v3.057c0 .111 0 .27.02.406a.936.936 0 0 0 .445.683a.96.96 0 0 0 .783.072c.13-.04.272-.108.378-.159L17 8.005l1.124.534c.106.05.248.119.378.16a.958.958 0 0 0 .783-.073a.936.936 0 0 0 .444-.683c.021-.136.021-.295.021-.406V3.031c.113-.005.224-.01.332-.013C21.154 2.98 22 3.86 22 4.933v11.21c0 1.112-.906 2.01-2.015 2.08c-.97.06-2.108.179-2.985.41c-1.082.286-1.99 1.068-3.373 1.436c-.626.167-1.324.257-1.627.323V5.174c.32-.079 1.382-.203 1.674-.371c.184-.107.377-.216.576-.323m5.478 8.338a.75.75 0 0 1-.546.91l-4 1a.75.75 0 0 1-.364-1.456l4-1a.75.75 0 0 1 .91.546" clip-rule="evenodd"/><path fill="currentColor" d="M18.25 3.151c-.62.073-1.23.18-1.75.336a8.2 8.2 0 0 0-.75.27v3.182l.75-.356l.008-.005a1.13 1.13 0 0 1 .492-.13c.047 0 .094.004.138.01c.175.029.315.1.354.12l.009.005l.749.356V3.647z"/><path fill="currentColor" d="M12 5.214c-.334-.064-1.057-.161-1.718-.339C8.938 4.515 8.05 3.765 7 3.487c-.887-.234-2.041-.352-3.018-.412C2.886 3.007 2 3.9 2 4.998v11.146c0 1.11.906 2.01 2.015 2.079c.97.06 2.108.179 2.985.41c.486.129 1.216.431 1.873.726c1.005.451 2.052.797 3.127 1.034z" opacity=".5"/><path fill="currentColor" d="M4.273 12.818a.75.75 0 0 1 .91-.545l4 1a.75.75 0 1 1-.365 1.455l-4-1a.75.75 0 0 1-.545-.91m.909-4.545a.75.75 0 1 0-.364 1.455l4 1a.75.75 0 0 0 .364-1.455z"/></svg></a><a class="nav-item" title="探索" href="/explore/" style="color:#FA6400"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M20 12a8 8 0 1 1-16 0a8 8 0 0 1 16 0" opacity=".5"/><path fill="currentColor" d="M17.712 5.453c1.047-.193 2.006-.259 2.797-.152c.77.103 1.536.393 1.956 1.064c.446.714.312 1.542-.012 2.258c-.33.728-.918 1.499-1.672 2.268c-1.516 1.547-3.836 3.226-6.597 4.697c-2.763 1.472-5.495 2.484-7.694 2.92c-1.095.217-2.098.299-2.923.201c-.8-.095-1.6-.383-2.032-1.075c-.47-.752-.296-1.63.07-2.379c.375-.768 1.032-1.586 1.872-2.403L4 12.416c0 .219.083.71.168 1.146c.045.23.09.444.123.596c-.652.666-1.098 1.263-1.339 1.756c-.277.567-.208.825-.145.925c.072.116.305.305.937.38c.609.073 1.44.018 2.455-.183c2.02-.4 4.613-1.351 7.28-2.772c2.667-1.42 4.85-3.015 6.23-4.423c.694-.707 1.15-1.334 1.377-1.836c.233-.515.167-.75.107-.844c-.07-.112-.289-.294-.883-.374c-.542-.072-1.272-.041-2.163.112L16.87 5.656c.338-.101.658-.17.842-.203"/></svg></a><a class="nav-item" title="友链" href="/friends/" style="color:#F44336"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="m13.629 20.472l-.542.916c-.483.816-1.69.816-2.174 0l-.542-.916c-.42-.71-.63-1.066-.968-1.262c-.338-.197-.763-.204-1.613-.219c-1.256-.021-2.043-.098-2.703-.372a5 5 0 0 1-2.706-2.706C2 14.995 2 13.83 2 11.5v-1c0-3.273 0-4.91.737-6.112a5 5 0 0 1 1.65-1.651C5.59 2 7.228 2 10.5 2h3c3.273 0 4.91 0 6.113.737a5 5 0 0 1 1.65 1.65C22 5.59 22 7.228 22 10.5v1c0 2.33 0 3.495-.38 4.413a5 5 0 0 1-2.707 2.706c-.66.274-1.447.35-2.703.372c-.85.015-1.275.022-1.613.219c-.338.196-.548.551-.968 1.262" opacity=".5"/><path fill="currentColor" d="M10.99 14.308c-1.327-.978-3.49-2.84-3.49-4.593c0-2.677 2.475-3.677 4.5-1.609c2.025-2.068 4.5-1.068 4.5 1.609c0 1.752-2.163 3.615-3.49 4.593c-.454.335-.681.502-1.01.502c-.329 0-.556-.167-1.01-.502"/></svg></a></nav>
+</div>
+<div class="widgets">
+
+
+<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span><a class="cap-action" id="rss" title="Subscribe" href="/atom.xml"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M5 21q-.825 0-1.412-.587T3 19q0-.825.588-1.412T5 17q.825 0 1.413.588T7 19q0 .825-.587 1.413T5 21m13.5 0q-.65 0-1.088-.475T16.9 19.4q-.275-2.425-1.312-4.537T12.9 11.1q-1.65-1.65-3.762-2.687T4.6 7.1q-.65-.075-1.125-.512T3 5.5q0-.65.45-1.062t1.075-.363q3.075.275 5.763 1.563t4.737 3.337q2.05 2.05 3.338 4.738t1.562 5.762q.05.625-.363 1.075T18.5 21m-6 0q-.625 0-1.075-.437T10.85 19.5q-.225-1.225-.787-2.262T8.65 15.35q-.85-.85-1.888-1.412T4.5 13.15q-.625-.125-1.062-.575T3 11.5q0-.65.45-1.075t1.075-.325q1.825.25 3.413 1.063t2.837 2.062q1.25 1.25 2.063 2.838t1.062 3.412q.1.625-.325 1.075T12.5 21"/></svg></a></div><div class="widget-body fs14"><a class="item title" href="/p/988d33e4/"><span class="title">MVC设计模式-1</span></a><a class="item title" href="/p/cf780ffd/"><span class="title">PHP-PDO&PDO类&PDO核心类&封装PDO单例</span></a><a class="item title" href="/p/980312b6/"><span class="title">PHP面向对象-2-三大特性&类常量&接口</span></a><a class="item title" href="/p/b78a5232/"><span class="title">PHP面向对象-1-类&对象&属性&访问修饰符</span></a><a class="item title" href="/p/d71be832/"><span class="title">PHP面向对象-4-命名空间&trait(原型)&迭代器</span></a><a class="item title" href="/p/a73ab557/"><span class="title">PHP基础-3-文件操作</span></a><a class="item title" href="/p/f60eefa5/"><span class="title">PHP基础-2-作用域&递归&文件夹操作</span></a><a class="item title" href="/p/be32be3e/"><span class="title">PHP面向对象-3-加载类&设计模式&魔术方法&序列化</span></a><a class="item title" href="/p/184625e/"><span class="title">MVC设计模式-2</span></a><a class="item title" href="/p/5b8fbc6e/"><span class="title">PHP基础-1-变量-常量-运算符-数据类型-判断-循环</span></a></div></widget>
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="/" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/08a41b181ce68.svg"/></a><a class="social" href="/" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/3616429.svg"/></a><a class="social" href="/about/#comments" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/942ebbf1a4b91.svg"/></a><a class="social" onclick="switchTheme()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path fill="currentColor" fill-rule="evenodd" d="M582.4 326.4c-140.8 0-256 115.2-256 256s115.2 256 256 256 256-115.2 256-256-115.2-256-256-256z m0 448c-70.4 0-131.2-36.8-164.8-92.8 12.8 3.2 27.2 4.8 40 4.8 121.6 0 219.2-99.2 219.2-219.2 0-17.6-1.6-35.2-6.4-52.8 60.8 32 102.4 96 102.4 169.6 1.6 104-84.8 190.4-190.4 190.4zM582.4 262.4c17.6 0 32-14.4 32-32v-128c0-17.6-14.4-32-32-32s-32 14.4-32 32v128c0 17.6 14.4 32 32 32zM262.4 582.4c0-17.6-14.4-32-32-32h-128c-17.6 0-32 14.4-32 32s14.4 32 32 32h128c17.6 0 32-14.4 32-32zM310.4 356.8c6.4 6.4 14.4 9.6 22.4 9.6 8 0 16-3.2 22.4-9.6 12.8-12.8 12.8-32 0-44.8l-91.2-91.2c-12.8-12.8-32-12.8-44.8 0-12.8 12.8-12.8 32 0 44.8l91.2 91.2zM944 220.8c-12.8-12.8-32-12.8-44.8 0l-91.2 91.2c-12.8 12.8-12.8 32 0 44.8 6.4 6.4 14.4 9.6 22.4 9.6 8 0 16-3.2 22.4-9.6l91.2-91.2c12.8-12.8 12.8-33.6 0-44.8zM310.4 808l-91.2 91.2c-12.8 12.8-12.8 32 0 44.8 6.4 6.4 14.4 9.6 22.4 9.6 8 0 16-3.2 22.4-9.6l91.2-91.2c12.8-12.8 12.8-32 0-44.8-11.2-11.2-32-11.2-44.8 0z"></path></svg></a></div></footer>
+</div></aside><div class="l_main" id="main">
+
+
+
+
+
+<div class="article banner top">
+  <div class="content">
+    <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+<span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Language/">Language</a></div>
+<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2024-10-19T13:44:24.000Z">2024-10-19</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2024-10-19T14:09:40.818Z">2024-10-19</time></span></div></div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>PHP基础-1-变量-常量-运算符-数据类型-判断-循环</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div><article class="md-text content"><h1 id="0-输出语句"><a href="#0-输出语句" class="headerlink" title="0 输出语句"></a>0 输出语句</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">echo</span>:输出</span><br><span class="line"><span class="keyword">print</span>:输出，输出成功返回<span class="number">1</span></span><br><span class="line"><span class="title function_ invoke__">print_r</span>()：输出数组</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>():输出数据的详细信息，带有数据类型和数据长度</span><br><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">	<span class="title function_ invoke__">var_dump</span>(<span class="string">&#x27;abc&#x27;</span>);	<span class="comment">//string(3) &quot;abc&quot; </span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="1-变量"><a href="#1-变量" class="headerlink" title="1 变量"></a>1 变量</h1><h2 id="1-1-变量的命名规则"><a href="#1-1-变量的命名规则" class="headerlink" title="1.1 变量的命名规则"></a>1.1 <strong>变量的命名规则</strong></h2><ol>
+<li>变量必须以$开头，$符不是变量的一部分，仅表示后面的标识符是变量名。</li>
+<li>除了$以外，以字母、下划线开头，后面跟着数字、字母、下划线</li>
+<li>变量名区分大小写，$aa和$Aa是两个空间</li>
+</ol>
+<h2 id="1-2-可变变量"><a href="#1-2-可变变量" class="headerlink" title="1.2 可变变量"></a>1.2 <strong>可变变量</strong></h2><p>变量名可以变，将变量名存储在另外一个变量中</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$a</span>=<span class="number">10</span>;</span><br><span class="line"><span class="variable">$b</span>=<span class="string">&#x27;a&#x27;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$$b</span>;	<span class="comment">//10</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="1-3-变量传递"><a href="#1-3-变量传递" class="headerlink" title="1.3 变量传递"></a>1.3 <strong>变量传递</strong></h2><p>变量的传递有值传递和地址传递（引用传递）</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">//值传递</span></span><br><span class="line"><span class="variable">$num1</span>=<span class="number">10</span>;	<span class="comment">//将10付给$num1</span></span><br><span class="line"><span class="variable">$num2</span>=<span class="variable">$num1</span>;	<span class="comment">//将$num1的值付给$num2</span></span><br><span class="line"><span class="variable">$num2</span>=<span class="number">20</span>;		<span class="comment">//更改$num2</span></span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$num1</span>;		<span class="comment">//10</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="1-4-销毁变量"><a href="#1-4-销毁变量" class="headerlink" title="1.4 销毁变量"></a>1.4 <strong>销毁变量</strong></h2><p>用unset()来销毁变量，销毁的是变量名，变量值由PHP垃圾回收机制销毁</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$num1</span>=<span class="number">10</span>;</span><br><span class="line"><span class="variable">$num2</span>=&amp;<span class="variable">$num1</span>;</span><br><span class="line"><span class="keyword">unset</span>(<span class="variable">$num1</span>);	<span class="comment">//销毁的是变量名</span></span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$num2</span>;		<span class="comment">//10</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="2-常量"><a href="#2-常量" class="headerlink" title="2 常量"></a>2 常量</h1><h2 id="2-1-定义常量"><a href="#2-1-定义常量" class="headerlink" title="2.1 定义常量"></a>2.1 <strong>定义常量</strong></h2><p>1、用define()函数定义常量</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">define</span>(常量名，值，[是否区别大小写])  <span class="literal">true</span>表示不区分大小写，默认是<span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<p>2、还可以使用const关键字定义常量</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="variable constant_">NAME</span>=<span class="string">&#x27;tom&#x27;</span>;</span><br><span class="line"><span class="keyword">echo</span> NAME;		<span class="comment">//tom</span></span><br></pre></td></tr></table></figure>
+
+<p>定义常量有两种方式，define()和const</p>
+<p>常量在整个运行过程中值保持不变，常量不能重新定义</p>
+<p>使用constant获取特殊字符做的常量名的值</p>
+<p>defined()用来判断常量是否被定义</p>
+<h2 id="2-2-预定义常量"><a href="#2-2-预定义常量" class="headerlink" title="2.2 预定义常量"></a>2.2 <strong>预定义常量</strong></h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">echo</span> PHP_VERSION,<span class="string">&#x27;&lt;br&gt;&#x27;</span>;		<span class="comment">//PHP版本号</span></span><br><span class="line"><span class="keyword">echo</span> PHP_OS,<span class="string">&#x27;&lt;br&gt;&#x27;</span>;				<span class="comment">//PHP操作系统</span></span><br><span class="line"><span class="keyword">echo</span> PHP_INT_MAX,<span class="string">&#x27;&lt;br&gt;&#x27;</span>;		<span class="comment">//PHP中整型的最大值</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-3-魔术常量"><a href="#2-3-魔术常量" class="headerlink" title="2.3 魔术常量"></a>2.3 魔术常量</h2><p>魔术常量它们的值随着它们在代码中的位置改变而改变</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">echo</span> <span class="keyword">__LINE__</span>,<span class="string">&#x27;&lt;br&gt;&#x27;</span>;		<span class="comment">//获取当前行号</span></span><br><span class="line"><span class="keyword">echo</span> <span class="keyword">__FILE__</span>,<span class="string">&#x27;&lt;br&gt;&#x27;</span>;		<span class="comment">//文件的完整路径和文件名</span></span><br><span class="line"><span class="keyword">echo</span> <span class="keyword">__DIR__</span>,<span class="string">&#x27;&lt;br&gt;&#x27;</span>;		<span class="comment">//文件所在的目录</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="3-数据类型"><a href="#3-数据类型" class="headerlink" title="3 数据类型"></a>3 数据类型</h1><h2 id="3-1-基本类型（标量类型）"><a href="#3-1-基本类型（标量类型）" class="headerlink" title="3.1 基本类型（标量类型）"></a>3.1 <strong>基本类型（标量类型）</strong></h2><h3 id="3-1-1-整型"><a href="#3-1-1-整型" class="headerlink" title="3.1.1 整型"></a>3.1.1 整型</h3><p>存整数，PHP_INT_MAX获取整形最大值</p>
+<table>
+<thead>
+<tr>
+<th><strong>机制</strong></th>
+<th><strong>缩写</strong></th>
+<th><strong>单词</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>十进制</td>
+<td>dec</td>
+<td>decimalist</td>
+</tr>
+<tr>
+<td>二进制</td>
+<td>bin</td>
+<td>binary</td>
+</tr>
+<tr>
+<td>八进制</td>
+<td>oct</td>
+<td>octonary</td>
+</tr>
+<tr>
+<td>十六进制</td>
+<td>hex</td>
+<td>hexdecimalist</td>
+</tr>
+</tbody></table>
+<h3 id="3-1-2-浮点型"><a href="#3-1-2-浮点型" class="headerlink" title="3.1.2 浮点型"></a>3.1.2 浮点型</h3><p>浮点数在内存中保存的是近似值</p>
+<p>浮点数不能参与比较</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="number">0.9</span>==(<span class="number">1</span>-<span class="number">0.1</span>));		<span class="comment">//bool(true) </span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&#x27;&lt;br&gt;&#x27;</span>;</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="number">0.1</span>==(<span class="number">1</span>-<span class="number">0.9</span>));		<span class="comment">//bool(false)</span></span><br></pre></td></tr></table></figure>
+
+<p>如果浮点数要比较，必须确定比较的位数</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="number">0.9</span>==(<span class="number">1</span>-<span class="number">0.1</span>));		<span class="comment">//bool(true) </span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&#x27;&lt;br&gt;&#x27;</span>;</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="number">0.1</span>==(<span class="number">1</span>-<span class="number">0.9</span>));		<span class="comment">//bool(false) </span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&#x27;&lt;br&gt;&#x27;</span>;</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="title function_ invoke__">bccomp</span>(<span class="number">0.1</span>,<span class="number">1</span>-<span class="number">0.9</span>,<span class="number">5</span>));	<span class="comment">//比较小数点后面5位   int(0)   0表示相等</span></span><br></pre></td></tr></table></figure>
+
+
+<p>💡 提醒：如果一个整数超出了整形的范围，会自动的转成浮点型</p>
+<h3 id="3-1-3-布尔型"><a href="#3-1-3-布尔型" class="headerlink" title="3.1.3 布尔型"></a>3.1.3 布尔型</h3><p>不能使用echo 和print输出布尔型，要使用var_dump()输出</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$name</span>=<span class="string">&#x27;tom&#x27;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&#x27;我的名字叫$name&#x27;</span>,<span class="string">&#x27;&lt;br&gt;&#x27;</span>;	<span class="comment">//我的名字叫$name</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;我的名字叫<span class="subst">$name</span>&quot;</span>,<span class="string">&#x27;&lt;br&gt;&#x27;</span>;	<span class="comment">//我的名字叫tom</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-1-4-字符串型"><a href="#3-1-4-字符串型" class="headerlink" title="3.1.4 字符串型"></a>3.1.4 字符串型</h3><p>在PHP中单引号字符串和双引号字符串是有区别的</p>
+<p>单引号字符串是真正的字符串</p>
+<p>双引号字符串要解析字符串中的变量</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$name</span>=<span class="string">&#x27;tom&#x27;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&#x27;我的名字叫$name&#x27;</span>,<span class="string">&#x27;&lt;br&gt;&#x27;</span>;	<span class="comment">//我的名字叫$name</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;我的名字叫<span class="subst">$name</span>&quot;</span>,<span class="string">&#x27;&lt;br&gt;&#x27;</span>;	<span class="comment">//我的名字叫tom</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-2-复合类型"><a href="#3-2-复合类型" class="headerlink" title="3.2 复合类型"></a>3.2 <strong>复合类型</strong></h2><h3 id="3-2-1-数组"><a href="#3-2-1-数组" class="headerlink" title="3.2.1 数组"></a>3.2.1 <strong>数组</strong></h3><p>在PHP中数组有两种形式，索引数组和关联数组</p>
+<p>索引数组：用整数做下标，默认从0开始，后面依次加一</p>
+<p>关联数组：用字符串做下标，通过&#x3D;&gt;符号将下标和值关联起来</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">//1、索引数组的声明</span></span><br><span class="line"><span class="variable">$stu</span>=<span class="keyword">array</span>(<span class="string">&#x27;tom&#x27;</span>,<span class="string">&#x27;berry&#x27;</span>,<span class="string">&#x27;ketty&#x27;</span>);   <span class="comment">//索引数组</span></span><br><span class="line"><span class="title function_ invoke__">print_r</span>(<span class="variable">$stu</span>);	<span class="comment">//输出数组  Array ( [0] =&gt; tom [1] =&gt; berry [2] =&gt; ketty ) </span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&#x27;&lt;hr&gt;&#x27;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$stu</span>[<span class="number">0</span>],<span class="string">&#x27;&lt;br&gt;&#x27;</span>;	<span class="comment">//tom</span></span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$stu</span>[<span class="number">1</span>],<span class="string">&#x27;&lt;br&gt;&#x27;</span>;	<span class="comment">//berry</span></span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$stu</span>[<span class="number">2</span>],<span class="string">&#x27;&lt;hr&gt;&#x27;</span>;	<span class="comment">//ketty</span></span><br><span class="line">------------------------------------------</span><br><span class="line"><span class="comment">//2、关联数组</span></span><br><span class="line"><span class="variable">$emp</span>=<span class="keyword">array</span>(<span class="string">&#x27;name&#x27;</span>=&gt;<span class="string">&#x27;李白&#x27;</span>,<span class="string">&#x27;sex&#x27;</span>=&gt;<span class="string">&#x27;男&#x27;</span>,<span class="string">&#x27;age&#x27;</span>=&gt;<span class="number">22</span>);</span><br><span class="line"><span class="title function_ invoke__">print_r</span>(<span class="variable">$emp</span>);	<span class="comment">//Array ( [name] =&gt; 李白 [sex] =&gt; 男 [age] =&gt; 22 ) </span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&#x27;&lt;hr&gt;&#x27;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$emp</span>[<span class="string">&#x27;name&#x27;</span>],<span class="string">&#x27;&lt;br&gt;&#x27;</span>;	<span class="comment">//李白</span></span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$emp</span>[<span class="string">&#x27;sex&#x27;</span>],<span class="string">&#x27;&lt;br&gt;&#x27;</span>;	<span class="comment">//男</span></span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$emp</span>[<span class="string">&#x27;age&#x27;</span>];			<span class="comment">//22</span></span><br></pre></td></tr></table></figure>
+
+<p>二维数组的声明</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$stu</span>=[</span><br><span class="line">	[<span class="string">&#x27;name&#x27;</span>=&gt;<span class="string">&#x27;tom&#x27;</span>,<span class="string">&#x27;sex&#x27;</span>=&gt;<span class="string">&#x27;男&#x27;</span>,<span class="string">&#x27;age&#x27;</span>=&gt;<span class="number">22</span>],</span><br><span class="line">	[<span class="string">&#x27;name&#x27;</span>=&gt;<span class="string">&#x27;berry&#x27;</span>,<span class="string">&#x27;sex&#x27;</span>=&gt;<span class="string">&#x27;女&#x27;</span>,<span class="string">&#x27;age&#x27;</span>=&gt;<span class="number">23</span>]</span><br><span class="line">];</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&#x27;&lt;pre&gt;&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>短数组语法，可以直接通过中括号声明数组</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$stu</span>=[<span class="string">&#x27;tom&#x27;</span>,<span class="string">&#x27;berry&#x27;</span>,<span class="string">&#x27;ketty&#x27;</span>];</span><br><span class="line"><span class="title function_ invoke__">print_r</span>(<span class="variable">$stu</span>);  <span class="comment">//Array ( [0] =&gt; tom [1] =&gt; berry [2] =&gt; ketty )</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-2-对象"><a href="#3-2-2-对象" class="headerlink" title="3.2.2 对象"></a>3.2.2 <strong>对象</strong></h3><h2 id="3-3-特殊类型"><a href="#3-3-特殊类型" class="headerlink" title="3.3 特殊类型"></a>3.3 <strong>特殊类型</strong></h2><p>1、资源</p>
+<p>2、null</p>
+<h2 id="3-4-类型转换"><a href="#3-4-类型转换" class="headerlink" title="3.4 类型转换"></a>3.4 <strong>类型转换</strong></h2><p>1、自动类型转换：当提供的类型和需要的类型不一致的时候会自动进行类型转换</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$num</span>=<span class="number">10</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$num</span>)&#123;   <span class="comment">//自动将数字转成布尔型</span></span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&#x27;aa&#x27;</span>;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&#x27;bb&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line">---------------------------------</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&#x27;20&#x27;</span>-<span class="number">10</span>;	<span class="comment">//自动的将字符串转成数字</span></span><br></pre></td></tr></table></figure>
+
+<p>2、强制类型转换</p>
+<p>语法：（数据类型）数据</p>
+<p>其他类型和布尔之间的转换</p>
+<p>规则：0、空为假，非0非空为真</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">var_dump</span>((<span class="keyword">bool</span>)<span class="string">&#x27;abc&#x27;</span>);	<span class="keyword">echo</span> <span class="string">&#x27;&lt;br&gt;&#x27;</span>;		<span class="comment">//bool(true)  </span></span><br><span class="line"><span class="title function_ invoke__">var_dump</span>((<span class="keyword">bool</span>)<span class="string">&#x27;&#x27;</span>);		<span class="keyword">echo</span> <span class="string">&#x27;&lt;br&gt;&#x27;</span>;		<span class="comment">//bool(false) </span></span><br><span class="line"><span class="title function_ invoke__">var_dump</span>((<span class="keyword">bool</span>)<span class="string">&#x27;0&#x27;</span>);	<span class="keyword">echo</span> <span class="string">&#x27;&lt;br&gt;&#x27;</span>;		<span class="comment">//bool(false)</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="4-运算符"><a href="#4-运算符" class="headerlink" title="4 运算符"></a>4 运算符</h1><h2 id="4-1-算术运算符"><a href="#4-1-算术运算符" class="headerlink" title="4.1 算术运算符"></a>4.1 <strong>算术运算符</strong></h2><table>
+<thead>
+<tr>
+<th><strong>一元运算符</strong></th>
+<th><strong>二元运算符</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>++</td>
+<td>+</td>
+</tr>
+<tr>
+<td>–</td>
+<td>-</td>
+</tr>
+<tr>
+<td></td>
+<td>*</td>
+</tr>
+<tr>
+<td></td>
+<td>&#x2F;</td>
+</tr>
+<tr>
+<td></td>
+<td>%   (取模)</td>
+</tr>
+</tbody></table>
+<h2 id="4-2-关系运算符（比较运算符）"><a href="#4-2-关系运算符（比较运算符）" class="headerlink" title="4.2 关系运算符（比较运算符）"></a>4.2 <strong>关系运算符（比较运算符）</strong></h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">=</span><br><span class="line">&lt;</span><br><span class="line">&lt;=</span><br><span class="line">== <span class="comment">//弱类型比较 不对数据类型作比较 &#x27;1&#x27;=1 true</span></span><br><span class="line">!=</span><br><span class="line">===<span class="comment">//强类型比较 对数据类型和值都进行比较 &#x27;1&#x27;=1 false</span></span><br><span class="line">!==</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-3-逻辑运算符"><a href="#4-3-逻辑运算符" class="headerlink" title="4.3 逻辑运算符"></a>4.3 <strong>逻辑运算符</strong></h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&amp;	与：运算符两边的表达式都要计算</span><br><span class="line">|	或：运算符两边的表达式都要计算</span><br><span class="line"></span><br><span class="line">&amp;&amp;	短路与：如果前面的条件不满足，后面的条件就不用计算了</span><br><span class="line">||	短路或</span><br><span class="line">!	非</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-4-赋值运算符"><a href="#4-4-赋值运算符" class="headerlink" title="4.4 赋值运算符"></a>4.4 赋值运算符</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">=	<span class="comment">//赋值</span></span><br><span class="line">+=			<span class="comment">//a+=b   a=a+b</span></span><br><span class="line">-=</span><br><span class="line">*=</span><br><span class="line">/=</span><br><span class="line">%=</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-5-字符串连接符"><a href="#4-5-字符串连接符" class="headerlink" title="4.5 字符串连接符(.)"></a>4.5 字符串连接符(.)</h2><h2 id="4-6-错误抑制符"><a href="#4-6-错误抑制符" class="headerlink" title="4.6 错误抑制符(@)"></a>4.6 <strong>错误抑制符(@)</strong></h2><p>错误抑制符只对表达式有效</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">echo</span> @(<span class="variable">$aa</span>+<span class="variable">$bb</span>);	<span class="comment">//错误抑制</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="4-7-三元运算符"><a href="#4-7-三元运算符" class="headerlink" title="4.7 三元运算符(?:)"></a>4.7 <strong>三元运算符(?:)</strong></h2><p>表达式1 ? 值1 : 值2</p>
+<h2 id="4-8-null合并运算符"><a href="#4-8-null合并运算符" class="headerlink" title="4.8 null合并运算符(??)"></a>4.8 <strong>null合并运算符(??)</strong></h2><p>PHP7.0以后才支持</p>
+<p>例题</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">echo $name??&#x27;姓名不详&#x27;;     //姓名不详</span><br></pre></td></tr></table></figure>
+
+<p>多学一招：两个用来判断的函数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">isset()：判断变量是否被设置，并且设置的不是null</span><br><span class="line">empty()：检查一个变量是否为空，能转成false全部是空，[&#x27;&#x27;,0,0.0,array(),null]</span><br></pre></td></tr></table></figure>
+
+<p>例题</p>
+<h1 id="5-判断"><a href="#5-判断" class="headerlink" title="5 判断"></a>5 判断</h1><h2 id="5-1-语法"><a href="#5-1-语法" class="headerlink" title="5.1 语法"></a>5.1 <strong>语法</strong></h2><p>1、if语句</p>
+<p>2、ifelse语句</p>
+<p>3、switch case语句</p>
+<h1 id="6-循环"><a href="#6-循环" class="headerlink" title="6 循环"></a>6 循环</h1><p>1、for</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(初始值;条件;增量)&#123;</span><br><span class="line">	<span class="comment">//循环体</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2、while&amp;do-while</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(条件)&#123;</span><br><span class="line">&#125;</span><br><span class="line">-------------------------</span><br><span class="line"><span class="keyword">do</span>&#123;</span><br><span class="line">    </span><br><span class="line">&#125;<span class="keyword">while</span>(条件)</span><br></pre></td></tr></table></figure>
+
+<p>3、foreach</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//语法一</span></span><br><span class="line"><span class="keyword">foreach</span>(数组 <span class="keyword">as</span> 值)&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//语法二</span></span><br><span class="line"><span class="keyword">foreach</span>(数组 <span class="keyword">as</span> 键=&gt;值)&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>示例：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$stu</span>=[<span class="string">&#x27;tom&#x27;</span>,<span class="string">&#x27;berry&#x27;</span>,<span class="string">&#x27;ketty&#x27;</span>];</span><br><span class="line"><span class="keyword">foreach</span>(<span class="variable">$stu</span> <span class="keyword">as</span> <span class="variable">$v</span>)&#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="variable">$v</span>,<span class="string">&#x27;&lt;br&gt;&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">tom</span></span><br><span class="line"><span class="comment">berry</span></span><br><span class="line"><span class="comment">ketty</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&#x27;&lt;hr&gt;&#x27;</span>;</span><br><span class="line">-----------------------------------------------------------</span><br><span class="line"><span class="keyword">foreach</span>(<span class="variable">$stu</span> <span class="keyword">as</span> <span class="variable">$k</span>=&gt;<span class="variable">$v</span>)&#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&quot;<span class="subst">&#123;$k&#125;</span>:<span class="subst">&#123;$v&#125;</span>&lt;br&gt;&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">0:tom</span></span><br><span class="line"><span class="comment">1:berry</span></span><br><span class="line"><span class="comment">2:ketty</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>小结：</p>
+<ul>
+<li>for、while、do-while可以相互替换</li>
+<li>如果明确知道循环多少次首先for循环，如要要循环到条件不成立为止选while或do-while</li>
+<li>先判断再执行选while，先执行再判断选do-while</li>
+<li>while循环条件不成立就不执行，do-while至少执行一次</li>
+</ul>
+<h1 id="7-跳转语句"><a href="#7-跳转语句" class="headerlink" title="7 跳转语句"></a>7 跳转语句</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">break</span>：中断循环</span><br><span class="line"></span><br><span class="line"><span class="keyword">continue</span>：中断当前循环，进入下一个循环</span><br></pre></td></tr></table></figure>
+
+<h1 id="8-函数"><a href="#8-函数" class="headerlink" title="8 函数"></a>8 函数</h1><h2 id="8-1-函数定义"><a href="#8-1-函数定义" class="headerlink" title="8.1 函数定义"></a>8.1 <strong>函数定义</strong></h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> 函数名(<span class="params">参数<span class="number">1</span>，参数<span class="number">2</span>，...</span>)</span>&#123;</span><br><span class="line">    <span class="comment">//函数体</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>小结：</p>
+<p>1、变量名区分大小写</p>
+<p>2、关键字、函数名不区分大小写</p>
+<p>8.2 <strong>可变函数</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">show</span>(<span class="params"><span class="variable">$args</span></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="variable">$args</span>,<span class="string">&#x27;&lt;br&gt;&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$str</span>=<span class="string">&#x27;show&#x27;</span>;	<span class="comment">//将函数名保存到变量中</span></span><br><span class="line"><span class="variable">$str</span>(<span class="string">&#x27;锄禾日当午&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>8.3 <strong>匿名函数</strong></p>
+<p>匿名函数就是没有名字的函数</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">//匿名函数</span></span><br><span class="line"><span class="variable">$fun</span>=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&#x27;锄禾日当午&lt;br&gt;&#x27;</span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//匿名函数调用</span></span><br><span class="line"><span class="variable">$fun</span>();</span><br></pre></td></tr></table></figure>
+<div class="article-footer fs14">
+    <section id="license">
+      <div class="header"><span>许可协议</span></div>
+      <div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div>
+    </section>
+    
+    <section id="share">
+      <div class="header"><span>分享文章</span></div>
+      <div class="body">
+        <div class="link"><input class="copy-area" readonly="true" id="copy-link" value="https://gbk.cx/p/5b8fbc6e/" /></div>
+        <div class="social-wrap dis-select"><a class="social share-item wechat" onclick="util.toggle(&quot;qrcode-wechat&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/b32ef3da1162a.svg" /></a><a class="social share-item weibo" target="_blank" rel="external nofollow noopener noreferrer" href="https://service.weibo.com/share/share.php?url=https://gbk.cx/p/5b8fbc6e/&title=PHP基础-1-变量-常量-运算符-数据类型-判断-循环 - RuntimeBroker Blog's&summary=0 输出语句12345678echo:输出print:输出，输出成功返回1print_r()：输出数组var_dump():输出数据的详细信息，带有数据类型和数据长度&lt;?php	var_dump(&#x27;abc&#x27;)..."><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/80c07e4dbb303.svg" /></a><a class="social share-item email" href="mailto:?subject=PHP基础-1-变量-常量-运算符-数据类型-判断-循环 - RuntimeBroker Blog's&amp;body=https://gbk.cx/p/5b8fbc6e/"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/a1b00e20f425d.svg" /></a><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;复制成功&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/8411ed322ced6.svg" /></a></div>
+        
+        <div class="qrcode" id="qrcode-wechat" style="opacity:0;height:0">
+          <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=https://gbk.cx/p/5b8fbc6e/"/>
+        </div>
+        
+      </div>
+    </section>
+    </div>
+</article>
+<div class="related-wrap" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/p/f60eefa5/">PHP基础-2-作用域&递归&文件夹操作</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/p/d147e7fa/">汇编入门学习</a></div></section></div>
+
+
+
+
+
+
+<footer class="page-footer footnote"><hr><div class="sitemap"><div class="sitemap-group"><span class="fs15">博客</span><a href="/">近期</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></div><div class="sitemap-group"><span class="fs15">项目</span><a href="/">开源库</a></div><div class="sitemap-group"><span class="fs15">社交</span><a href="/friends">友链</a><a href="/">留言板</a></div><div class="sitemap-group"><span class="fs15">更多</span><a href="/">关于本站</a><a target="_blank" rel="noopener" href="https://github.com/RuntimeBroker">GitHub</a></div></div><div class="text"><div style="text-align: center;">
+<p>
+    本站由 <a href="/">RuntimeBroker</a> 使用 <a href="/">Stellar</a> 主题创建。<br />
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。
+</p>
+</div>
+<!--不蒜子计数器-->
+<center>
+<script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js?id=Kb5KNSz05b5WZNTV&ck=Kb5KNSz05b5WZNTV"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!--添加一个访问量-->
+<span>
+       本"<span style="color: hsl(192 98% 55%); font-weight: bold;">页面</ a></span>"访问 <span id="busuanzi_value_page_pv" style="color: hsl(192 98% 55%); font-weight: bold;"></span> 次 | 👀总访问 <span id="busuanzi_value_site_pv" style="color: hsl(192 98% 55%); font-weight: bold;"></span>       次 | 总访客 <span id="busuanzi_value_site_uv" style="color: hsl(192 98% 55%); font-weight: bold;"></span> 人
+</span></br>
+<span id="runtime_span"></span>
+<script type="text/javascript">
+    function show_runtime() {
+        window.setTimeout("show_runtime()", 1000);
+        X = new Date("2024/09/20 17:00:00");
+        Y = new Date();
+        T = (Y.getTime() - X.getTime());
+        M = 24 * 60 * 60 * 1000;
+        a = T / M;
+        A = Math.floor(a);
+        b = (a - A) * 24;
+        B = Math.floor(b);
+        c = (b - B) * 60;
+        C = Math.floor((b - B) * 60);
+        D = Math.floor((c - C) * 60);
+        runtime_span.innerHTML = "⏱️本站已运行 " + A + "天" + B + "小时" + C + "分" + D + "秒"
+    }
+    show_runtime();
+</script>
+</center>
+</div></footer>
+<div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right">
+<div class="widgets">
+
+
+
+<widget class="widget-wrapper toc" id="data-toc" collapse="false"><div class="widget-header dis-select"><span class="name">本文目录</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#0-%E8%BE%93%E5%87%BA%E8%AF%AD%E5%8F%A5"><span class="toc-text">0 输出语句</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E5%8F%98%E9%87%8F"><span class="toc-text">1 变量</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E5%8F%98%E9%87%8F%E7%9A%84%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99"><span class="toc-text">1.1 变量的命名规则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E5%8F%AF%E5%8F%98%E5%8F%98%E9%87%8F"><span class="toc-text">1.2 可变变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-%E5%8F%98%E9%87%8F%E4%BC%A0%E9%80%92"><span class="toc-text">1.3 变量传递</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-%E9%94%80%E6%AF%81%E5%8F%98%E9%87%8F"><span class="toc-text">1.4 销毁变量</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E5%B8%B8%E9%87%8F"><span class="toc-text">2 常量</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E5%AE%9A%E4%B9%89%E5%B8%B8%E9%87%8F"><span class="toc-text">2.1 定义常量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E9%A2%84%E5%AE%9A%E4%B9%89%E5%B8%B8%E9%87%8F"><span class="toc-text">2.2 预定义常量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-%E9%AD%94%E6%9C%AF%E5%B8%B8%E9%87%8F"><span class="toc-text">2.3 魔术常量</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">3 数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%EF%BC%88%E6%A0%87%E9%87%8F%E7%B1%BB%E5%9E%8B%EF%BC%89"><span class="toc-text">3.1 基本类型（标量类型）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-1-%E6%95%B4%E5%9E%8B"><span class="toc-text">3.1.1 整型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-2-%E6%B5%AE%E7%82%B9%E5%9E%8B"><span class="toc-text">3.1.2 浮点型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-3-%E5%B8%83%E5%B0%94%E5%9E%8B"><span class="toc-text">3.1.3 布尔型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-4-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%9E%8B"><span class="toc-text">3.1.4 字符串型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-%E5%A4%8D%E5%90%88%E7%B1%BB%E5%9E%8B"><span class="toc-text">3.2 复合类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-1-%E6%95%B0%E7%BB%84"><span class="toc-text">3.2.1 数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-2-%E5%AF%B9%E8%B1%A1"><span class="toc-text">3.2.2 对象</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-%E7%89%B9%E6%AE%8A%E7%B1%BB%E5%9E%8B"><span class="toc-text">3.3 特殊类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="toc-text">3.4 类型转换</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">4 运算符</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">4.1 算术运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-%E5%85%B3%E7%B3%BB%E8%BF%90%E7%AE%97%E7%AC%A6%EF%BC%88%E6%AF%94%E8%BE%83%E8%BF%90%E7%AE%97%E7%AC%A6%EF%BC%89"><span class="toc-text">4.2 关系运算符（比较运算符）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">4.3 逻辑运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-4-%E8%B5%8B%E5%80%BC%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">4.4 赋值运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-5-%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BF%9E%E6%8E%A5%E7%AC%A6"><span class="toc-text">4.5 字符串连接符(.)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-6-%E9%94%99%E8%AF%AF%E6%8A%91%E5%88%B6%E7%AC%A6"><span class="toc-text">4.6 错误抑制符(@)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-7-%E4%B8%89%E5%85%83%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">4.7 三元运算符(?:)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-8-null%E5%90%88%E5%B9%B6%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">4.8 null合并运算符(??)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-%E5%88%A4%E6%96%AD"><span class="toc-text">5 判断</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-%E8%AF%AD%E6%B3%95"><span class="toc-text">5.1 语法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-%E5%BE%AA%E7%8E%AF"><span class="toc-text">6 循环</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-%E8%B7%B3%E8%BD%AC%E8%AF%AD%E5%8F%A5"><span class="toc-text">7 跳转语句</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#8-%E5%87%BD%E6%95%B0"><span class="toc-text">8 函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#8-1-%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89"><span class="toc-text">8.1 函数定义</span></a></li></ol></li></ol></div><div class="widget-footer">
+
+<a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12c0-4.714 0-7.071 1.464-8.536C4.93 2 7.286 2 12 2c4.714 0 7.071 0 8.535 1.464C22 4.93 22 7.286 22 12c0 4.714 0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12Z"/><path stroke-linecap="round" stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/></g></svg><span>回到顶部</span></a></div></widget>
+</div></aside><div class='float-panel blur'>
+  <button type='button' style='display:none' class='laptop-only rightbar-toggle mobile' onclick='sidebar.rightbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type='button' style='display:none' class='mobile-only leftbar-toggle mobile' onclick='sidebar.leftbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+</div><div class="scripts">
+<script type="text/javascript">
+  const ctx = {
+    date_suffix: {
+      just: `刚刚`,
+      min: `分钟前`,
+      hour: `小时前`,
+      day: `天前`,
+    },
+    root : `/`,
+  };
+
+  // required plugins (only load if needs)
+  if (`local_search`) {
+    ctx.search = {};
+    ctx.search.service = `local_search`;
+    if (ctx.search.service == 'local_search') {
+      let service_obj = Object.assign({}, `{"field":"all","path":"/search.json","content":true,"sort":"-date"}`);
+      ctx.search[ctx.search.service] = service_obj;
+    }
+  }
+  const def = {
+    avatar: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/3442075.svg`,
+    cover: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/cover/76b86c0226ffd.svg`,
+  };
+  const deps = {
+    jquery: `https://pic.gitlab.cx/npm/jquery@3.7.1/dist/jquery.min.js`,
+    marked: `https://pic.gitlab.cx/npm/marked@13.0.1/lib/marked.umd.min.js`
+  }
+  
+
+</script>
+
+<script type="text/javascript">
+  const utils = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    css: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    js: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = ctx.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    jq: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        utils.js(deps.jquery).then(fn)
+      } else {
+        fn()
+      }
+    },
+    
+    onLoading: (el) => {
+      if (el) {
+        $(el).append('<div class="loading-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" stroke-opacity=".3" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="1.3s" values="60;0"/></path><path stroke-dasharray="15" stroke-dashoffset="15" d="M12 3C16.9706 3 21 7.02944 21 12"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="15;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></g></svg></div>');
+      }
+    },
+    onLoadSuccess: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap').remove();
+      }
+    },
+    onLoadFailure: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap svg').remove();
+        $(el).find('.loading-wrap').append('<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3L21 20H3L12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="6" stroke-dashoffset="6" d="M12 10V14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="6;0"/></path></g><circle cx="12" cy="17" r="1" fill="currentColor" fill-opacity="0"><animate fill="freeze" attributeName="fill-opacity" begin="0.8s" dur="0.4s" values="0;1"/></circle></svg>');
+        $(el).find('.loading-wrap').addClass('error');
+      }
+    },
+    request: (el, url, callback, onFailure) => {
+      let retryTimes = 3;
+      utils.onLoading(el);
+      function req() {
+        return new Promise((resolve, reject) => {
+          let status = 0; // 0 等待 1 完成 2 超时
+          let timer = setTimeout(() => {
+            if (status === 0) {
+              status = 2;
+              timer = null;
+              reject('请求超时');
+              if (retryTimes == 0) {
+                onFailure();
+              }
+            }
+          }, 5000);
+          fetch(url).then(function(response) {
+            if (status !== 2) {
+              clearTimeout(timer);
+              resolve(response);
+              timer = null;
+              status = 1;
+            }
+            if (response.ok) {
+              return response.json();
+            }
+            throw new Error('Network response was not ok.');
+          }).then(function(data) {
+            retryTimes = 0;
+            utils.onLoadSuccess(el);
+            callback(data);
+          }).catch(function(error) {
+            if (retryTimes > 0) {
+              retryTimes -= 1;
+              setTimeout(() => {
+                req();
+              }, 5000);
+            } else {
+              utils.onLoadFailure(el);
+              onFailure();
+            }
+          });
+        });
+      }
+      req();
+    },
+  };
+</script>
+
+<script>
+  const sidebar = {
+    leftbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    rightbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('rightbar');
+        l_body.removeAttribute('leftbar');
+      }
+    },
+    dismiss: () => {
+      if (l_body) {
+        l_body.removeAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    toggleTOC: () => {
+      document.querySelector('#data-toc').classList.toggle('collapse');
+    }
+  }
+</script>
+<script type="text/javascript">
+  (() => {
+    const tagSwitchers = document.querySelectorAll('.tag-subtree.parent-tag > a > .tag-switcher-wrapper')
+    for (const tagSwitcher of tagSwitchers) {
+      tagSwitcher.addEventListener('click', (e) => {
+        const parent = e.target.closest('.tag-subtree.parent-tag')
+        parent.classList.toggle('expanded')
+        e.preventDefault()
+      })
+    }
+
+    // Get active tag from query string, then activate it.
+    const urlParams = new URLSearchParams(window.location.search)
+    const activeTag = urlParams.get('tag')
+    if (activeTag) {
+      let tag = document.querySelector(`.tag-subtree[data-tag="${activeTag}"]`)
+      if (tag) {
+        tag.querySelector('a').classList.add('active')
+        
+        while (tag) {
+          tag.classList.add('expanded')
+          tag = tag.parentElement.closest('.tag-subtree.parent-tag')
+        }
+      }
+    }
+  })()
+</script>
+
+
+<!-- required -->
+<script src="/js/main.js?v=1.29.1" defer></script>
+
+<script type="text/javascript">
+  const applyTheme = (theme) => {
+    if (theme === 'auto') {
+      document.documentElement.removeAttribute('data-theme')
+    } else {
+      document.documentElement.setAttribute('data-theme', theme)
+    }
+
+    applyThemeToGiscus(theme)
+  }
+
+  const applyThemeToGiscus = (theme) => {
+    theme = theme === 'auto' ? 'preferred_color_scheme' : theme
+
+    const cmt = document.getElementById('giscus')
+    if (cmt) {
+      // This works before giscus load.
+      cmt.setAttribute('data-theme', theme)
+    }
+
+    const iframe = document.querySelector('#comments > section.giscus > iframe')
+    if (iframe) {
+      // This works after giscus loaded.
+      const src = iframe.src
+      const newSrc = src.replace(/theme=[\w]+/, `theme=${theme}`)
+      iframe.src = newSrc
+    }
+  }
+
+  const switchTheme = () => {
+    // light -> dark -> auto -> light -> ...
+    const currentTheme = document.documentElement.getAttribute('data-theme')
+    let newTheme;
+    switch (currentTheme) {
+      case 'light':
+        newTheme = 'dark'
+        break
+      case 'dark':
+        newTheme = 'auto'
+        break
+      default:
+        newTheme = 'light'
+    }
+    applyTheme(newTheme)
+    window.localStorage.setItem('Stellar.theme', newTheme)
+
+    const messages = {
+      light: `切换到浅色模式`,
+      dark: `切换到深色模式`,
+      auto: `切换到跟随系统配色`,
+    }
+    hud?.toast?.(messages[newTheme])
+  }
+
+  (() => {
+    // Apply user's preferred theme, if any.
+    const theme = window.localStorage.getItem('Stellar.theme')
+    if (theme !== null) {
+      applyTheme(theme)
+    }
+  })()
+</script>
+
+
+<!-- optional -->
+
+
+
+<script defer>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.services = Object.assign({}, JSON.parse(`{"mdrender":{"js":"/js/services/mdrender.js"},"siteinfo":{"js":"/js/services/siteinfo.js","api":null},"ghinfo":{"js":"/js/services/ghinfo.js"},"sites":{"js":"/js/services/sites.js"},"friends":{"js":"/js/services/friends.js"},"timeline":{"js":"/js/services/timeline.js"},"fcircle":{"js":"/js/services/fcircle.js"},"weibo":{"js":"/js/services/weibo.js"},"memos":{"js":"/js/services/memos.js"}}`));
+    for (let id of Object.keys(ctx.services)) {
+      const js = ctx.services[id].js;
+      if (id == 'siteinfo') {
+        ctx.cardlinks = document.querySelectorAll('a.link-card[cardlink]');
+        if (ctx.cardlinks?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            setCardLink(ctx.cardlinks);
+          });
+        }
+      } else {
+        const els = document.getElementsByClassName(`ds-${id}`);
+        if (els?.length > 0) {
+          utils.jq(() => {
+            if (id == 'timeline' || 'memos' || 'marked') {
+              utils.js(deps.marked).then(function () {
+                utils.js(js, { defer: true });
+              });
+            } else {
+              utils.js(js, { defer: true });
+            }
+          });
+        }
+      }
+    }
+  });
+</script>
+
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.search = {
+      path: `/search.json`,
+    }
+    utils.js('/js/search/local-search.js', { defer: true });
+  });
+</script><script>
+  window.FPConfig = {
+    delay: 0,
+    ignoreKeywords: [],
+    maxRPS: 5,
+    hoverDelay: 25
+  };
+</script>
+<script defer src="https://pic.gitlab.cx/npm/flying-pages@2/flying-pages.min.js"></script><script defer src="https://pic.gitlab.cx/npm/vanilla-lazyload@19.1.3/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazy",
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    window.lazyLoadInstance?.update();
+  });
+</script><script>
+  ctx.fancybox = {
+    selector: `.timenode p>img`,
+    css: `https://pic.gitlab.cx/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css`,
+    js: `https://pic.gitlab.cx/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js`
+  };
+  var selector = '[data-fancybox]:not(.error)';
+  if (ctx.fancybox.selector) {
+    selector += `, ${ctx.fancybox.selector}`
+  }
+  var needFancybox = document.querySelectorAll(selector).length !== 0;
+  if (!needFancybox) {
+    const els = document.getElementsByClassName('ds-memos');
+    if (els != undefined && els.length > 0) {
+      needFancybox = true;
+    }
+  }
+  if (needFancybox) {
+    utils.css(ctx.fancybox.css);
+    utils.js(ctx.fancybox.js, { defer: true }).then(function () {
+      Fancybox.bind(selector, {
+        hideScrollbar: false,
+        Thumbs: {
+          autoStart: false,
+        },
+        caption: (fancybox, slide) => {
+          return slide.triggerEl.alt || slide.triggerEl.dataset.caption || null
+        }
+      });
+    })
+  }
+</script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const swiper_api = document.getElementById('swiper-api');
+    if (swiper_api != undefined) {
+      utils.css(`https://unpkg.com/swiper@10.3.1/swiper-bundle.min.css`);
+      utils.js(`https://unpkg.com/swiper@10.3.1/swiper-bundle.min.js`, { defer: true }).then(function () {
+        const effect = swiper_api.getAttribute('effect') || '';
+        var swiper = new Swiper('.swiper#swiper-api', {
+          slidesPerView: 'auto',
+          spaceBetween: 8,
+          centeredSlides: true,
+          effect: effect,
+          rewind: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      })
+    }
+  });
+</script>
+<script defer type="text/javascript" src="https://pic.gitlab.cx/npm/mermaid@v9/dist/mermaid.min.js"></script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    var mermaid_config = {
+      startOnLoad: true,
+      theme:
+        "" == "auto" &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "neutral",
+      logLevel: 3,
+      themeVariables: {
+        darkMode: true
+      },
+      flowchart: {
+        useMaxWidth: false,
+        htmlLabels: true,
+        curve: "linear"
+      },
+      gantt: {
+        axisFormat: "%Y/%m/%d"
+      },
+      sequence: {
+        actorMargin: 50
+      }
+    }
+    mermaid.initialize(mermaid_config);
+  });
+</script><script>
+  document.addEventListener('DOMContentLoaded', function () {
+    window.codeElements = document.querySelectorAll('.code');
+    if (window.codeElements.length > 0) {
+      ctx.copycode = {
+        default_text: `Copy`,
+        success_text: `Copied`,
+        toast: `复制成功`,
+      };
+      utils.js('/js/plugins/copycode.js');
+    }
+  });
+</script>
+
+
+<!-- inject -->
+
+</div></body></html>
