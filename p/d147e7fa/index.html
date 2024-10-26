@@ -20,12 +20,12 @@
   <title>汇编入门学习 - RuntimeBroker Blog's</title>
 
   
-    <meta name="description" content="汇编 一、指令 1 mov 可以立即数到内存，寄存器到内存。内存到寄存器 1.1 mov指令操作的四种形式  [立即数] [reg] reg代表寄存器 可以是8个通用寄存器中的任意一个 [reg+立即数] [reg+reg*{1,2,4,8}]  1.2 指令格式  MOV r&#x2F;m8,r8      r通用寄存器 MOV r&#x2F;m16,r16   m代表内存 MOV r&#x2F;m32,r32  r8代表8">
+    <meta name="description" content="汇编一、指令1 mov可以立即数到内存，寄存器到内存。内存到寄存器 1.1 mov指令操作的四种形式 [立即数] [reg] reg代表寄存器 可以是8个通用寄存器中的任意一个 [reg+立即数] [reg+reg*{1,2,4,8}]  1.2 指令格式 MOV r&#x2F;m8,r8      r通用寄存器 MOV r&#x2F;m16,r16   m代表内存 MOV r&#x2F;m32,">
 <meta property="og:type" content="article">
 <meta property="og:title" content="汇编入门学习">
 <meta property="og:url" content="https://gbk.cx/p/d147e7fa/index.html">
 <meta property="og:site_name" content="RuntimeBroker Blog&#39;s">
-<meta property="og:description" content="汇编 一、指令 1 mov 可以立即数到内存，寄存器到内存。内存到寄存器 1.1 mov指令操作的四种形式  [立即数] [reg] reg代表寄存器 可以是8个通用寄存器中的任意一个 [reg+立即数] [reg+reg*{1,2,4,8}]  1.2 指令格式  MOV r&#x2F;m8,r8      r通用寄存器 MOV r&#x2F;m16,r16   m代表内存 MOV r&#x2F;m32,r32  r8代表8">
+<meta property="og:description" content="汇编一、指令1 mov可以立即数到内存，寄存器到内存。内存到寄存器 1.1 mov指令操作的四种形式 [立即数] [reg] reg代表寄存器 可以是8个通用寄存器中的任意一个 [reg+立即数] [reg+reg*{1,2,4,8}]  1.2 指令格式 MOV r&#x2F;m8,r8      r通用寄存器 MOV r&#x2F;m16,r16   m代表内存 MOV r&#x2F;m32,">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/19/tzdTVzkA9nSuhP3vM6p01729344068916.png">
 <meta property="og:image" content="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/19/IDqXn7QaUsncKSoprbes1729344086548.png">
@@ -34,7 +34,7 @@
 <meta property="og:image" content="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/19/PwH0TLISl2GN2FgrYHIw1729344103144.png">
 <meta property="og:image" content="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/19/EXei6gcBRwac3PrdL7l31729344109884.png">
 <meta property="article:published_time" content="2024-10-19T13:25:45.000Z">
-<meta property="article:modified_time" content="2024-10-20T02:22:03.111Z">
+<meta property="article:modified_time" content="2024-10-26T02:45:46.812Z">
 <meta property="article:author" content="RuntimeBroker">
 <meta property="article:tag" content="Assembly">
 <meta name="twitter:card" content="summary">
@@ -73,7 +73,7 @@
 <div class="widgets">
 
 
-<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span><a class="cap-action" id="rss" title="Subscribe" href="/atom.xml"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M5 21q-.825 0-1.412-.587T3 19q0-.825.588-1.412T5 17q.825 0 1.413.588T7 19q0 .825-.587 1.413T5 21m13.5 0q-.65 0-1.088-.475T16.9 19.4q-.275-2.425-1.312-4.537T12.9 11.1q-1.65-1.65-3.762-2.687T4.6 7.1q-.65-.075-1.125-.512T3 5.5q0-.65.45-1.062t1.075-.363q3.075.275 5.763 1.563t4.737 3.337q2.05 2.05 3.338 4.738t1.562 5.762q.05.625-.363 1.075T18.5 21m-6 0q-.625 0-1.075-.437T10.85 19.5q-.225-1.225-.787-2.262T8.65 15.35q-.85-.85-1.888-1.412T4.5 13.15q-.625-.125-1.062-.575T3 11.5q0-.65.45-1.075t1.075-.325q1.825.25 3.413 1.063t2.837 2.062q1.25 1.25 2.063 2.838t1.062 3.412q.1.625-.325 1.075T12.5 21"/></svg></a></div><div class="widget-body fs14"><a class="item title" href="/p/4a17b156/"><span class="title">Hello World</span></a><a class="item title" href="/p/86acdf67/"><span class="title">windbg常用命令</span></a><a class="item title" href="/p/6c15571f/"><span class="title">保护模式</span></a><a class="item title" href="/p/d147e7fa/"><span class="title">汇编入门学习</span></a><a class="item title" href="/p/2d289b78/"><span class="title">github actions 云编译</span></a><a class="item title" href="/p/7a303294/"><span class="title">PHP代码审计环境调试坑点汇总</span></a><a class="item title" href="/p/988d33e4/"><span class="title">MVC设计模式-1</span></a><a class="item title" href="/p/cf780ffd/"><span class="title">PHP-PDO&PDO类&PDO核心类&封装PDO单例</span></a><a class="item title" href="/p/980312b6/"><span class="title">PHP面向对象-2-三大特性&类常量&接口</span></a><a class="item title" href="/p/b78a5232/"><span class="title">PHP面向对象-1-类&对象&属性&访问修饰符</span></a></div></widget>
+<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span><a class="cap-action" id="rss" title="Subscribe" href="/atom.xml"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M5 21q-.825 0-1.412-.587T3 19q0-.825.588-1.412T5 17q.825 0 1.413.588T7 19q0 .825-.587 1.413T5 21m13.5 0q-.65 0-1.088-.475T16.9 19.4q-.275-2.425-1.312-4.537T12.9 11.1q-1.65-1.65-3.762-2.687T4.6 7.1q-.65-.075-1.125-.512T3 5.5q0-.65.45-1.062t1.075-.363q3.075.275 5.763 1.563t4.737 3.337q2.05 2.05 3.338 4.738t1.562 5.762q.05.625-.363 1.075T18.5 21m-6 0q-.625 0-1.075-.437T10.85 19.5q-.225-1.225-.787-2.262T8.65 15.35q-.85-.85-1.888-1.412T4.5 13.15q-.625-.125-1.062-.575T3 11.5q0-.65.45-1.075t1.075-.325q1.825.25 3.413 1.063t2.837 2.062q1.25 1.25 2.063 2.838t1.062 3.412q.1.625-.325 1.075T12.5 21"/></svg></a></div><div class="widget-body fs14"><a class="item title" href="/p/d147e7fa/"><span class="title">汇编入门学习</span></a><a class="item title" href="/p/4a17b156/"><span class="title">Hello World</span></a><a class="item title" href="/p/86acdf67/"><span class="title">windbg常用命令</span></a><a class="item title" href="/p/6c15571f/"><span class="title">保护模式</span></a><a class="item title" href="/p/2d289b78/"><span class="title">github actions 云编译</span></a><a class="item title" href="/p/7a303294/"><span class="title">PHP代码审计环境调试坑点汇总</span></a><a class="item title" href="/p/988d33e4/"><span class="title">MVC设计模式-1</span></a><a class="item title" href="/p/cf780ffd/"><span class="title">PHP-PDO&PDO类&PDO核心类&封装PDO单例</span></a><a class="item title" href="/p/980312b6/"><span class="title">PHP面向对象-2-三大特性&类常量&接口</span></a><a class="item title" href="/p/b78a5232/"><span class="title">PHP面向对象-1-类&对象&属性&访问修饰符</span></a></div></widget>
 </div>
 <footer class="footer dis-select"><div class="social-wrap"><a class="social" href="/" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/08a41b181ce68.svg"/></a><a class="social" href="/" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/3616429.svg"/></a><a class="social" href="/about/#comments" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/942ebbf1a4b91.svg"/></a><a class="social" onclick="switchTheme()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path fill="currentColor" fill-rule="evenodd" d="M582.4 326.4c-140.8 0-256 115.2-256 256s115.2 256 256 256 256-115.2 256-256-115.2-256-256-256z m0 448c-70.4 0-131.2-36.8-164.8-92.8 12.8 3.2 27.2 4.8 40 4.8 121.6 0 219.2-99.2 219.2-219.2 0-17.6-1.6-35.2-6.4-52.8 60.8 32 102.4 96 102.4 169.6 1.6 104-84.8 190.4-190.4 190.4zM582.4 262.4c17.6 0 32-14.4 32-32v-128c0-17.6-14.4-32-32-32s-32 14.4-32 32v128c0 17.6 14.4 32 32 32zM262.4 582.4c0-17.6-14.4-32-32-32h-128c-17.6 0-32 14.4-32 32s14.4 32 32 32h128c17.6 0 32-14.4 32-32zM310.4 356.8c6.4 6.4 14.4 9.6 22.4 9.6 8 0 16-3.2 22.4-9.6 12.8-12.8 12.8-32 0-44.8l-91.2-91.2c-12.8-12.8-32-12.8-44.8 0-12.8 12.8-12.8 32 0 44.8l91.2 91.2zM944 220.8c-12.8-12.8-32-12.8-44.8 0l-91.2 91.2c-12.8 12.8-12.8 32 0 44.8 6.4 6.4 14.4 9.6 22.4 9.6 8 0 16-3.2 22.4-9.6l91.2-91.2c12.8-12.8 12.8-33.6 0-44.8zM310.4 808l-91.2 91.2c-12.8 12.8-12.8 32 0 44.8 6.4 6.4 14.4 9.6 22.4 9.6 8 0 16-3.2 22.4-9.6l91.2-91.2c12.8-12.8 12.8-32 0-44.8-11.2-11.2-32-11.2-44.8 0z"></path></svg></a></div></footer>
 </div></aside><div class="l_main" id="main">
@@ -86,7 +86,7 @@
   <div class="content">
     <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
 <span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Language/">Language</a></div>
-<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2024-10-19T13:25:45.000Z">2024-10-19</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2024-10-20T02:22:03.111Z">2024-10-20</time></span></div></div></div>
+<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2024-10-19T13:25:45.000Z">2024-10-19</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2024-10-26T02:45:46.812Z">2024-10-26</time></span></div></div></div>
     
     <div class="bottom only-title">
       
@@ -97,298 +97,216 @@
     </div>
     
   </div>
-  </div><article class="md-text content"><h1>汇编</h1>
-<h1>一、指令</h1>
-<h2 id="1-mov">1 mov</h2>
-<p>可以立即数到内存，寄存器到内存。内存到寄存器</p>
-<h3 id="1-1-mov指令操作的四种形式">1.1 mov指令操作的四种形式</h3>
-<ol>
+  </div><article class="md-text content"><h1 id="汇编"><a href="#汇编" class="headerlink" title="汇编"></a>汇编</h1><h1 id="一、指令"><a href="#一、指令" class="headerlink" title="一、指令"></a>一、指令</h1><h2 id="1-mov"><a href="#1-mov" class="headerlink" title="1 mov"></a>1 mov</h2><p>可以立即数到内存，寄存器到内存。内存到寄存器</p>
+<h3 id="1-1-mov指令操作的四种形式"><a href="#1-1-mov指令操作的四种形式" class="headerlink" title="1.1 mov指令操作的四种形式"></a>1.1 mov指令操作的四种形式</h3><ol>
 <li>[立即数]</li>
 <li>[reg] reg代表寄存器 可以是8个通用寄存器中的任意一个</li>
 <li>[reg+立即数]</li>
 <li>[reg+reg*{1,2,4,8}]</li>
 </ol>
-<h3 id="1-2-指令格式">1.2 指令格式</h3>
-<ol>
-<li>MOV r/m8,r8      r通用寄存器</li>
-<li>MOV r/m16,r16   m代表内存</li>
-<li>MOV r/m32,r32  r8代表8位通用寄存器</li>
-<li>MOV r8,r/m8      m8代表8为内存</li>
-<li>MOV r16,r/m16   imm8代表8位立即数</li>
-<li>MOV r32,r/m32</li>
+<h3 id="1-2-指令格式"><a href="#1-2-指令格式" class="headerlink" title="1.2 指令格式"></a>1.2 指令格式</h3><ol>
+<li>MOV r&#x2F;m8,r8      r通用寄存器</li>
+<li>MOV r&#x2F;m16,r16   m代表内存</li>
+<li>MOV r&#x2F;m32,r32  r8代表8位通用寄存器</li>
+<li>MOV r8,r&#x2F;m8      m8代表8为内存</li>
+<li>MOV r16,r&#x2F;m16   imm8代表8位立即数</li>
+<li>MOV r32,r&#x2F;m32</li>
 <li>MOV r8,imm8</li>
 <li>MOV r16,imm16</li>
 <li>MOV r32,imm32</li>
 </ol>
-<h2 id="2-movs">2 movs</h2>
-<p>移动数据 内存-内存 （EDI-ESI）</p>
+<h2 id="2-movs"><a href="#2-movs" class="headerlink" title="2 movs"></a>2 movs</h2><p>移动数据 内存-内存 （EDI-ESI）</p>
 <p>MOVS BYTE PTR ES:[EDI],BYTE PTR DS:[ESI] 简写为：MOVSB</p>
 <p>MOVS WORD PTR ES:[EDI],WORD PTR DS:[ESI] 简写为：MOVSW</p>
 <p>MOVS DWORD PTR ES:[EDI],DWORD PTR DS:[ESI] 简写为：MOVSD</p>
 <p>💡 默认DF位是0时，当完成movs操作后ESI和EDI的值会加byte,word,dword{1，2，4}</p>
-<h2 id="3-stos">3 stos</h2>
-<p>将AI/AX/EAX的值存储到[EDI]指定的内存单元</p>
+<h2 id="3-stos"><a href="#3-stos" class="headerlink" title="3 stos"></a>3 stos</h2><p>将AI&#x2F;AX&#x2F;EAX的值存储到[EDI]指定的内存单元</p>
 <p>STOS BYTE PRT ES:[EDI] 简写为STOSB</p>
 <p>STOS WORD PRT ES:[EDI] 简写为STOSW</p>
 <p>STOS DWORD PRT ES:[EDI] 简写为STOSD</p>
 <p>💡 默认DF位是0时，当完成stos操作后EDI的值会加byte,word,dword{1，2，4}</p>
-<h2 id="4-rep">4 rep</h2>
-<p>按计数寄存器ECX中指定的次数重复执行字符串指令</p>
+<h2 id="4-rep"><a href="#4-rep" class="headerlink" title="4 rep"></a>4 rep</h2><p>按计数寄存器ECX中指定的次数重复执行字符串指令</p>
 <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable constant_">MOV</span> <span class="variable constant_">ECX</span>,<span class="number">10</span></span><br><span class="line"><span class="variable constant_">REP</span> <span class="variable constant_">MOVSD</span></span><br><span class="line"></span><br><span class="line"><span class="variable constant_">REP</span> <span class="variable constant_">STOSD</span></span><br></pre></td></tr></table></figure>
-<h2 id="5-add">5 add</h2>
-<h3 id="5-1-指令格式">5.1 指令格式</h3>
-<ol>
-<li>ADD r/m8,imm8</li>
-<li>ADD r/m16,imm16</li>
-<li>ADD r/m32,imm32</li>
-<li>ADD r/m16,imm8</li>
-<li>ADD r/m32,imm8</li>
-<li>ADD r/m8,r8</li>
-<li>ADD r/m16,r16</li>
-<li>ADD r/m32,r32</li>
-<li>ADD r8,r/m8</li>
-<li>ADD r16,r/m16</li>
-<li>ADD r32,r/m32</li>
+
+<h2 id="5-add"><a href="#5-add" class="headerlink" title="5 add"></a>5 add</h2><h3 id="5-1-指令格式"><a href="#5-1-指令格式" class="headerlink" title="5.1 指令格式"></a>5.1 指令格式</h3><ol>
+<li>ADD r&#x2F;m8,imm8</li>
+<li>ADD r&#x2F;m16,imm16</li>
+<li>ADD r&#x2F;m32,imm32 </li>
+<li>ADD r&#x2F;m16,imm8</li>
+<li>ADD r&#x2F;m32,imm8</li>
+<li>ADD r&#x2F;m8,r8</li>
+<li>ADD r&#x2F;m16,r16</li>
+<li>ADD r&#x2F;m32,r32</li>
+<li>ADD r8,,r&#x2F;m8</li>
+<li>ADD r16,r&#x2F;m16</li>
+<li>ADD r32,r&#x2F;m32</li>
 </ol>
-<h2 id="6-sub">6 sub</h2>
-<h3 id="6-1-指令格式">6.1 指令格式</h3>
-<ol>
-<li>SUB r/m8,imm8</li>
-<li>SUB r/m16,imm16</li>
-<li>SUB r/m32,imm32</li>
-<li>SUB r/m16,imm8</li>
-<li>SUB r/m32,imm8</li>
-<li>SUB r/m8,r8</li>
-<li>SUB r/m16,r16</li>
-<li>SUB r/m32,r32</li>
-<li>SUB r8,r/m8</li>
-<li>SUB r16,r/m16</li>
-<li>SUB r32,r/m32</li>
+<h2 id="6-sub"><a href="#6-sub" class="headerlink" title="6 sub"></a>6 sub</h2><h3 id="6-1-指令格式"><a href="#6-1-指令格式" class="headerlink" title="6.1 指令格式"></a>6.1 指令格式</h3><ol>
+<li>SUB r&#x2F;m8,imm8</li>
+<li>SUB r&#x2F;m16,imm16</li>
+<li>SUB r&#x2F;m32,imm32 </li>
+<li>SUB r&#x2F;m16,imm8</li>
+<li>SUB r&#x2F;m32,imm8</li>
+<li>SUB r&#x2F;m8,r8</li>
+<li>SUB r&#x2F;m16,r16</li>
+<li>SUB r&#x2F;m32,r32</li>
+<li>SUB r8,,r&#x2F;m8</li>
+<li>SUB r16,r&#x2F;m16</li>
+<li>SUB r32,r&#x2F;m32</li>
 </ol>
-<h2 id="7-and">7 and</h2>
-<h3 id="7-1-指令格式">7.1 指令格式</h3>
-<ol>
-<li>AND r/m8,imm8</li>
-<li>AND r/m16,imm16</li>
-<li>AND r/m32,imm32</li>
-<li>AND r/m16,imm8</li>
-<li>AND r/m32,imm8</li>
-<li>AND r/m8,r8</li>
-<li>AND r/m16,r16</li>
-<li>AND r/m32,r32</li>
-<li>AND r8,r/m8</li>
-<li>AND r16,r/m16</li>
-<li>AND r32,r/m32</li>
+<h2 id="7-and"><a href="#7-and" class="headerlink" title="7 and"></a>7 and</h2><h3 id="7-1-指令格式"><a href="#7-1-指令格式" class="headerlink" title="7.1 指令格式"></a>7.1 指令格式</h3><ol>
+<li>AND r&#x2F;m8,imm8</li>
+<li>AND r&#x2F;m16,imm16</li>
+<li>AND r&#x2F;m32,imm32</li>
+<li>AND r&#x2F;m16,imm8</li>
+<li>AND r&#x2F;m32,imm8</li>
+<li>AND r&#x2F;m8,r8</li>
+<li>AND r&#x2F;m16,r16</li>
+<li>AND r&#x2F;m32,r32</li>
+<li>AND r8,r&#x2F;m8</li>
+<li>AND r16,r&#x2F;m16</li>
+<li>AND r32,r&#x2F;m32</li>
 </ol>
-<h2 id="8-or">8 or</h2>
-<h3 id="8-1-指令格式">8.1 指令格式</h3>
-<ol>
-<li>OR r/m8,imm8</li>
-<li>OR r/m16,imm16</li>
-<li>OR r/m32,imm32</li>
-<li>OR r/m16,imm8</li>
-<li>OR r/m32,imm8</li>
-<li>OR r/m8,r8</li>
-<li>OR r/m16,r16</li>
-<li>OR r/m32,r32</li>
-<li>OR r8,r/m8</li>
-<li>OR r16,r/m16</li>
-<li>OR r32,r/m32</li>
+<h2 id="8-or"><a href="#8-or" class="headerlink" title="8 or"></a>8 or</h2><h3 id="8-1-指令格式"><a href="#8-1-指令格式" class="headerlink" title="8.1 指令格式"></a>8.1 指令格式</h3><ol>
+<li>OR r&#x2F;m8,imm8</li>
+<li>OR r&#x2F;m16,imm16</li>
+<li>OR r&#x2F;m32,imm32</li>
+<li>OR r&#x2F;m16,imm8</li>
+<li>OR r&#x2F;m32,imm8</li>
+<li>OR r&#x2F;m8,r8</li>
+<li>OR r&#x2F;m16,r16</li>
+<li>OR r&#x2F;m32,r32</li>
+<li>OR r8,r&#x2F;m8</li>
+<li>OR r16,r&#x2F;m16</li>
+<li>OR r32,r&#x2F;m32</li>
 </ol>
-<h2 id="9-not">9 not</h2>
-<h3 id="9-1-功能">9.1 功能</h3>
-<p>进行取反操作</p>
-<h3 id="9-2-指令格式">9.2 指令格式</h3>
-<ol>
+<h2 id="9-not"><a href="#9-not" class="headerlink" title="9 not"></a>9 not</h2><h3 id="9-1-功能"><a href="#9-1-功能" class="headerlink" title="9.1 功能"></a>9.1 功能</h3><p>进行取反操作</p>
+<h3 id="9-2-指令格式"><a href="#9-2-指令格式" class="headerlink" title="9.2 指令格式"></a>9.2 指令格式</h3><ol>
 <li>NOT r32</li>
 <li>NOT r16</li>
 <li>NOT m16</li>
 <li>NOT m32</li>
 </ol>
-<h2 id="10-xor">10 xor</h2>
-<h3 id="10-1-指令格式">10.1 指令格式</h3>
-<ol>
-<li>XOR r/m8,imm8</li>
-<li>XOR r/m16,imm16</li>
-<li>XOR r/m32,imm32</li>
-<li>XOR r/m16,imm8</li>
-<li>XOR r/m32,imm8</li>
-<li>XOR r/m8,r8</li>
-<li>XOR r/m16,r16</li>
-<li>XOR r/m32,r32</li>
-<li>XOR r8,r/m8</li>
-<li>XOR r16,r/m16</li>
-<li>XOR r32,r/m32</li>
+<h2 id="10-xor"><a href="#10-xor" class="headerlink" title="10 xor"></a>10 xor</h2><h3 id="10-1-指令格式"><a href="#10-1-指令格式" class="headerlink" title="10.1 指令格式"></a>10.1 指令格式</h3><ol>
+<li>XOR r&#x2F;m8,imm8</li>
+<li>XOR r&#x2F;m16,imm16</li>
+<li>XOR r&#x2F;m32,imm32</li>
+<li>XOR r&#x2F;m16,imm8</li>
+<li>XOR r&#x2F;m32,imm8</li>
+<li>XOR r&#x2F;m8,r8</li>
+<li>XOR r&#x2F;m16,r16</li>
+<li>XOR r&#x2F;m32,r32</li>
+<li>XOR r8,r&#x2F;m8</li>
+<li>XOR r16,r&#x2F;m16</li>
+<li>XOR r32,r&#x2F;m32</li>
 </ol>
-<h2 id="11-push">11 push</h2>
-<h3 id="11-1-功能">11.1 功能</h3>
-<ol>
+<h2 id="11-push"><a href="#11-push" class="headerlink" title="11 push"></a>11 push</h2><h3 id="11-1-功能"><a href="#11-1-功能" class="headerlink" title="11.1 功能"></a>11.1 功能</h3><ol>
 <li>向堆栈中压入数据</li>
 <li>然后修改栈顶指针ESP寄存器地址，看数据类型byte,word,dword分别对应-1，-2，-4</li>
 </ol>
-<h3 id="11-2-指令格式">11.2 指令格式</h3>
-<ol>
+<h3 id="11-2-指令格式"><a href="#11-2-指令格式" class="headerlink" title="11.2 指令格式"></a>11.2 指令格式</h3><ol>
 <li>PUSH r32</li>
 <li>PUSH r16</li>
 <li>PUSH m16</li>
 <li>PUSH m32</li>
-<li>PUSH imm8/imm16/imm32</li>
-<li>PUSHAD（把8个通用寄存器的值存入堆栈）</li>
+<li>PUSH imm8&#x2F;imm16&#x2F;imm32</li>
+<li>PUSHAD（把8个通用寄存器的值存入堆栈，其中D是DWORD）</li>
+<li>PUSHFD (把32位的eflags寄存器压入栈中，其中D是DWORD)</li>
 </ol>
-<h3 id="11-3-其他方式实现该功能">11.3 其他方式实现该功能</h3>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/19/tzdTVzkA9nSuhP3vM6p01729344068916.png" alt="image"></p>
-<h2 id="12-pop">12 pop</h2>
-<h3 id="12-1-功能">12.1 功能</h3>
-<ol>
-<li>将栈顶数据存储到寄存器/内存</li>
+<h3 id="11-3-其他方式实现该功能"><a href="#11-3-其他方式实现该功能" class="headerlink" title="11.3 其他方式实现该功能"></a>11.3 其他方式实现该功能</h3><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/19/tzdTVzkA9nSuhP3vM6p01729344068916.png" alt="image"></p>
+<h2 id="12-pop"><a href="#12-pop" class="headerlink" title="12 pop"></a>12 pop</h2><h3 id="12-1-功能"><a href="#12-1-功能" class="headerlink" title="12.1 功能"></a>12.1 功能</h3><ol>
+<li>将栈顶数据存储到寄存器&#x2F;内存</li>
 <li>修改栈顶指针ESP寄存器地址，看数据类型byte,word,dword分别对应+1，+2，+4</li>
 </ol>
-<h3 id="12-2-指令格式">12.2 指令格式</h3>
-<ol>
+<h3 id="12-2-指令格式"><a href="#12-2-指令格式" class="headerlink" title="12.2 指令格式"></a>12.2 指令格式</h3><ol>
 <li>POP r16</li>
 <li>POP r32</li>
 <li>POP m16</li>
 <li>POP m32</li>
 <li>POPAD （把存入堆栈的8个寄存器值弹出，恢复8个寄存器的值）</li>
 </ol>
-<h3 id="12-3-其他方式实现该功能">12.3 其他方式实现该功能</h3>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/19/IDqXn7QaUsncKSoprbes1729344086548.png" alt="image"></p>
-<h2 id="13-jmp">13 jmp</h2>
-<h3 id="13-1-功能">13.1 功能</h3>
-<ol>
+<h3 id="12-3-其他方式实现该功能"><a href="#12-3-其他方式实现该功能" class="headerlink" title="12.3 其他方式实现该功能"></a>12.3 其他方式实现该功能</h3><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/19/IDqXn7QaUsncKSoprbes1729344086548.png" alt="image"></p>
+<h2 id="13-jmp"><a href="#13-jmp" class="headerlink" title="13 jmp"></a>13 jmp</h2><h3 id="13-1-功能"><a href="#13-1-功能" class="headerlink" title="13.1 功能"></a>13.1 功能</h3><ol>
 <li>修改寄存器EIP的值</li>
 </ol>
-<h3 id="13-2-指令格式">13.2 指令格式</h3>
-<ol>
-<li>JMP 寄存器/立即数/内存</li>
+<h3 id="13-2-指令格式"><a href="#13-2-指令格式" class="headerlink" title="13.2 指令格式"></a>13.2 指令格式</h3><ol>
+<li>JMP 寄存器&#x2F;立即数&#x2F;内存</li>
 </ol>
-<h2 id="14-call">14 call</h2>
-<h3 id="14-1-功能">14.1 功能</h3>
-<ol>
+<h2 id="14-call"><a href="#14-call" class="headerlink" title="14 call"></a>14 call</h2><h3 id="14-1-功能"><a href="#14-1-功能" class="headerlink" title="14.1 功能"></a>14.1 功能</h3><ol>
 <li>PUSH当前call指令的下一行地址进入堆栈</li>
-<li>往EIP内存入立即数/寄存器/内存    简写：jmp 立即数/寄存器/内存</li>
+<li>往EIP内存入立即数&#x2F;寄存器&#x2F;内存    简写：jmp 立即数&#x2F;寄存器&#x2F;内存</li>
 </ol>
 <p>💡 与JMP唯一的区别：在堆栈中存储call指令下一行内存地址</p>
-<h3 id="14-2-指令格式">14.2 指令格式</h3>
-<ol>
-<li>CALL 立即数/寄存器/内存</li>
+<h3 id="14-2-指令格式"><a href="#14-2-指令格式" class="headerlink" title="14.2 指令格式"></a>14.2 指令格式</h3><ol>
+<li>CALL 立即数&#x2F;寄存器&#x2F;内存</li>
 </ol>
-<h2 id="15-ret">15 ret</h2>
-<h3 id="15-1-功能">15.1 功能</h3>
-<ol>
+<h2 id="15-ret"><a href="#15-ret" class="headerlink" title="15 ret"></a>15 ret</h2><h3 id="15-1-功能"><a href="#15-1-功能" class="headerlink" title="15.1 功能"></a>15.1 功能</h3><ol>
 <li>将当前栈顶数据值存入EIP      ADD ESP,4</li>
 <li>然后当前栈顶指针+4，赋值给ESP    MOV EIP,[ESP-4]</li>
 </ol>
-<h3 id="15-2-指令格式">15.2 指令格式</h3>
-<ol>
+<h3 id="15-2-指令格式"><a href="#15-2-指令格式" class="headerlink" title="15.2 指令格式"></a>15.2 指令格式</h3><ol>
 <li>RET</li>
 </ol>
-<h2 id="16-CMP">16 CMP</h2>
-<h3 id="16-1-功能">16.1 功能</h3>
-<p>该指令是比较两个操作数。</p>
+<h2 id="16-CMP"><a href="#16-CMP" class="headerlink" title="16 CMP"></a>16 CMP</h2><h3 id="16-1-功能"><a href="#16-1-功能" class="headerlink" title="16.1 功能"></a>16.1 功能</h3><p>该指令是比较两个操作数。</p>
 <p>实际上，它相当于SUB指令，但是相减的记过并不保存到第一个操作数中。</p>
 <p>只是根据相减的结果来改变零标志位的,当两个操作数相等的时候,零标志位置1。</p>
-<h3 id="16-2-指令格式">16.2 指令格式</h3>
-<ol>
-<li>CMP R/M,R/M/IMM</li>
+<h3 id="16-2-指令格式"><a href="#16-2-指令格式" class="headerlink" title="16.2 指令格式"></a>16.2 指令格式</h3><ol>
+<li>CMP R&#x2F;M,R&#x2F;M&#x2F;IMM</li>
 </ol>
-<h2 id="17-TEST">17 TEST</h2>
-<h3 id="17-1-功能">17.1 功能</h3>
-<p>TEST指令相当于AND指令，只不过与的结果并不保存到第一个操作数中。</p>
+<h2 id="17-TEST"><a href="#17-TEST" class="headerlink" title="17 TEST"></a>17 TEST</h2><h3 id="17-1-功能"><a href="#17-1-功能" class="headerlink" title="17.1 功能"></a>17.1 功能</h3><p>TEST指令相当于AND指令，只不过与的结果并不保存到第一个操作数中。</p>
 <p>该指令在一定程序上和CMP指令时类似的,两个数值进行AND操作,结果不保存,但是会改变相应标志位.</p>
-<h3 id="17-2-指令格式">17.2 指令格式</h3>
-<p>TEST r/m,r/m/imm</p>
-<h2 id="18-ADC">18 ADC</h2>
-<h3 id="18-1-功能">18.1 功能</h3>
-<p>带进位加法，两边不能同时为内存 宽度要一样</p>
-<h3 id="18-2-指令格式">18.2 指令格式</h3>
-<ol>
-<li>ADC r/m,r/m/imm</li>
+<h3 id="17-2-指令格式"><a href="#17-2-指令格式" class="headerlink" title="17.2 指令格式"></a>17.2 指令格式</h3><p>TEST r&#x2F;m,r&#x2F;m&#x2F;imm</p>
+<h2 id="18-ADC"><a href="#18-ADC" class="headerlink" title="18 ADC"></a>18 ADC</h2><h3 id="18-1-功能"><a href="#18-1-功能" class="headerlink" title="18.1 功能"></a>18.1 功能</h3><p>带进位加法，两边不能同时为内存 宽度要一样</p>
+<h3 id="18-2-指令格式"><a href="#18-2-指令格式" class="headerlink" title="18.2 指令格式"></a>18.2 指令格式</h3><ol>
+<li>ADC r&#x2F;m,r&#x2F;m&#x2F;imm</li>
 </ol>
-<h2 id="19-SBB">19 SBB</h2>
-<h3 id="19-1-功能">19.1 功能</h3>
-<p>带借位减法，两边不能同时为内存 宽度要一样</p>
-<h3 id="19-2-指令格式">19.2 指令格式</h3>
-<ol>
-<li>SBB r/m,r/m</li>
+<h2 id="19-SBB"><a href="#19-SBB" class="headerlink" title="19 SBB"></a>19 SBB</h2><h3 id="19-1-功能"><a href="#19-1-功能" class="headerlink" title="19.1 功能"></a>19.1 功能</h3><p>带借位减法，两边不能同时为内存 宽度要一样</p>
+<h3 id="19-2-指令格式"><a href="#19-2-指令格式" class="headerlink" title="19.2 指令格式"></a>19.2 指令格式</h3><ol>
+<li>SBB r&#x2F;m,r&#x2F;m</li>
 </ol>
-<h2 id="20-XCHG">20 XCHG</h2>
-<h3 id="20-1-功能">20.1 功能</h3>
-<p>交换数据，两边不能同时为内存 宽度要一样</p>
-<h3 id="20-2-指令格式">20.2 指令格式</h3>
-<ol>
-<li>XCHG r/m,r/m</li>
+<h2 id="20-XCHG"><a href="#20-XCHG" class="headerlink" title="20 XCHG"></a>20 XCHG</h2><h3 id="20-1-功能"><a href="#20-1-功能" class="headerlink" title="20.1 功能"></a>20.1 功能</h3><p>交换数据，两边不能同时为内存 宽度要一样</p>
+<h3 id="20-2-指令格式"><a href="#20-2-指令格式" class="headerlink" title="20.2 指令格式"></a>20.2 指令格式</h3><ol>
+<li>XCHG r&#x2F;m,r&#x2F;m</li>
 </ol>
-<h2 id="21-算术位移指令">21 算术位移指令</h2>
-<h3 id="21-1-SAL（算术左移）">21.1 SAL（算术左移）</h3>
-<p>SAR Reg/Mem, CL/Imm</p>
-<h3 id="21-2-SAR（算术右移）">21.2 SAR（算术右移）</h3>
-<p>SAR Reg/Mem, CL/Imm</p>
+<h2 id="21-算术位移指令"><a href="#21-算术位移指令" class="headerlink" title="21 算术位移指令"></a>21 算术位移指令</h2><h3 id="21-1-SAL（算术左移）"><a href="#21-1-SAL（算术左移）" class="headerlink" title="21.1 SAL（算术左移）"></a>21.1 SAL（算术左移）</h3><p>SAR Reg&#x2F;Mem, CL&#x2F;Imm</p>
+<h3 id="21-2-SAR（算术右移）"><a href="#21-2-SAR（算术右移）" class="headerlink" title="21.2 SAR（算术右移）"></a>21.2 SAR（算术右移）</h3><p>SAR Reg&#x2F;Mem, CL&#x2F;Imm</p>
 <p>注意：算术右移时候补最高位符号位，是1补1，是0补0</p>
-<h2 id="22-逻辑移位指令">22 逻辑移位指令</h2>
-<p>注意：不管是左移还是右移都是补0</p>
-<h3 id="22-1-SHL（逻辑左移）">22.1 SHL（逻辑左移）</h3>
-<p>SHL Reg/Mem, CL/Imm</p>
-<h3 id="22-2-SHR（逻辑右移）">22.2 SHR（逻辑右移）</h3>
-<p>SHR Reg/Mem, CL/Imm</p>
-<h2 id="23-循环移位指令">23 循环移位指令</h2>
-<h3 id="23-1-ROL（循环左移）">23.1 ROL（循环左移）</h3>
-<p>ROL r/m, i8</p>
+<h2 id="22-逻辑移位指令"><a href="#22-逻辑移位指令" class="headerlink" title="22 逻辑移位指令"></a>22 逻辑移位指令</h2><p>注意：不管是左移还是右移都是补0</p>
+<h3 id="22-1-SHL（逻辑左移）"><a href="#22-1-SHL（逻辑左移）" class="headerlink" title="22.1 SHL（逻辑左移）"></a>22.1 SHL（逻辑左移）</h3><p>SHL Reg&#x2F;Mem, CL&#x2F;Imm</p>
+<h3 id="22-2-SHR（逻辑右移）"><a href="#22-2-SHR（逻辑右移）" class="headerlink" title="22.2 SHR（逻辑右移）"></a>22.2 SHR（逻辑右移）</h3><p>SHR Reg&#x2F;Mem, CL&#x2F;Imm</p>
+<h2 id="23-循环移位指令"><a href="#23-循环移位指令" class="headerlink" title="23 循环移位指令"></a>23 循环移位指令</h2><h3 id="23-1-ROL（循环左移）"><a href="#23-1-ROL（循环左移）" class="headerlink" title="23.1 ROL（循环左移）"></a>23.1 ROL（循环左移）</h3><p>ROL r&#x2F;m, i8 </p>
 <p>最低位是1则补1，最低位是0则补0</p>
-<h3 id="23-2-ROR（循环右移）">23.2 ROR（循环右移）</h3>
-<p>ROR r/m, CL</p>
+<h3 id="23-2-ROR（循环右移）"><a href="#23-2-ROR（循环右移）" class="headerlink" title="23.2 ROR（循环右移）"></a>23.2 ROR（循环右移）</h3><p>ROR r&#x2F;m, CL</p>
 <p>最高位是1则补1，最高位是0则补0</p>
-<h2 id="24-带进位的循环移位指令">24 带进位的循环移位指令</h2>
-<p>CF位是1则补1，反之则补0</p>
-<h3 id="24-1-RCL（带进位循环左移）">24.1 RCL（带进位循环左移）</h3>
-<p>RCL r/m, i8</p>
-<h3 id="24-2-RCR（带进位循环右移）">24.2 RCR（带进位循环右移）</h3>
-<p>RCR r/m, CL</p>
-<h1>二、存储模式</h1>
-<p>大端模式：数据高位在低位，数据低位在高位</p>
+<h2 id="24-带进位的循环移位指令"><a href="#24-带进位的循环移位指令" class="headerlink" title="24 带进位的循环移位指令"></a>24 带进位的循环移位指令</h2><p>CF位是1则补1，反之则补0</p>
+<h3 id="24-1-RCL（带进位循环左移）"><a href="#24-1-RCL（带进位循环左移）" class="headerlink" title="24.1 RCL（带进位循环左移）"></a>24.1 RCL（带进位循环左移）</h3><p>RCL r&#x2F;m, i8 </p>
+<h3 id="24-2-RCR（带进位循环右移）"><a href="#24-2-RCR（带进位循环右移）" class="headerlink" title="24.2 RCR（带进位循环右移）"></a>24.2 RCR（带进位循环右移）</h3><p>RCR r&#x2F;m, CL</p>
+<h1 id="二、存储模式"><a href="#二、存储模式" class="headerlink" title="二、存储模式"></a>二、存储模式</h1><p>大端模式：数据高位在低位，数据低位在高位</p>
 <p>小端模式：数据高位在高位，数据低位在低位</p>
 <p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/19/FA7VNMp2h04dlYk2uiOY1729344094077.png" alt="image"></p>
-<h1>三 JCC</h1>
-<h2 id="1-标志寄存器-EFLAGS">1 标志寄存器 EFLAGS</h2>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/19/2jddoYVTheo4vVBfG6Pe1729344096976.png" alt="image"></p>
-<h2 id="2-CF（bit-0）-Carry-flag">2 CF（bit 0）[Carry flag]</h2>
-<h3 id="2-1-功能">2.1 功能</h3>
-<p>若算术操作产生的结果在最高有效位发生进位或者借位则将其置1，反之清零。这个标志通常用来只是无符号整型运算的溢出状态。</p>
+<h1 id="三-JCC"><a href="#三-JCC" class="headerlink" title="三 JCC"></a>三 JCC</h1><h2 id="1-标志寄存器-EFLAGS"><a href="#1-标志寄存器-EFLAGS" class="headerlink" title="1 标志寄存器 EFLAGS"></a>1 标志寄存器 EFLAGS</h2><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/19/2jddoYVTheo4vVBfG6Pe1729344096976.png" alt="image"></p>
+<h2 id="2-CF（bit-0）-Carry-flag"><a href="#2-CF（bit-0）-Carry-flag" class="headerlink" title="2 CF（bit 0）[Carry flag]"></a>2 CF（bit 0）[Carry flag]</h2><h3 id="2-1-功能"><a href="#2-1-功能" class="headerlink" title="2.1 功能"></a>2.1 功能</h3><p>若算术操作产生的结果在最高有效位发生进位或者借位则将其置1，反之清零。这个标志通常用来只是无符号整型运算的溢出状态。</p>
 <p>👉 有符号运算看O位，无符号运算看C位</p>
-<h3 id="2-2-例子">2.2 例子</h3>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/19/PwH0TLISl2GN2FgrYHIw1729344103144.png" alt="image"></p>
-<h2 id="3-PF-（bit-2）-parity-flag">3 PF （bit 2）[parity flag]</h2>
-<h3 id="3-1-功能">3.1 功能</h3>
-<p>如果结果的最低有效字节包含偶数个1位，则该位置1，否则清零。</p>
+<h3 id="2-2-例子"><a href="#2-2-例子" class="headerlink" title="2.2 例子"></a>2.2 例子</h3><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/19/PwH0TLISl2GN2FgrYHIw1729344103144.png" alt="image"></p>
+<h2 id="3-PF-（bit-2）-parity-flag"><a href="#3-PF-（bit-2）-parity-flag" class="headerlink" title="3 PF （bit 2）[parity flag]"></a>3 PF （bit 2）[parity flag]</h2><h3 id="3-1-功能"><a href="#3-1-功能" class="headerlink" title="3.1 功能"></a>3.1 功能</h3><p>如果结果的最低有效字节包含偶数个1位，则该位置1，否则清零。</p>
 <p>利用PF课进行奇偶校验检查：</p>
 <p>需要传输“11001110”，数据中含有5个“1”，所以其奇校验位为“0”，同时把“110011100”数据传输给接收方，接收方收到数据时后再一次计算奇偶性，“110011100”中仍然含有5个“1”，所以接收方计算出的奇校验位还是“0”，与发送方一致，表示在此次传输过程中未发生错误</p>
-<h2 id="4-AF（bit-4）-Auxiliary-carry-flag">4 AF（bit 4）[Auxiliary carry flag]</h2>
-<h3 id="4-1-功能">4.1 功能</h3>
-<ol>
+<h2 id="4-AF（bit-4）-Auxiliary-carry-flag"><a href="#4-AF（bit-4）-Auxiliary-carry-flag" class="headerlink" title="4 AF（bit 4）[Auxiliary carry flag]"></a>4 AF（bit 4）[Auxiliary carry flag]</h2><h3 id="4-1-功能"><a href="#4-1-功能" class="headerlink" title="4.1 功能"></a>4.1 功能</h3><ol>
 <li>在字操作时，发生低字节向高字节进位或借位时；</li>
 <li>在字节操作时，发生低四位向高四位进位或借位时。</li>
 </ol>
 <p>辅助进位标志AF的值被置为1，否则其值为0：</p>
-<h2 id="5-ZF（bit-6）-zero-flag">5 ZF（bit 6）[zero flag]</h2>
-<h3 id="5-1-功能">5.1 功能</h3>
-<p>零标志ZF用来反映运算结果是否为0。</p>
+<h2 id="5-ZF（bit-6）-zero-flag"><a href="#5-ZF（bit-6）-zero-flag" class="headerlink" title="5 ZF（bit 6）[zero flag]"></a>5 ZF（bit 6）[zero flag]</h2><h3 id="5-1-功能"><a href="#5-1-功能" class="headerlink" title="5.1 功能"></a>5.1 功能</h3><p>零标志ZF用来反映运算结果是否为0。</p>
 <p>若结果为0，则将其置1，反之清零</p>
 <p>经常与CMP或者TEST等指令一起使用</p>
-<h2 id="6-SF（bit-7）-Sign-flag">6 SF（bit 7）[Sign flag]</h2>
-<h3 id="6-1-功能">6.1 功能</h3>
-<p>该标志被设置为有符号整型的最高有效位</p>
+<h2 id="6-SF（bit-7）-Sign-flag"><a href="#6-SF（bit-7）-Sign-flag" class="headerlink" title="6 SF（bit 7）[Sign flag]"></a>6 SF（bit 7）[Sign flag]</h2><h3 id="6-1-功能"><a href="#6-1-功能" class="headerlink" title="6.1 功能"></a>6.1 功能</h3><p>该标志被设置为有符号整型的最高有效位</p>
 <p>0指示结果为正，反之则为负</p>
-<h2 id="7-OF（bit-11）-OverFlow-flag">7 OF（bit 11）[OverFlow flag]</h2>
-<h3 id="7-1-功能">7.1 功能</h3>
-<p>一处标志OF用于反映有符号数加减运算所得结果是否溢出。</p>
+<h2 id="7-OF（bit-11）-OverFlow-flag"><a href="#7-OF（bit-11）-OverFlow-flag" class="headerlink" title="7 OF（bit 11）[OverFlow flag]"></a>7 OF（bit 11）[OverFlow flag]</h2><h3 id="7-1-功能"><a href="#7-1-功能" class="headerlink" title="7.1 功能"></a>7.1 功能</h3><p>一处标志OF用于反映有符号数加减运算所得结果是否溢出。</p>
 <p>如果是无符号数运算，是否溢出看CF位。</p>
 <p>如果是有符号数运算，是否溢出看OF位。</p>
-<h2 id="8-DF（bit-10）-Oirection-flag">8 DF（bit 10）[Oirection flag]</h2>
-<h3 id="8-1-功能">8.1 功能</h3>
-<p>这个方向标志控制串指令（MOVS,CMPS,SCAS,LODS以及STOS）设置DF标志是的串指令自动递减（从高地址向低地址方向处理字符串），清楚该标志则使得指令自动递增</p>
+<h2 id="8-DF（bit-10）-Oirection-flag"><a href="#8-DF（bit-10）-Oirection-flag" class="headerlink" title="8 DF（bit 10）[Oirection flag]"></a>8 DF（bit 10）[Oirection flag]</h2><h3 id="8-1-功能"><a href="#8-1-功能" class="headerlink" title="8.1 功能"></a>8.1 功能</h3><p>这个方向标志控制串指令（MOVS,CMPS,SCAS,LODS以及STOS）设置DF标志是的串指令自动递减（从高地址向低地址方向处理字符串），清楚该标志则使得指令自动递增</p>
 <p>STD以及CLD指令分别用于设置以及清楚DF标志</p>
-<h2 id="9-JCC指令">9 JCC指令</h2>
-<table>
+<h2 id="9-JCC指令"><a href="#9-JCC指令" class="headerlink" title="9 JCC指令"></a>9 JCC指令</h2><table>
 <thead>
 <tr>
 <th>Index</th>
@@ -397,78 +315,77 @@
 <th>EFLAGS</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>1</td>
 <td>JE ，JZ</td>
 <td>结果为零则跳转(相等时跳转)</td>
-<td>ZF=1</td>
+<td>ZF&#x3D;1</td>
 </tr>
 <tr>
 <td>2</td>
 <td>JNE，JNZ</td>
 <td>结果不为零则跳转(不相等时跳转)</td>
-<td>ZF=0</td>
+<td>ZF&#x3D;0</td>
 </tr>
 <tr>
 <td>3</td>
 <td>JS</td>
 <td>结果为负则跳转</td>
-<td>SF=1</td>
+<td>SF&#x3D;1</td>
 </tr>
 <tr>
 <td>4</td>
 <td>JNS</td>
 <td>结果为非负则跳转</td>
-<td>SF=0</td>
+<td>SF&#x3D;0</td>
 </tr>
 <tr>
 <td>5</td>
 <td>JP，JPE</td>
 <td>结果中1的个数为偶数则跳转</td>
-<td>PF=1</td>
+<td>PF&#x3D;1</td>
 </tr>
 <tr>
 <td>6</td>
 <td>JNP，JPO</td>
 <td>结果中1的个数为偶数则跳转</td>
-<td>PF=0</td>
+<td>PF&#x3D;0</td>
 </tr>
 <tr>
 <td>7</td>
 <td>JO</td>
 <td>结果溢出了则跳转</td>
-<td>OF=1</td>
+<td>OF&#x3D;1</td>
 </tr>
 <tr>
 <td>8</td>
 <td>JNO</td>
 <td>结果没有溢出则跳转</td>
-<td>OF=0</td>
+<td>OF&#x3D;0</td>
 </tr>
 <tr>
 <td>9</td>
 <td>JB，JNAE</td>
 <td>小于则跳转 (无符号数)</td>
-<td>CF=1</td>
+<td>CF&#x3D;1</td>
 </tr>
 <tr>
 <td>10</td>
 <td>JNB，JAE</td>
 <td>大于等于则跳转 (无符号数)</td>
-<td>CF=0</td>
+<td>CF&#x3D;0</td>
 </tr>
 <tr>
 <td>11</td>
 <td>JBE，JNA</td>
 <td>小于等于则跳转 (无符号数)</td>
-<td>CF=1 or ZF=1</td>
+<td>CF&#x3D;1 or ZF&#x3D;1</td>
 </tr>
 <tr>
 <td>12</td>
 <td>JNBE，JA</td>
 <td>大于则跳转(无符号数)</td>
-<td>CF=0 and ZF=0</td>
+<td>CF&#x3D;0 and ZF&#x3D;0</td>
 </tr>
 <tr>
 <td>13</td>
@@ -480,22 +397,21 @@
 <td>14</td>
 <td>JNL，JGE</td>
 <td>大于等于则跳转 (有符号数)</td>
-<td>SF=OF</td>
+<td>SF&#x3D;OF</td>
 </tr>
 <tr>
 <td>15</td>
 <td>JLE，JNG</td>
 <td>小于等于则跳转 (有符号数)</td>
-<td>ZF=1 or SF≠ OF</td>
+<td>ZF&#x3D;1 or SF≠ OF</td>
 </tr>
 <tr>
 <td>16</td>
 <td>JNLE，JG</td>
 <td>大于则跳转(有符号数)</td>
-<td>ZF=0 and SF=OF</td>
+<td>ZF&#x3D;0 and SF&#x3D;OF</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>👉 在任何运算之前得先确定时有符号运算还是无符号运算</p>
 <p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/19/EXei6gcBRwac3PrdL7l31729344109884.png" alt="image"></p>
 
@@ -510,16 +426,12 @@
       <div class="header"><span>分享文章</span></div>
       <div class="body">
         <div class="link"><input class="copy-area" readonly="true" id="copy-link" value="https://gbk.cx/p/d147e7fa/" /></div>
-        <div class="social-wrap dis-select"><a class="social share-item wechat" onclick="util.toggle(&quot;qrcode-wechat&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/b32ef3da1162a.svg" /></a><a class="social share-item weibo" target="_blank" rel="external nofollow noopener noreferrer" href="https://service.weibo.com/share/share.php?url=https://gbk.cx/p/d147e7fa/&title=汇编入门学习 - RuntimeBroker Blog's&summary=汇编
-一、指令
-1 mov
-可以立即数到内存，寄存器到内存。内存到寄存器
+        <div class="social-wrap dis-select"><a class="social share-item wechat" onclick="util.toggle(&quot;qrcode-wechat&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/b32ef3da1162a.svg" /></a><a class="social share-item weibo" target="_blank" rel="external nofollow noopener noreferrer" href="https://service.weibo.com/share/share.php?url=https://gbk.cx/p/d147e7fa/&title=汇编入门学习 - RuntimeBroker Blog's&summary=汇编一、指令1 mov可以立即数到内存，寄存器到内存。内存到寄存器
 1.1 mov指令操作的四种形式
-
 [立即数]
 [reg] reg代表寄存器 可以是8个通用寄存器中的任意一个
 [reg+立即数]
-[reg+reg*{1,2,..."><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/80c07e4dbb303.svg" /></a><a class="social share-item email" href="mailto:?subject=汇编入门学习 - RuntimeBroker Blog's&amp;body=https://gbk.cx/p/d147e7fa/"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/a1b00e20f425d.svg" /></a><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;复制成功&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/8411ed322ced6.svg" /></a></div>
+[reg+reg*{1,2,4,8}..."><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/80c07e4dbb303.svg" /></a><a class="social share-item email" href="mailto:?subject=汇编入门学习 - RuntimeBroker Blog's&amp;body=https://gbk.cx/p/d147e7fa/"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/a1b00e20f425d.svg" /></a><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;复制成功&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/8411ed322ced6.svg" /></a></div>
         
         <div class="qrcode" id="qrcode-wechat" style="opacity:0;height:0">
           <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=https://gbk.cx/p/d147e7fa/"/>
@@ -576,7 +488,7 @@
 
 
 
-<widget class="widget-wrapper toc" id="data-toc" collapse="false"><div class="widget-header dis-select"><span class="name">本文目录</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">汇编</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">一、指令</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-mov"><span class="toc-text">1 mov</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-mov%E6%8C%87%E4%BB%A4%E6%93%8D%E4%BD%9C%E7%9A%84%E5%9B%9B%E7%A7%8D%E5%BD%A2%E5%BC%8F"><span class="toc-text">1.1 mov指令操作的四种形式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-text">1.2 指令格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-movs"><span class="toc-text">2 movs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-stos"><span class="toc-text">3 stos</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-rep"><span class="toc-text">4 rep</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-add"><span class="toc-text">5 add</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-text">5.1 指令格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-sub"><span class="toc-text">6 sub</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-text">6.1 指令格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-and"><span class="toc-text">7 and</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-text">7.1 指令格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-or"><span class="toc-text">8 or</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#8-1-%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-text">8.1 指令格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-not"><span class="toc-text">9 not</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#9-1-%E5%8A%9F%E8%83%BD"><span class="toc-text">9.1 功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-2-%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-text">9.2 指令格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-xor"><span class="toc-text">10 xor</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#10-1-%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-text">10.1 指令格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-push"><span class="toc-text">11 push</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#11-1-%E5%8A%9F%E8%83%BD"><span class="toc-text">11.1 功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-2-%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-text">11.2 指令格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-3-%E5%85%B6%E4%BB%96%E6%96%B9%E5%BC%8F%E5%AE%9E%E7%8E%B0%E8%AF%A5%E5%8A%9F%E8%83%BD"><span class="toc-text">11.3 其他方式实现该功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-pop"><span class="toc-text">12 pop</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#12-1-%E5%8A%9F%E8%83%BD"><span class="toc-text">12.1 功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-2-%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-text">12.2 指令格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-3-%E5%85%B6%E4%BB%96%E6%96%B9%E5%BC%8F%E5%AE%9E%E7%8E%B0%E8%AF%A5%E5%8A%9F%E8%83%BD"><span class="toc-text">12.3 其他方式实现该功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-jmp"><span class="toc-text">13 jmp</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#13-1-%E5%8A%9F%E8%83%BD"><span class="toc-text">13.1 功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-2-%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-text">13.2 指令格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-call"><span class="toc-text">14 call</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#14-1-%E5%8A%9F%E8%83%BD"><span class="toc-text">14.1 功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-2-%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-text">14.2 指令格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#15-ret"><span class="toc-text">15 ret</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#15-1-%E5%8A%9F%E8%83%BD"><span class="toc-text">15.1 功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#15-2-%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-text">15.2 指令格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#16-CMP"><span class="toc-text">16 CMP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#16-1-%E5%8A%9F%E8%83%BD"><span class="toc-text">16.1 功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#16-2-%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-text">16.2 指令格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#17-TEST"><span class="toc-text">17 TEST</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#17-1-%E5%8A%9F%E8%83%BD"><span class="toc-text">17.1 功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#17-2-%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-text">17.2 指令格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#18-ADC"><span class="toc-text">18 ADC</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#18-1-%E5%8A%9F%E8%83%BD"><span class="toc-text">18.1 功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#18-2-%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-text">18.2 指令格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#19-SBB"><span class="toc-text">19 SBB</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#19-1-%E5%8A%9F%E8%83%BD"><span class="toc-text">19.1 功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#19-2-%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-text">19.2 指令格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#20-XCHG"><span class="toc-text">20 XCHG</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#20-1-%E5%8A%9F%E8%83%BD"><span class="toc-text">20.1 功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#20-2-%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-text">20.2 指令格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#21-%E7%AE%97%E6%9C%AF%E4%BD%8D%E7%A7%BB%E6%8C%87%E4%BB%A4"><span class="toc-text">21 算术位移指令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#21-1-SAL%EF%BC%88%E7%AE%97%E6%9C%AF%E5%B7%A6%E7%A7%BB%EF%BC%89"><span class="toc-text">21.1 SAL（算术左移）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#21-2-SAR%EF%BC%88%E7%AE%97%E6%9C%AF%E5%8F%B3%E7%A7%BB%EF%BC%89"><span class="toc-text">21.2 SAR（算术右移）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#22-%E9%80%BB%E8%BE%91%E7%A7%BB%E4%BD%8D%E6%8C%87%E4%BB%A4"><span class="toc-text">22 逻辑移位指令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#22-1-SHL%EF%BC%88%E9%80%BB%E8%BE%91%E5%B7%A6%E7%A7%BB%EF%BC%89"><span class="toc-text">22.1 SHL（逻辑左移）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#22-2-SHR%EF%BC%88%E9%80%BB%E8%BE%91%E5%8F%B3%E7%A7%BB%EF%BC%89"><span class="toc-text">22.2 SHR（逻辑右移）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#23-%E5%BE%AA%E7%8E%AF%E7%A7%BB%E4%BD%8D%E6%8C%87%E4%BB%A4"><span class="toc-text">23 循环移位指令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#23-1-ROL%EF%BC%88%E5%BE%AA%E7%8E%AF%E5%B7%A6%E7%A7%BB%EF%BC%89"><span class="toc-text">23.1 ROL（循环左移）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#23-2-ROR%EF%BC%88%E5%BE%AA%E7%8E%AF%E5%8F%B3%E7%A7%BB%EF%BC%89"><span class="toc-text">23.2 ROR（循环右移）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#24-%E5%B8%A6%E8%BF%9B%E4%BD%8D%E7%9A%84%E5%BE%AA%E7%8E%AF%E7%A7%BB%E4%BD%8D%E6%8C%87%E4%BB%A4"><span class="toc-text">24 带进位的循环移位指令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#24-1-RCL%EF%BC%88%E5%B8%A6%E8%BF%9B%E4%BD%8D%E5%BE%AA%E7%8E%AF%E5%B7%A6%E7%A7%BB%EF%BC%89"><span class="toc-text">24.1 RCL（带进位循环左移）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#24-2-RCR%EF%BC%88%E5%B8%A6%E8%BF%9B%E4%BD%8D%E5%BE%AA%E7%8E%AF%E5%8F%B3%E7%A7%BB%EF%BC%89"><span class="toc-text">24.2 RCR（带进位循环右移）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">二、存储模式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">三 JCC</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8-EFLAGS"><span class="toc-text">1 标志寄存器 EFLAGS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-CF%EF%BC%88bit-0%EF%BC%89-Carry-flag"><span class="toc-text">2 CF（bit 0）[Carry flag]</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E5%8A%9F%E8%83%BD"><span class="toc-text">2.1 功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E4%BE%8B%E5%AD%90"><span class="toc-text">2.2 例子</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-PF-%EF%BC%88bit-2%EF%BC%89-parity-flag"><span class="toc-text">3 PF （bit 2）[parity flag]</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E5%8A%9F%E8%83%BD"><span class="toc-text">3.1 功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-AF%EF%BC%88bit-4%EF%BC%89-Auxiliary-carry-flag"><span class="toc-text">4 AF（bit 4）[Auxiliary carry flag]</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E5%8A%9F%E8%83%BD"><span class="toc-text">4.1 功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-ZF%EF%BC%88bit-6%EF%BC%89-zero-flag"><span class="toc-text">5 ZF（bit 6）[zero flag]</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E5%8A%9F%E8%83%BD"><span class="toc-text">5.1 功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-SF%EF%BC%88bit-7%EF%BC%89-Sign-flag"><span class="toc-text">6 SF（bit 7）[Sign flag]</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-%E5%8A%9F%E8%83%BD"><span class="toc-text">6.1 功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-OF%EF%BC%88bit-11%EF%BC%89-OverFlow-flag"><span class="toc-text">7 OF（bit 11）[OverFlow flag]</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-%E5%8A%9F%E8%83%BD"><span class="toc-text">7.1 功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-DF%EF%BC%88bit-10%EF%BC%89-Oirection-flag"><span class="toc-text">8 DF（bit 10）[Oirection flag]</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#8-1-%E5%8A%9F%E8%83%BD"><span class="toc-text">8.1 功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-JCC%E6%8C%87%E4%BB%A4"><span class="toc-text">9 JCC指令</span></a></li></ol></li></ol></div><div class="widget-footer">
+<widget class="widget-wrapper toc" id="data-toc" collapse="false"><div class="widget-header dis-select"><span class="name">本文目录</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B1%87%E7%BC%96"><span class="toc-text">汇编</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%8C%87%E4%BB%A4"><span class="toc-text">一、指令</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-mov"><span class="toc-text">1 mov</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-mov%E6%8C%87%E4%BB%A4%E6%93%8D%E4%BD%9C%E7%9A%84%E5%9B%9B%E7%A7%8D%E5%BD%A2%E5%BC%8F"><span class="toc-text">1.1 mov指令操作的四种形式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-text">1.2 指令格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-movs"><span class="toc-text">2 movs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-stos"><span class="toc-text">3 stos</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-rep"><span class="toc-text">4 rep</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-add"><span class="toc-text">5 add</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-text">5.1 指令格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-sub"><span class="toc-text">6 sub</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-text">6.1 指令格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-and"><span class="toc-text">7 and</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-text">7.1 指令格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-or"><span class="toc-text">8 or</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#8-1-%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-text">8.1 指令格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-not"><span class="toc-text">9 not</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#9-1-%E5%8A%9F%E8%83%BD"><span class="toc-text">9.1 功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-2-%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-text">9.2 指令格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-xor"><span class="toc-text">10 xor</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#10-1-%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-text">10.1 指令格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-push"><span class="toc-text">11 push</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#11-1-%E5%8A%9F%E8%83%BD"><span class="toc-text">11.1 功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-2-%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-text">11.2 指令格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-3-%E5%85%B6%E4%BB%96%E6%96%B9%E5%BC%8F%E5%AE%9E%E7%8E%B0%E8%AF%A5%E5%8A%9F%E8%83%BD"><span class="toc-text">11.3 其他方式实现该功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-pop"><span class="toc-text">12 pop</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#12-1-%E5%8A%9F%E8%83%BD"><span class="toc-text">12.1 功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-2-%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-text">12.2 指令格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-3-%E5%85%B6%E4%BB%96%E6%96%B9%E5%BC%8F%E5%AE%9E%E7%8E%B0%E8%AF%A5%E5%8A%9F%E8%83%BD"><span class="toc-text">12.3 其他方式实现该功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-jmp"><span class="toc-text">13 jmp</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#13-1-%E5%8A%9F%E8%83%BD"><span class="toc-text">13.1 功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-2-%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-text">13.2 指令格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-call"><span class="toc-text">14 call</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#14-1-%E5%8A%9F%E8%83%BD"><span class="toc-text">14.1 功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-2-%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-text">14.2 指令格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#15-ret"><span class="toc-text">15 ret</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#15-1-%E5%8A%9F%E8%83%BD"><span class="toc-text">15.1 功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#15-2-%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-text">15.2 指令格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#16-CMP"><span class="toc-text">16 CMP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#16-1-%E5%8A%9F%E8%83%BD"><span class="toc-text">16.1 功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#16-2-%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-text">16.2 指令格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#17-TEST"><span class="toc-text">17 TEST</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#17-1-%E5%8A%9F%E8%83%BD"><span class="toc-text">17.1 功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#17-2-%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-text">17.2 指令格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#18-ADC"><span class="toc-text">18 ADC</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#18-1-%E5%8A%9F%E8%83%BD"><span class="toc-text">18.1 功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#18-2-%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-text">18.2 指令格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#19-SBB"><span class="toc-text">19 SBB</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#19-1-%E5%8A%9F%E8%83%BD"><span class="toc-text">19.1 功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#19-2-%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-text">19.2 指令格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#20-XCHG"><span class="toc-text">20 XCHG</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#20-1-%E5%8A%9F%E8%83%BD"><span class="toc-text">20.1 功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#20-2-%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-text">20.2 指令格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#21-%E7%AE%97%E6%9C%AF%E4%BD%8D%E7%A7%BB%E6%8C%87%E4%BB%A4"><span class="toc-text">21 算术位移指令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#21-1-SAL%EF%BC%88%E7%AE%97%E6%9C%AF%E5%B7%A6%E7%A7%BB%EF%BC%89"><span class="toc-text">21.1 SAL（算术左移）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#21-2-SAR%EF%BC%88%E7%AE%97%E6%9C%AF%E5%8F%B3%E7%A7%BB%EF%BC%89"><span class="toc-text">21.2 SAR（算术右移）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#22-%E9%80%BB%E8%BE%91%E7%A7%BB%E4%BD%8D%E6%8C%87%E4%BB%A4"><span class="toc-text">22 逻辑移位指令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#22-1-SHL%EF%BC%88%E9%80%BB%E8%BE%91%E5%B7%A6%E7%A7%BB%EF%BC%89"><span class="toc-text">22.1 SHL（逻辑左移）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#22-2-SHR%EF%BC%88%E9%80%BB%E8%BE%91%E5%8F%B3%E7%A7%BB%EF%BC%89"><span class="toc-text">22.2 SHR（逻辑右移）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#23-%E5%BE%AA%E7%8E%AF%E7%A7%BB%E4%BD%8D%E6%8C%87%E4%BB%A4"><span class="toc-text">23 循环移位指令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#23-1-ROL%EF%BC%88%E5%BE%AA%E7%8E%AF%E5%B7%A6%E7%A7%BB%EF%BC%89"><span class="toc-text">23.1 ROL（循环左移）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#23-2-ROR%EF%BC%88%E5%BE%AA%E7%8E%AF%E5%8F%B3%E7%A7%BB%EF%BC%89"><span class="toc-text">23.2 ROR（循环右移）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#24-%E5%B8%A6%E8%BF%9B%E4%BD%8D%E7%9A%84%E5%BE%AA%E7%8E%AF%E7%A7%BB%E4%BD%8D%E6%8C%87%E4%BB%A4"><span class="toc-text">24 带进位的循环移位指令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#24-1-RCL%EF%BC%88%E5%B8%A6%E8%BF%9B%E4%BD%8D%E5%BE%AA%E7%8E%AF%E5%B7%A6%E7%A7%BB%EF%BC%89"><span class="toc-text">24.1 RCL（带进位循环左移）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#24-2-RCR%EF%BC%88%E5%B8%A6%E8%BF%9B%E4%BD%8D%E5%BE%AA%E7%8E%AF%E5%8F%B3%E7%A7%BB%EF%BC%89"><span class="toc-text">24.2 RCR（带进位循环右移）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%AD%98%E5%82%A8%E6%A8%A1%E5%BC%8F"><span class="toc-text">二、存储模式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89-JCC"><span class="toc-text">三 JCC</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8-EFLAGS"><span class="toc-text">1 标志寄存器 EFLAGS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-CF%EF%BC%88bit-0%EF%BC%89-Carry-flag"><span class="toc-text">2 CF（bit 0）[Carry flag]</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E5%8A%9F%E8%83%BD"><span class="toc-text">2.1 功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E4%BE%8B%E5%AD%90"><span class="toc-text">2.2 例子</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-PF-%EF%BC%88bit-2%EF%BC%89-parity-flag"><span class="toc-text">3 PF （bit 2）[parity flag]</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E5%8A%9F%E8%83%BD"><span class="toc-text">3.1 功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-AF%EF%BC%88bit-4%EF%BC%89-Auxiliary-carry-flag"><span class="toc-text">4 AF（bit 4）[Auxiliary carry flag]</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E5%8A%9F%E8%83%BD"><span class="toc-text">4.1 功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-ZF%EF%BC%88bit-6%EF%BC%89-zero-flag"><span class="toc-text">5 ZF（bit 6）[zero flag]</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E5%8A%9F%E8%83%BD"><span class="toc-text">5.1 功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-SF%EF%BC%88bit-7%EF%BC%89-Sign-flag"><span class="toc-text">6 SF（bit 7）[Sign flag]</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-%E5%8A%9F%E8%83%BD"><span class="toc-text">6.1 功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-OF%EF%BC%88bit-11%EF%BC%89-OverFlow-flag"><span class="toc-text">7 OF（bit 11）[OverFlow flag]</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-%E5%8A%9F%E8%83%BD"><span class="toc-text">7.1 功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-DF%EF%BC%88bit-10%EF%BC%89-Oirection-flag"><span class="toc-text">8 DF（bit 10）[Oirection flag]</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#8-1-%E5%8A%9F%E8%83%BD"><span class="toc-text">8.1 功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-JCC%E6%8C%87%E4%BB%A4"><span class="toc-text">9 JCC指令</span></a></li></ol></li></ol></div><div class="widget-footer">
 
 <a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12c0-4.714 0-7.071 1.464-8.536C4.93 2 7.286 2 12 2c4.714 0 7.071 0 8.535 1.464C22 4.93 22 7.286 22 12c0 4.714 0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12Z"/><path stroke-linecap="round" stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/></g></svg><span>回到顶部</span></a></div></widget>
 </div></aside><div class='float-panel blur'>
