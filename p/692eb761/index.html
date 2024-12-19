@@ -1,0 +1,1070 @@
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.29.1" theme-name="Stellar" theme-version="1.29.1">
+  
+  <meta name="generator" content="Hexo 7.3.0">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  
+  <title>驱动开发 - RuntimeBroker Blog's</title>
+
+  
+    <meta name="description" content="开发环境环境配置1、配置使用的是VS2019 前提条件：  VS2019安装正确 安装WDK  安装WDK之前一定要看清楚，对应当前VS2019安装的windows SDK版本  12345678910111213141516171819202122232425次函数可能设置的时间会比较长，虚拟机内存越大，耗时越长vmxPid:虚拟机进程ID vmware-vmx.exe的IDMajorVersi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="驱动开发">
+<meta property="og:url" content="https://gbk.cx/p/692eb761/index.html">
+<meta property="og:site_name" content="RuntimeBroker Blog&#39;s">
+<meta property="og:description" content="开发环境环境配置1、配置使用的是VS2019 前提条件：  VS2019安装正确 安装WDK  安装WDK之前一定要看清楚，对应当前VS2019安装的windows SDK版本  12345678910111213141516171819202122232425次函数可能设置的时间会比较长，虚拟机内存越大，耗时越长vmxPid:虚拟机进程ID vmware-vmx.exe的IDMajorVersi">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/27/1mS9hTaPABuDUDovcOF51730000313283.png">
+<meta property="og:image" content="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/27/I8N2Pmejdd173L9HSfEP1730000103089.png">
+<meta property="og:image" content="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/27/z2ghkD0kWtc5p4BKr3Hi1730000189190.png">
+<meta property="og:image" content="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/27/RhDC46djYydXMGZg7UBO1730001168917.png">
+<meta property="og:image" content="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/27/xZ3rZ7UCnnO2qr2DShIV1730001216597.png">
+<meta property="og:image" content="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/27/DRpCT2CH6TVskbW5psYX1730001264219.png">
+<meta property="og:image" content="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/27/yKS7nz6huGbXIj7bSZc91730001348554.png">
+<meta property="og:image" content="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/27/CM2PfW0SaCHfvV76ENI81730001370254.png">
+<meta property="og:image" content="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/27/bfzOYHaEkM68qS2Pc5Og1730001483069.png">
+<meta property="og:image" content="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/27/N61lClXh46N0PWCvCBFq1730001500966.png">
+<meta property="og:image" content="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/27/pulmgH3L1TP0cZAOKLME1730000804524.png">
+<meta property="og:image" content="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/27/YfEJIJjVUOT6tqMnsoeu1730001636988.png">
+<meta property="og:image" content="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/27/dtVv7BV9fNh8urYc8kyB1730017576598.png">
+<meta property="og:image" content="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/27/EqoztFhhGjUXd2TeX9NU1730017678416.png">
+<meta property="og:image" content="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/27/lc0gxx58dZPY1MhJVUnh1730017848816.png">
+<meta property="og:image" content="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/27/pV4fyAyowOHBpo7vi3Vm1730018428026.png">
+<meta property="og:image" content="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/27/vrSu9SAhzPtAPl7EVPqV1730018628136.png">
+<meta property="og:image" content="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/27/DVQlRz2g1AF7e1nTKll61730018768896.png">
+<meta property="og:image" content="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/27/jJaDjV4GbTXdyqMOVWrW1730019066112.png">
+<meta property="og:image" content="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/27/VZUZSMBwHRaJRTQV72Jx1730019415536.png">
+<meta property="og:image" content="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/27/txRf6B5ULZVz7UcHBXHU1730030765958.png">
+<meta property="og:image" content="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/11/03/CWuqoRQWDXGzDoyhgXSV1730640993715.png">
+<meta property="og:image" content="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/11/03/vqVuSt3267JHwXiz5uPk1730641034414.png">
+<meta property="og:image" content="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/11/03/CsCaEad1WJKSEb6Z0LBt1730639122204.png">
+<meta property="og:image" content="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/11/03/LQkU0pZEUIvGDqKA5VpB1730641405267.png">
+<meta property="og:image" content="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/11/03/c9UK1ArZy7Gaj4DdTZNL1730641428137.png">
+<meta property="og:image" content="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/11/03/NqKdMHJ2swOHM8jLY3Cy1730639709406.png">
+<meta property="og:image" content="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/11/03/ja5Pm9hU0NHOyZsPXrhj1730639976290.png">
+<meta property="article:published_time" content="2024-12-19T09:54:39.000Z">
+<meta property="article:modified_time" content="2024-12-19T09:56:17.389Z">
+<meta property="article:author" content="RuntimeBroker">
+<meta property="article:tag" content="滴水中级">
+<meta property="article:tag" content="win内核">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/27/1mS9hTaPABuDUDovcOF51730000313283.png">
+  
+  
+  
+  <meta name="keywords" content="滴水中级,win内核">
+
+  <!-- feed -->
+  
+    <link rel="alternate" href="/atom.xml" title="RuntimeBroker Blog's" type="application/atom+xml">
+  
+
+  <link rel="stylesheet" href="/css/main.css?v=1.29.1">
+
+  
+
+  
+
+  
+</head>
+<body>
+
+<div class="l_body s:aa content tech" id="start" layout="post" ><aside class="l_left"><div class="leftbar-container">
+
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="undefined" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">RuntimeBroker Blog's</div></a></div></header>
+
+<div class="nav-area">
+<div class="search-wrapper" id="search-wrapper"><form class="search-form"><a class="search-button" onclick="document.getElementById(&quot;search-input&quot;).focus();"><svg t="1705074644177" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1560" width="200" height="200"><path d="M1008.839137 935.96571L792.364903 719.491476a56.783488 56.783488 0 0 0-80.152866 0 358.53545 358.53545 0 1 1 100.857314-335.166073 362.840335 362.840335 0 0 1-3.689902 170.145468 51.248635 51.248635 0 1 0 99.217358 26.444296 462.057693 462.057693 0 1 0-158.255785 242.303546l185.930047 185.725053a51.248635 51.248635 0 0 0 72.568068 0 51.248635 51.248635 0 0 0 0-72.978056z" p-id="1561"></path><path d="M616.479587 615.969233a50.428657 50.428657 0 0 0-61.498362-5.534852 174.655348 174.655348 0 0 1-177.525271 3.484907 49.403684 49.403684 0 0 0-58.833433 6.76482l-3.074918 2.869923a49.403684 49.403684 0 0 0 8.609771 78.10292 277.767601 277.767601 0 0 0 286.992355-5.739847 49.403684 49.403684 0 0 0 8.404776-76.667958z" p-id="1562"></path></svg></a><input type="text" class="search-input" id="search-input" placeholder="站内搜索"></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div>
+
+
+<nav class="menu dis-select"><a class="nav-item" title="主页" href="/" style="color:#1BCDFC"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M5.879 2.879C5 3.757 5 5.172 5 8v8c0 2.828 0 4.243.879 5.121C6.757 22 8.172 22 11 22h2c2.828 0 4.243 0 5.121-.879C19 20.243 19 18.828 19 16V8c0-2.828 0-4.243-.879-5.121C17.243 2 15.828 2 13 2h-2c-2.828 0-4.243 0-5.121.879M8.25 17a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75M9 12.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zM8.25 9A.75.75 0 0 1 9 8.25h6a.75.75 0 0 1 0 1.5H9A.75.75 0 0 1 8.25 9" clip-rule="evenodd"/><path fill="currentColor" d="M5.235 4.058C5 4.941 5 6.177 5 8v8c0 1.823 0 3.058.235 3.942L5 19.924c-.975-.096-1.631-.313-2.121-.803C2 18.243 2 16.828 2 14v-4c0-2.829 0-4.243.879-5.121c.49-.49 1.146-.707 2.121-.803zm13.53 15.884C19 19.058 19 17.822 19 16V8c0-1.823 0-3.059-.235-3.942l.235.018c.975.096 1.631.313 2.121.803C22 5.757 22 7.17 22 9.999v4c0 2.83 0 4.243-.879 5.122c-.49.49-1.146.707-2.121.803z" opacity=".5"/></svg></a><a class="nav-item" title="分类" href="/categories/" style="color:#3DC550"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M14.25 4.48v3.057c0 .111 0 .27.02.406a.936.936 0 0 0 .445.683a.96.96 0 0 0 .783.072c.13-.04.272-.108.378-.159L17 8.005l1.124.534c.106.05.248.119.378.16a.958.958 0 0 0 .783-.073a.936.936 0 0 0 .444-.683c.021-.136.021-.295.021-.406V3.031c.113-.005.224-.01.332-.013C21.154 2.98 22 3.86 22 4.933v11.21c0 1.112-.906 2.01-2.015 2.08c-.97.06-2.108.179-2.985.41c-1.082.286-1.99 1.068-3.373 1.436c-.626.167-1.324.257-1.627.323V5.174c.32-.079 1.382-.203 1.674-.371c.184-.107.377-.216.576-.323m5.478 8.338a.75.75 0 0 1-.546.91l-4 1a.75.75 0 0 1-.364-1.456l4-1a.75.75 0 0 1 .91.546" clip-rule="evenodd"/><path fill="currentColor" d="M18.25 3.151c-.62.073-1.23.18-1.75.336a8.2 8.2 0 0 0-.75.27v3.182l.75-.356l.008-.005a1.13 1.13 0 0 1 .492-.13c.047 0 .094.004.138.01c.175.029.315.1.354.12l.009.005l.749.356V3.647z"/><path fill="currentColor" d="M12 5.214c-.334-.064-1.057-.161-1.718-.339C8.938 4.515 8.05 3.765 7 3.487c-.887-.234-2.041-.352-3.018-.412C2.886 3.007 2 3.9 2 4.998v11.146c0 1.11.906 2.01 2.015 2.079c.97.06 2.108.179 2.985.41c.486.129 1.216.431 1.873.726c1.005.451 2.052.797 3.127 1.034z" opacity=".5"/><path fill="currentColor" d="M4.273 12.818a.75.75 0 0 1 .91-.545l4 1a.75.75 0 1 1-.365 1.455l-4-1a.75.75 0 0 1-.545-.91m.909-4.545a.75.75 0 1 0-.364 1.455l4 1a.75.75 0 0 0 .364-1.455z"/></svg></a><a class="nav-item" title="探索" href="/explore/" style="color:#FA6400"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M20 12a8 8 0 1 1-16 0a8 8 0 0 1 16 0" opacity=".5"/><path fill="currentColor" d="M17.712 5.453c1.047-.193 2.006-.259 2.797-.152c.77.103 1.536.393 1.956 1.064c.446.714.312 1.542-.012 2.258c-.33.728-.918 1.499-1.672 2.268c-1.516 1.547-3.836 3.226-6.597 4.697c-2.763 1.472-5.495 2.484-7.694 2.92c-1.095.217-2.098.299-2.923.201c-.8-.095-1.6-.383-2.032-1.075c-.47-.752-.296-1.63.07-2.379c.375-.768 1.032-1.586 1.872-2.403L4 12.416c0 .219.083.71.168 1.146c.045.23.09.444.123.596c-.652.666-1.098 1.263-1.339 1.756c-.277.567-.208.825-.145.925c.072.116.305.305.937.38c.609.073 1.44.018 2.455-.183c2.02-.4 4.613-1.351 7.28-2.772c2.667-1.42 4.85-3.015 6.23-4.423c.694-.707 1.15-1.334 1.377-1.836c.233-.515.167-.75.107-.844c-.07-.112-.289-.294-.883-.374c-.542-.072-1.272-.041-2.163.112L16.87 5.656c.338-.101.658-.17.842-.203"/></svg></a><a class="nav-item" title="友链" href="/friends/" style="color:#F44336"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="m13.629 20.472l-.542.916c-.483.816-1.69.816-2.174 0l-.542-.916c-.42-.71-.63-1.066-.968-1.262c-.338-.197-.763-.204-1.613-.219c-1.256-.021-2.043-.098-2.703-.372a5 5 0 0 1-2.706-2.706C2 14.995 2 13.83 2 11.5v-1c0-3.273 0-4.91.737-6.112a5 5 0 0 1 1.65-1.651C5.59 2 7.228 2 10.5 2h3c3.273 0 4.91 0 6.113.737a5 5 0 0 1 1.65 1.65C22 5.59 22 7.228 22 10.5v1c0 2.33 0 3.495-.38 4.413a5 5 0 0 1-2.707 2.706c-.66.274-1.447.35-2.703.372c-.85.015-1.275.022-1.613.219c-.338.196-.548.551-.968 1.262" opacity=".5"/><path fill="currentColor" d="M10.99 14.308c-1.327-.978-3.49-2.84-3.49-4.593c0-2.677 2.475-3.677 4.5-1.609c2.025-2.068 4.5-1.068 4.5 1.609c0 1.752-2.163 3.615-3.49 4.593c-.454.335-.681.502-1.01.502c-.329 0-.556-.167-1.01-.502"/></svg></a></nav>
+</div>
+<div class="widgets">
+
+
+<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span><a class="cap-action" id="rss" title="Subscribe" href="/atom.xml"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M5 21q-.825 0-1.412-.587T3 19q0-.825.588-1.412T5 17q.825 0 1.413.588T7 19q0 .825-.587 1.413T5 21m13.5 0q-.65 0-1.088-.475T16.9 19.4q-.275-2.425-1.312-4.537T12.9 11.1q-1.65-1.65-3.762-2.687T4.6 7.1q-.65-.075-1.125-.512T3 5.5q0-.65.45-1.062t1.075-.363q3.075.275 5.763 1.563t4.737 3.337q2.05 2.05 3.338 4.738t1.562 5.762q.05.625-.363 1.075T18.5 21m-6 0q-.625 0-1.075-.437T10.85 19.5q-.225-1.225-.787-2.262T8.65 15.35q-.85-.85-1.888-1.412T4.5 13.15q-.625-.125-1.062-.575T3 11.5q0-.65.45-1.075t1.075-.325q1.825.25 3.413 1.063t2.837 2.062q1.25 1.25 2.063 2.838t1.062 3.412q.1.625-.325 1.075T12.5 21"/></svg></a></div><div class="widget-body fs14"><a class="item title" href="/p/4f5d4e8d/"><span class="title">系统调用</span></a><a class="item title" href="/p/692eb761/"><span class="title">驱动开发</span></a><a class="item title" href="/p/988d33e4/"><span class="title">MVC设计模式-1</span></a><a class="item title" href="/p/5b8fbc6e/"><span class="title">PHP基础-1-变量-常量-运算符-数据类型-判断-循环</span></a><a class="item title" href="/p/d147e7fa/"><span class="title">汇编入门学习</span></a><a class="item title" href="/p/4a17b156/"><span class="title">Hello World</span></a><a class="item title" href="/p/86acdf67/"><span class="title">windbg常用命令</span></a><a class="item title" href="/p/6c15571f/"><span class="title">保护模式</span></a><a class="item title" href="/p/2d289b78/"><span class="title">github actions 云编译</span></a><a class="item title" href="/p/7a303294/"><span class="title">PHP代码审计环境调试坑点汇总</span></a></div></widget>
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="/" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/08a41b181ce68.svg"/></a><a class="social" href="/" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/3616429.svg"/></a><a class="social" href="/about/#comments" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/942ebbf1a4b91.svg"/></a><a class="social" onclick="switchTheme()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path fill="currentColor" fill-rule="evenodd" d="M582.4 326.4c-140.8 0-256 115.2-256 256s115.2 256 256 256 256-115.2 256-256-115.2-256-256-256z m0 448c-70.4 0-131.2-36.8-164.8-92.8 12.8 3.2 27.2 4.8 40 4.8 121.6 0 219.2-99.2 219.2-219.2 0-17.6-1.6-35.2-6.4-52.8 60.8 32 102.4 96 102.4 169.6 1.6 104-84.8 190.4-190.4 190.4zM582.4 262.4c17.6 0 32-14.4 32-32v-128c0-17.6-14.4-32-32-32s-32 14.4-32 32v128c0 17.6 14.4 32 32 32zM262.4 582.4c0-17.6-14.4-32-32-32h-128c-17.6 0-32 14.4-32 32s14.4 32 32 32h128c17.6 0 32-14.4 32-32zM310.4 356.8c6.4 6.4 14.4 9.6 22.4 9.6 8 0 16-3.2 22.4-9.6 12.8-12.8 12.8-32 0-44.8l-91.2-91.2c-12.8-12.8-32-12.8-44.8 0-12.8 12.8-12.8 32 0 44.8l91.2 91.2zM944 220.8c-12.8-12.8-32-12.8-44.8 0l-91.2 91.2c-12.8 12.8-12.8 32 0 44.8 6.4 6.4 14.4 9.6 22.4 9.6 8 0 16-3.2 22.4-9.6l91.2-91.2c12.8-12.8 12.8-33.6 0-44.8zM310.4 808l-91.2 91.2c-12.8 12.8-12.8 32 0 44.8 6.4 6.4 14.4 9.6 22.4 9.6 8 0 16-3.2 22.4-9.6l91.2-91.2c12.8-12.8 12.8-32 0-44.8-11.2-11.2-32-11.2-44.8 0z"></path></svg></a></div></footer>
+</div></aside><div class="l_main" id="main">
+
+
+
+
+
+<div class="article banner top">
+  <div class="content">
+    <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+<span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/%E9%80%86%E5%90%91/">逆向</a></div>
+<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2024-12-19T09:54:39.000Z">2024-12-19</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2024-12-19T09:56:17.389Z">2024-12-19</time></span></div></div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>驱动开发</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div><article class="md-text content"><h1 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h1><h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><p>1、配置使用的是VS2019</p>
+<p>前提条件：</p>
+<ul>
+<li>VS2019安装正确</li>
+<li>安装WDK</li>
+</ul>
+<p>安装WDK之前一定要看清楚，对应当前VS2019安装的windows SDK版本</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/27/1mS9hTaPABuDUDovcOF51730000313283.png" alt="image-20241027113833143"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">次函数可能设置的时间会比较长，虚拟机内存越大，耗时越长</span><br><span class="line">vmxPid:虚拟机进程ID vmware-vmx.exe的ID</span><br><span class="line">MajorVersion:虚拟机系统的主版本</span><br><span class="line">MinorVersion:虚拟机系统的次版本</span><br><span class="line">BuildNumber :虚拟机系统的内部版本号</span><br><span class="line">例如:WIN7 MajorVersion=6  MinorVersion=1 BuildNumber=7600 或 7601</span><br><span class="line">例如:WIN10 MajorVersion=10  MinorVersion=0 BuildNumber=18326 代表1903</span><br><span class="line">-----------------------------------------</span><br><span class="line">Windows 11（21H2） 	22000</span><br><span class="line">Windows 10（21H1）	19043</span><br><span class="line">Windows 10（20H2）	19042</span><br><span class="line">Windows 10（2004)    19041</span><br><span class="line">Windows 10（1909）	18363</span><br><span class="line">Windows 10（1903）	18362</span><br><span class="line">Windows 10（1809）	17763</span><br><span class="line">Windows 10（1803）	17134</span><br><span class="line">Windows 10（1709）	16299</span><br><span class="line">Windows 10（1703）	15063</span><br><span class="line">Windows 10（1607）	14393</span><br><span class="line">Windows 10（1511）	10586</span><br><span class="line">Windows 10	(1507)	10240</span><br><span class="line"></span><br><span class="line">Windows 8.1（更新1）	MajorVersion = 6 MinorVersion = 3 BuildNumber = 9600</span><br><span class="line">Windows 8.1			MajorVersion = 6 MinorVersion = 3 BuildNumber = 9200</span><br><span class="line">Windows 8				MajorVersion = 6 MinorVersion = 2 BuildNumber = 9200</span><br></pre></td></tr></table></figure>
+
+<p>根据对应的小版本号去寻找并且安装WDK，因为我系统是win10部操作系统版本号是1904，比如图中我安装的<strong>SDK小版本号是19041</strong>，并且我用的VS2019，这个版本号比较特殊，在官网寻找，发现需要用到win10 2004版本的WDK。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/27/I8N2Pmejdd173L9HSfEP1730000103089.png" alt="image-20241027113502683"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/27/z2ghkD0kWtc5p4BKr3Hi1730000189190.png" alt="image-20241027113618216"></p>
+<p>之后下载WDK进行安装，默认安装位置即可。</p>
+<h2 id="项目配置"><a href="#项目配置" class="headerlink" title="项目配置"></a>项目配置</h2><p>新建项目选择Empty WDM Driver，新建完成后。配置属性页，如果配置所有平台出现，左侧栏少东西，那你就删掉ARM那几个平台</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/27/RhDC46djYydXMGZg7UBO1730001168917.png" alt="image-20241027115237585"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/27/xZ3rZ7UCnnO2qr2DShIV1730001216597.png" alt="image-20241027115336339"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/27/DRpCT2CH6TVskbW5psYX1730001264219.png" alt="image-20241027115424021"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/27/yKS7nz6huGbXIj7bSZc91730001348554.png" alt="image-20241027115548434"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/27/CM2PfW0SaCHfvV76ENI81730001370254.png" alt="image-20241027115610127"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/27/bfzOYHaEkM68qS2Pc5Og1730001483069.png" alt="image-20241027115802881"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/27/N61lClXh46N0PWCvCBFq1730001500966.png" alt="image-20241027115820775"></p>
+<p>配置代码片段，方便快速开发</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;utf-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">CodeSnippets</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">CodeSnippet</span> <span class="attr">Format</span>=<span class="string">&quot;1.0.0&quot;</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">Header</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">Title</span>&gt;</span>DriverMain<span class="tag">&lt;/<span class="name">Title</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">Shortcut</span>&gt;</span>DriverMain<span class="tag">&lt;/<span class="name">Shortcut</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">Description</span>&gt;</span>DriverMain<span class="tag">&lt;/<span class="name">Description</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">Author</span>&gt;</span>Microsoft Corporation<span class="tag">&lt;/<span class="name">Author</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">SnippetTypes</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">SnippetType</span>&gt;</span>Expansion<span class="tag">&lt;/<span class="name">SnippetType</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">SnippetType</span>&gt;</span>SurroundsWith<span class="tag">&lt;/<span class="name">SnippetType</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">SnippetTypes</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">Header</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">Snippet</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">Code</span> <span class="attr">Language</span>=<span class="string">&quot;cpp&quot;</span>&gt;</span>&lt;![CDATA[</span><br><span class="line">			#include &lt;ntifs.h&gt;</span><br><span class="line">			</span><br><span class="line">			VOID DriverUnload(PDRIVER_OBJECT pDriver)</span><br><span class="line">			&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">			&#125;</span><br><span class="line">			NTSTATUS DriverEntry(PDRIVER_OBJECT pDriver,PUNICODE_STRING pReg)</span><br><span class="line">			&#123;</span><br><span class="line">				pDriver-&gt;DriverUnload = DriverUnload;</span><br><span class="line">				return STATUS_SUCCESS;</span><br><span class="line">			&#125;</span><br><span class="line">			]]&gt;</span><br><span class="line">			<span class="tag">&lt;/<span class="name">Code</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">Snippet</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">CodeSnippet</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">CodeSnippets</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>新建一个文件，命名为DriverMain.snippet。然后添加进代码片段管理器</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/27/pulmgH3L1TP0cZAOKLME1730000804524.png" alt="image-20241027114644286"></p>
+<h1 id="编写第一个驱动程序"><a href="#编写第一个驱动程序" class="headerlink" title="编写第一个驱动程序"></a>编写第一个驱动程序</h1><p>驱动的话用C开发比较好，因为用C++开发出来的驱动在某些平台会出现蓝屏。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/27/YfEJIJjVUOT6tqMnsoeu1730001636988.png" alt="image-20241027120036816"></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;ntifs.h&gt;</span></span></span><br><span class="line"></span><br><span class="line">VOID <span class="title function_">DriverUnload</span><span class="params">(PDRIVER_OBJECT pDriver)</span></span><br><span class="line">&#123;</span><br><span class="line">	DbgBreakPoint();</span><br><span class="line">&#125;</span><br><span class="line">NTSTATUS <span class="title function_">DriverEntry</span><span class="params">(PDRIVER_OBJECT pDriver, PUNICODE_STRING pReg)</span></span><br><span class="line">&#123;</span><br><span class="line">	DbgPrintEx(<span class="number">0</span>,<span class="number">0</span>,<span class="string">&quot;第一个驱动测试程序&quot;</span>);</span><br><span class="line">	DbgBreakPoint();</span><br><span class="line">	pDriver-&gt;DriverUnload = DriverUnload;</span><br><span class="line">	<span class="keyword">return</span> STATUS_SUCCESS;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>编译后得到.sys文件放入win7虚拟机测试。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/27/dtVv7BV9fNh8urYc8kyB1730017576598.png" alt="image-20241027162537163"></p>
+<p>驱动管理程序进行注册，然后运行。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/27/EqoztFhhGjUXd2TeX9NU1730017678416.png" alt="image-20241027162758270"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/27/lc0gxx58dZPY1MhJVUnh1730017848816.png" alt="image-20241027163048666"></p>
+<h1 id="调试驱动程序"><a href="#调试驱动程序" class="headerlink" title="调试驱动程序"></a>调试驱动程序</h1><h2 id="1、配置调试"><a href="#1、配置调试" class="headerlink" title="1、配置调试"></a>1、配置调试</h2><p>驱动程序调试不如应用程序调试方便，主要因为驱动程序运行在操作系统内核中，直接调试内核程序难度大。</p>
+<p>驱动程序调试需要使用特殊的调试器，如WinDbg，且调试过程通常涉及虚拟机和技术如断点和单步执行。 </p>
+<p>驱动程序调试时，无法在当前开发环境中直接调试，需要将驱动文件部署到新的操作系统环境中进行</p>
+<p>原来我们是手动修改windbg软件的快捷图标信息来配置和虚拟机进行双机调试的，这次我们 <a target="_blank" rel="noopener" href="https://github.com/4d61726b/VirtualKD-Redux">VirtualKD</a>来简化配置过程，提升效率。</p>
+<p>具体压缩包目录是这样：</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/27/pV4fyAyowOHBpo7vi3Vm1730018428026.png" alt="image-20241027164027781"></p>
+<p>其中target目录是分别针对32位和64位系统的，在对应位数的虚拟机，我们把对应位数的target目录复制到虚拟机内，然后在虚拟机内安装vminstall.exe，这样在启动时会多一个引导项名字是含有Redux。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/27/vrSu9SAhzPtAPl7EVPqV1730018628136.png" alt="image-20241027164347980"></p>
+<blockquote>
+<p>[!NOTE]</p>
+<p>其中虚拟机含win7以上需要按F8，强制禁用驱动签名检测</p>
+</blockquote>
+<p>安装完成后就重新启动。进入对应生成的引导项，启动系统。同时vmmon64.exe是主程序，双击打开。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/27/DVQlRz2g1AF7e1nTKll61730018768896.png" alt="image-20241027164608760"></p>
+<p>第一次可能需要配置<strong>windbg&#x2F;KD debugger Path</strong>路径。</p>
+<h2 id="2、PDB文件"><a href="#2、PDB文件" class="headerlink" title="2、PDB文件"></a>2、PDB文件</h2><ul>
+<li>PDB文件是在我们编译工程的时候产生的，它是和对应的模块(exe或dll)一起生成出来的</li>
+<li>每个模块编译的时候都可以生成自己的PDB文件。比如.exe&#x2F;.dll&#x2F;.sys等等</li>
+</ul>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/27/jJaDjV4GbTXdyqMOVWrW1730019066112.png" alt="image-20241027165105960"></p>
+<h2 id="3、windbg如何找到pdb文件"><a href="#3、windbg如何找到pdb文件" class="headerlink" title="3、windbg如何找到pdb文件"></a>3、windbg如何找到pdb文件</h2><p>对于虚拟机系统的PDB，我们可以通过微软的符号表服务器自动下载。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SRV*D:\Symbols\XP*http://msdl.microsoft.com/download/symbols</span><br><span class="line">kd&gt;.reload</span><br></pre></td></tr></table></figure>
+
+<p>但是对于我们<strong>自己写的驱动</strong>呢，却无法从微软的符号表服务器自动下载</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SRV*D:\Symbols\XP*http://msdl.microsoft.com/download/symbols;D:\Projects\_01 HelloDriver\Driver</span><br><span class="line">kd&gt;.reload</span><br></pre></td></tr></table></figure>
+
+<h1 id="内核编程基础"><a href="#内核编程基础" class="headerlink" title="内核编程基础"></a>内核编程基础</h1><h2 id="1、内核API的使用"><a href="#1、内核API的使用" class="headerlink" title="1、内核API的使用"></a>1、内核API的使用</h2><p>在应用层编程我们可以使用WINDOWS提供的各种API函数，只要导入头文件&lt;windows.h&gt;就可以了，但是在内核编程的时候，我们不能像在Ring3那样直接使用。微软为内核程序提供了专用的API，只要在程序中包含相应的头文件就可以使用了，如：#include &lt;ntddk.h&gt; (假设你已经正确安装了WDK)</p>
+<p>其中在Windows Vista 版本的 WDK 开始，使用<strong>Ntifs.h</strong>作为头文件。<em>Ntifs.h</em> 包含 <em>Ntddk.h</em>，而 <em>Ntddk.h</em> 又包含 <em>Wdm.h</em></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/27/VZUZSMBwHRaJRTQV72Jx1730019415536.png" alt="image-20241027165655203"></p>
+<p> 在应用层编程的时候，我们通过MSDN来了解函数的详细信息，在内核编程的时候，要使用WDK自己的<a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/windows-hardware/drivers/ddi/_kernel/">帮助文档</a></p>
+<blockquote>
+<p>[!NOTE]</p>
+<p>在老版本WDK中安装完还会自带帮助文档，但是新版的WDK中不会有文档，需要自己去微软官网查询</p>
+</blockquote>
+<h2 id="2、未导出函数的使用"><a href="#2、未导出函数的使用" class="headerlink" title="2、未导出函数的使用"></a>2、未导出函数的使用</h2><p>WDK说明文档中只包含了内核模块导出的函数，对于未导出的函数，则不能直接使用。 如果要使用未导出的函数，只要自己定义一个函数指针，并且为函数指针提供正确的函数地址就可以使用了。</p>
+<p>有两种办法都可以<strong>获取为导出的函数地址：</strong></p>
+<ul>
+<li><strong>特征码搜索</strong></li>
+</ul>
+<p>通过遍历你想要找的这个内核函数，它那个模块在这个模块里边呢，搜索特征码可以找到我们想要找的这个未导出的。</p>
+<ul>
+<li><strong>解析内核PDB文件</strong></li>
+</ul>
+<p>PDB调试文件，就相当于内核呃的一份完整的说明书。里边不但包含了。导出函数的相关说明也包含了未导出函数的相关说明，我们可以自己解析它的PDB文件，就像windbg解析它的PDB文件的一样，我们也可以这种方式可以更加灵活的得到。</p>
+<h2 id="3、基本数据类型"><a href="#3、基本数据类型" class="headerlink" title="3、基本数据类型"></a>3、基本数据类型</h2><p>在内核编程的时候，强烈建议大家遵守WDK的编码习惯，<strong>不要这样写：unsigned long length;</strong></p>
+<p> 习惯使用WDK自己的类型</p>
+<table>
+<thead>
+<tr>
+<th align="center">WDK 的写法</th>
+<th align="center">等同于</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">ULONG</td>
+<td align="center">unsigned long</td>
+</tr>
+<tr>
+<td align="center">UCHAR</td>
+<td align="center">unsigned char</td>
+</tr>
+<tr>
+<td align="center">UINT</td>
+<td align="center">unsigned int</td>
+</tr>
+<tr>
+<td align="center">VOID</td>
+<td align="center">void</td>
+</tr>
+<tr>
+<td align="center">PULONG</td>
+<td align="center">unsigned long*</td>
+</tr>
+<tr>
+<td align="center">PUCHAR</td>
+<td align="center">unsigned char*</td>
+</tr>
+<tr>
+<td align="center">PUNIT</td>
+<td align="center">unsigned int*</td>
+</tr>
+<tr>
+<td align="center">PVOID</td>
+<td align="center">void*</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>[!NOTE]</p>
+<p>1.建议使用WDK定义的数据类型以确保代码可移植性。 </p>
+<p>2.使用ULONG等类型定义以适应不同编译平台的宽度要求。</p>
+</blockquote>
+<h2 id="4、返回值"><a href="#4、返回值" class="headerlink" title="4、返回值"></a>4、返回值</h2><p>大部分内核函数的返回值都是NTSTATUS类型，内核API函数通常返回NTSTATUS，用于指示成功或失败</p>
+<p>分别表示一下<strong>常见几种情况：</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">宏</th>
+<th align="center">返回值</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">STATUS_SUCCESS</td>
+<td align="center">0x00000000</td>
+<td align="center">成功</td>
+</tr>
+<tr>
+<td align="center">STATUS_INVALID_PARAMETER</td>
+<td align="center">0xC000000D</td>
+<td align="center">参数无效</td>
+</tr>
+<tr>
+<td align="center">STATUS_BUFFER_OVERFLOW</td>
+<td align="center">0x80000005</td>
+<td align="center">缓冲区长度不够</td>
+</tr>
+</tbody></table>
+<p>当你调用的内核函数，如果返回的结果不是STATUS_SUCCESS，就说明函数执行中遇到了问题，具体是什么问题，可以在ntstatus.h文件中查看。</p>
+<h2 id="5、内核中的异常处理"><a href="#5、内核中的异常处理" class="headerlink" title="5、内核中的异常处理"></a>5、内核中的异常处理</h2><p>在内核中，一个小小的错误就可能导致蓝屏，比如：读写一个无效的内存地址。为了让自己的内核程序更加健壮，强烈建议大家在编写内核程序时，使用异常处</p>
+<p>Windows提供了结构化异常处理机制，一般的编译器都是支持的</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">__try&#123;</span><br><span class="line">	<span class="comment">//可能出错的代码</span></span><br><span class="line">&#125;</span><br><span class="line">__except(filter_value) &#123;</span><br><span class="line">	<span class="comment">//出错时要执行的代码</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>出现异常时，可根据<strong>filter_value</strong>的值来决定程序该如果执行，当<strong>filter_value</strong>的值为</p>
+<table>
+<thead>
+<tr>
+<th align="center">宏名称</th>
+<th align="center">实际值</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">EXCEPTION_EXECUTE_HANDLER</td>
+<td align="center">1</td>
+<td align="center">代码进入except块</td>
+</tr>
+<tr>
+<td align="center">EXCEPTION_CONTINUE_SEARCH</td>
+<td align="center">0</td>
+<td align="center">不处理异常，由上一层调用函数处理</td>
+</tr>
+<tr>
+<td align="center">EXCEPTION_CONTINUE_EXECUTION</td>
+<td align="center">-1</td>
+<td align="center">回去继续执行错误处的代码</td>
+</tr>
+</tbody></table>
+<h2 id="6、常用的内核内存函数"><a href="#6、常用的内核内存函数" class="headerlink" title="6、常用的内核内存函数"></a>6、常用的内核内存函数</h2><table>
+<thead>
+<tr>
+<th align="center">C语言</th>
+<th align="center">内核中</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">malloc</td>
+<td align="center">ExAllocatePool</td>
+</tr>
+<tr>
+<td align="center">memset</td>
+<td align="center">RtlFillMemory</td>
+</tr>
+<tr>
+<td align="center">memcpy</td>
+<td align="center">RtlMoveMemory</td>
+</tr>
+<tr>
+<td align="center">free</td>
+<td align="center">ExFreePool</td>
+</tr>
+</tbody></table>
+<h2 id="7、内核字符串种类"><a href="#7、内核字符串种类" class="headerlink" title="7、内核字符串种类"></a>7、内核字符串种类</h2><p><strong>CHAR(char)相当于ANSI_STRING，WCHAR相当于UNICODE_STRING</strong></p>
+<p><strong>ANSI_STRING</strong>字符串的定义如下</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">STRING</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    USHORT Length;</span><br><span class="line">    USHORT MaximumLength;</span><br><span class="line">    PCHAR Buffer;</span><br><span class="line">&#125;STRING;</span><br></pre></td></tr></table></figure>
+
+<p><strong>UNICODE_STRING</strong>字符串的定义如下</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">UNICODE_STRING</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    USHORT Length;</span><br><span class="line">    USHORT MaxmumLength;</span><br><span class="line">    PWSTR Buffer;</span><br><span class="line">&#125; UNICODE_STRING;</span><br></pre></td></tr></table></figure>
+
+<p>内核中避免使用传统字符串以防止蓝屏</p>
+<p>推荐使用升级版的字符串结构体，如<strong>ANSI_STRING</strong>和<strong>UNICODE_STRING</strong></p>
+<h2 id="8、内核字符串常用函数"><a href="#8、内核字符串常用函数" class="headerlink" title="8、内核字符串常用函数"></a>8、内核字符串常用函数</h2><p>字符串常用的功能无非就是：创建、复制、比较以及转换等</p>
+<table>
+<thead>
+<tr>
+<th align="center"><strong>ANSI_STRING字符串</strong></th>
+<th align="center"><strong>UNICODE_STRING字符串</strong></th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">RtlInitAnsiString</td>
+<td align="center">RtlInitUnicodeString</td>
+<td align="center">创建</td>
+</tr>
+<tr>
+<td align="center">RtlCopyString</td>
+<td align="center">RtlCopyUnicodeString</td>
+<td align="center">复制</td>
+</tr>
+<tr>
+<td align="center">RtlCompareString</td>
+<td align="center">RtlCompareUnicoodeString</td>
+<td align="center">比较</td>
+</tr>
+<tr>
+<td align="center">RtlAnsiStringToUnicodeString</td>
+<td align="center">RtlUnicodeStringToAnsiString</td>
+<td align="center">转换</td>
+</tr>
+</tbody></table>
+<h1 id="内核空间与内核模块"><a href="#内核空间与内核模块" class="headerlink" title="内核空间与内核模块"></a>内核空间与内核模块</h1><h2 id="1、内核空间"><a href="#1、内核空间" class="headerlink" title="1、内核空间"></a>1、内核空间</h2><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/10/27/txRf6B5ULZVz7UcHBXHU1730030765958.png" alt="image-20241027200605755"></p>
+<p>内核模块定义全局变量：在不同进程中查看</p>
+<p>在2g中所有模块共享一块内存</p>
+<p>现在我设置一个全局变量在驱动里，然后注册运行通过dbgview查看</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;ntifs.h&gt;</span></span></span><br><span class="line"></span><br><span class="line">ULONG a = <span class="number">0x12345678</span>;</span><br><span class="line">VOID <span class="title function_">DriverUnload</span><span class="params">(PDRIVER_OBJECT pDriver)</span></span><br><span class="line">&#123;</span><br><span class="line">	DbgBreakPoint();</span><br><span class="line">&#125;</span><br><span class="line">NTSTATUS <span class="title function_">DriverEntry</span><span class="params">(PDRIVER_OBJECT pDriver, PUNICODE_STRING pReg)</span></span><br><span class="line">&#123;</span><br><span class="line">	DbgPrint(<span class="string">&quot;%x\n&quot;</span>, &amp;a);</span><br><span class="line"></span><br><span class="line">	pDriver-&gt;DriverUnload = DriverUnload;</span><br><span class="line">	<span class="keyword">return</span> STATUS_SUCCESS;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/11/03/CWuqoRQWDXGzDoyhgXSV1730640993715.png" alt="image-20241103213633527"></p>
+<p>现在我们随便找一个进程，通过.process来选择进程查看，我们发现在dbgview的内存中存在那个全局变量的值</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/11/03/vqVuSt3267JHwXiz5uPk1730641034414.png" alt="image-20241103213714154"></p>
+<p>证实了在4GB的内存空间中高2G是共享的，高2g就是内核空间。</p>
+<h2 id="2、内核模块"><a href="#2、内核模块" class="headerlink" title="2、内核模块"></a>2、内核模块</h2><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/11/03/CsCaEad1WJKSEb6Z0LBt1730639122204.png" alt="image-20241103210521664"></p>
+<ul>
+<li>硬件种类繁多，不可能做一个兼容所有硬件的内核，所以，微软提供规定的接口格式，让硬件驱动人员安装规定的格式编写“驱动程序” 。</li>
+<li>这些驱动程序每一个都是一个模块，称为“内核模块”，都可以加载到内核中，都遵守PE结构。但本质上讲，任意一个.sys文件与内核文件没有区别。</li>
+</ul>
+<h2 id="3、DRIVER-OBJECT"><a href="#3、DRIVER-OBJECT" class="headerlink" title="3、DRIVER_OBJECT"></a>3、DRIVER_OBJECT</h2><p>每个内核模块都有一个对应的结构体，来描述这个模块在内核中的：位置、大小、名称等等。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">kd&gt; dt _DRIVER_OBJECT</span><br><span class="line">nt!_DRIVER_OBJECT</span><br><span class="line">   +<span class="number">0x000</span> Type             : Int2B</span><br><span class="line">   +<span class="number">0x002</span> Size             : Int2B</span><br><span class="line">   +<span class="number">0x004</span> DeviceObject     : Ptr32 _DEVICE_OBJECT</span><br><span class="line">   +<span class="number">0x008</span> Flags            : Uint4B</span><br><span class="line">   +<span class="number">0x00c</span> DriverStart      : Ptr32 Void</span><br><span class="line">   +<span class="number">0x010</span> DriverSize       : Uint4B</span><br><span class="line">   +<span class="number">0x014</span> DriverSection    : Ptr32 Void</span><br><span class="line">   +<span class="number">0x018</span> DriverExtension  : Ptr32 _DRIVER_EXTENSION</span><br><span class="line">   +<span class="number">0x01c</span> DriverName       : _UNICODE_STRING</span><br><span class="line">   +<span class="number">0x024</span> HardwareDatabase : Ptr32 _UNICODE_STRING</span><br><span class="line">   +<span class="number">0x028</span> FastIoDispatch   : Ptr32 _FAST_IO_DISPATCH</span><br><span class="line">   +<span class="number">0x02c</span> DriverInit       : Ptr32     <span class="type">long</span> </span><br><span class="line">   +<span class="number">0x030</span> DriverStartIo    : Ptr32     <span class="type">void</span> </span><br><span class="line">   +<span class="number">0x034</span> DriverUnload     : Ptr32     <span class="type">void</span> </span><br><span class="line">   +<span class="number">0x038</span> MajorFunction    : [<span class="number">28</span>] Ptr32     <span class="type">long</span> </span><br></pre></td></tr></table></figure>
+
+<h2 id="4、打印DRIVER-OBJECT地址"><a href="#4、打印DRIVER-OBJECT地址" class="headerlink" title="4、打印DRIVER_OBJECT地址"></a>4、打印DRIVER_OBJECT地址</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DbgPrint(<span class="string">&quot;DRIVER_OBJECT对象地址：%x \r\n&quot;</span>,driver);</span><br></pre></td></tr></table></figure>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/11/03/LQkU0pZEUIvGDqKA5VpB1730641405267.png" alt="image-20241103214325045"></p>
+<p>通过DRIVER_OBJECT找到当前模块信息：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DbgPrint(<span class="string">&quot;驱动名称：%ws \r\n&quot;</span>,driver-&gt;DriverName.Buffer);</span><br><span class="line">DbgPrint(<span class="string">&quot;模块基址：%x \r\n&quot;</span>,driver-&gt;DriverStart);</span><br><span class="line">DbgPrint(<span class="string">&quot;模块大小：%x \r\n&quot;</span>,driver-&gt;DriverSize);</span><br></pre></td></tr></table></figure>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/11/03/c9UK1ArZy7Gaj4DdTZNL1730641428137.png" alt="image-20241103214347788"></p>
+<h2 id="5、遍历内核模块"><a href="#5、遍历内核模块" class="headerlink" title="5、遍历内核模块"></a>5、遍历内核模块</h2><ol>
+<li>dt _DRIVER_OBJECT  (地址)</li>
+<li>dt _LDR_DATA_TABLE_ENTRY  (DriverSection)地址</li>
+<li>dt _LDR_DATA_TABLE_ENTRY  (InLoadOrderLinks.Flink)地址</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">kd&gt; dt _LDR_DATA_TABLE_ENTRY 0x87ba7430 </span><br><span class="line">nt!_LDR_DATA_TABLE_ENTRY</span><br><span class="line">   +0x000 InLoadOrderLinks : _LIST_ENTRY [ 0x83f82850 - 0x87a114c8 ] //双向链表</span><br><span class="line">   +0x008 InMemoryOrderLinks : _LIST_ENTRY [ 0xffffffff - 0xffffffff ]</span><br><span class="line">   +0x010 InInitializationOrderLinks : _LIST_ENTRY [ 0x1c - 0x0 ]</span><br><span class="line">   +0x018 DllBase          : 0x8d600000 Void</span><br><span class="line">   +0x01c EntryPoint       : 0x8d604000 Void</span><br><span class="line">   +0x020 SizeOfImage      : 0x6000</span><br><span class="line">   +0x024 FullDllName      : _UNICODE_STRING &quot;\??\C:\Users\Administrator\Desktop\MyDriver1.sys&quot;</span><br><span class="line">   +0x02c BaseDllName      : _UNICODE_STRING &quot;MyDriver1.sys&quot;</span><br><span class="line">   +0x034 Flags            : 0x49104000</span><br><span class="line">   +0x038 LoadCount        : 1</span><br><span class="line">   +0x03a TlsIndex         : 0x6d</span><br><span class="line">   +0x03c HashLinks        : _LIST_ENTRY [ 0x0 - 0xabfc ]</span><br><span class="line">   +0x03c SectionPointer   : (null) </span><br><span class="line">   +0x040 CheckSum         : 0xabfc</span><br><span class="line">   +0x044 TimeDateStamp    : 0x490057</span><br><span class="line">   +0x044 LoadedImports    : 0x00490057 Void</span><br><span class="line">   +0x048 EntryPointActivationContext : (null) </span><br><span class="line">   +0x04c PatchInformation : 0x86344c99 Void</span><br><span class="line">   +0x050 ForwarderLinks   : _LIST_ENTRY [ 0x0 - 0x6000 ]</span><br><span class="line">   +0x058 ServiceTagLinks  : _LIST_ENTRY [ 0x67277d47 - 0x79004d ]</span><br><span class="line">   +0x060 StaticLinks      : _LIST_ENTRY [ 0x720044 - 0x760069 ]</span><br><span class="line">   +0x068 ContextInformation : 0x00720065 Void</span><br><span class="line">   +0x06c OriginalBase     : 0x2e0031</span><br><span class="line">   +0x070 LoadTime         : _LARGE_INTEGER 0x00000073`00790073</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="0环与3环通信-常规方式"><a href="#0环与3环通信-常规方式" class="headerlink" title="0环与3环通信(常规方式)"></a>0环与3环通信(常规方式)</h1><h2 id="1、设备对象"><a href="#1、设备对象" class="headerlink" title="1、设备对象"></a>1、设备对象</h2><p>我们在开发窗口程序的时候，消息被封装成<strong>一个结构体：MSG</strong></p>
+<p>在内核开发时，消息被封装成另外<strong>一个结构体：IRP(I&#x2F;O Request Package)</strong></p>
+<p>在窗口程序中，<strong>能够接收消息</strong>的只能是<strong>窗口对象</strong>。在内核中，<strong>能够接收IRP消息</strong>的只能是<strong>设备对象</strong></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/11/03/NqKdMHJ2swOHM8jLY3Cy1730639709406.png" alt="image-20241103211509184"></p>
+<h2 id="2、创建设备对象"><a href="#2、创建设备对象" class="headerlink" title="2、创建设备对象"></a>2、创建设备对象</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建设备名称</span></span><br><span class="line">UNICODE_STRING Devicename;</span><br><span class="line">RtlInitUnicodeString(&amp;Devicename,<span class="string">L&quot;\\Device\\MyDevice&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建设备</span></span><br><span class="line">IoCreateDevice(</span><br><span class="line">pDriver,				<span class="comment">//当前设备所属的驱动对象</span></span><br><span class="line"><span class="number">0</span>,</span><br><span class="line">&amp;Devicename,			<span class="comment">//设备对象的名称</span></span><br><span class="line">FILE_DEVICE_UNKNOWN,</span><br><span class="line">FILE_DEVICE_SECURE_OPEN,</span><br><span class="line">FALSE,</span><br><span class="line">&amp;pDeviceObj			<span class="comment">//设备对象指针</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h2 id="3、设置交互数据的方式"><a href="#3、设置交互数据的方式" class="headerlink" title="3、设置交互数据的方式"></a>3、设置交互数据的方式</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pDeviceObj-&gt;Flags |= DO_BUFFERED_IO;</span><br></pre></td></tr></table></figure>
+
+<p>**缓冲区方式读写(DO_BUFFERED_IO)**：操作系统将应用程序提供缓冲区的数据复制到内核模式下的地址中。</p>
+<p>**直接方式读写(DO_DIRECT_IO)**：操作系统会将用户模式下的缓冲区锁住。然后操作系统将这段缓冲区在内核模式地址再次映射一遍。这样，用户模式的缓冲区和内核模式的缓冲区指向的是同一区域的物理内存。缺点就是要单独占用物理页面。</p>
+<p>**其他方式读写(在调用IoCreateDevice创建设备后对pDevObj-&gt;Flags即不设置DO_BUFFERED_IO也不设置DO_DIRECT_IO此时就是其他方式)**：在使用其他方式读写设备时，派遣函数直接读写应用程序提供的缓冲区地址。在驱动程序中，直接操作应用程序的缓冲区地址是很危险的。只有驱动程序与应用程序运行在相同线程上下文的情况下，才能使用这种方式。</p>
+<h2 id="4、创建符号链接"><a href="#4、创建符号链接" class="headerlink" title="4、创建符号链接"></a>4、创建符号链接</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建符号链接名称</span></span><br><span class="line">RtlInitUnicodeString(&amp;SymbolicLinkName,<span class="string">L&quot;\\??\\MyTestDriver&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建符号链接</span></span><br><span class="line">IoCreateSymbolicLink(&amp;SymbolicLinkName,&amp;Devicename);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE]</p>
+<p>1、设备名称的作用是给内核对象用的，如果要在Ring3访问，必须要有符号链接其实就是一个别名，没有这个别名，在Ring3不可见。</p>
+<p>2、内核模式下，符号链接是以“??\”开头的，如C 盘就是“??\C:”</p>
+<p>3、而在用户模式下，则是以“\.\”开头的，如C 盘就是“\.\C:“</p>
+</blockquote>
+<h2 id="5、IRP与派遣函数"><a href="#5、IRP与派遣函数" class="headerlink" title="5、IRP与派遣函数"></a>5、IRP与派遣函数</h2><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic.gitlab.cx/gh/RuntimeBroker/pic-bed/img/2024/11/03/ja5Pm9hU0NHOyZsPXrhj1730639976290.png" alt="image-20241103211936136"></p>
+<p>在3环会将事件封装澄一个MSG对象，窗口对象接收，然后触发对应的回调函数。</p>
+<p>同样在0环也是会将事件封装澄一个IRP对象，设备对象接收，然后触发对应的派遣函数。</p>
+<h2 id="6、IRP的类型"><a href="#6、IRP的类型" class="headerlink" title="6、IRP的类型"></a>6、IRP的类型</h2><table>
+<thead>
+<tr>
+<th><strong>IRP类型</strong></th>
+<th>来源</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>IRP_MJ_CREATE</td>
+<td>CreateFile</td>
+<td>打开设备</td>
+</tr>
+<tr>
+<td>IRP_MJ_READ</td>
+<td>ReadFile</td>
+<td>设备读取数据</td>
+</tr>
+<tr>
+<td>IRP_MJ_WRITE</td>
+<td>WriteFile</td>
+<td>设备写入数据</td>
+</tr>
+<tr>
+<td>IRP_MJ_CLOSE</td>
+<td>CloseHandle</td>
+<td>关闭设备</td>
+</tr>
+</tbody></table>
+<p>其他类型：</p>
+<table>
+<thead>
+<tr>
+<th><strong>IRP类型</strong></th>
+<th><strong>来源</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>IRP_MJ_DEVICE_CONTROL</td>
+<td>DeviceControl函数会产生此IRP</td>
+</tr>
+<tr>
+<td>IRP_MJ_POWER</td>
+<td>在操作系统处理电源消息时，产生次IRP</td>
+</tr>
+<tr>
+<td>IRP_MJ_SHUTDOWN</td>
+<td>关闭系统前会产生此IRP</td>
+</tr>
+</tbody></table>
+<h2 id="7、派遣函数注册位置"><a href="#7、派遣函数注册位置" class="headerlink" title="7、派遣函数注册位置"></a>7、派遣函数注册位置</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">kd&gt; dt _DRIVER_OBJECT</span><br><span class="line">nt!_DRIVER_OBJECT</span><br><span class="line">   +<span class="number">0x000</span> Type             : Int2B</span><br><span class="line">   +<span class="number">0x002</span> Size             : Int2B</span><br><span class="line">   +<span class="number">0x004</span> DeviceObject     : Ptr32 _DEVICE_OBJECT</span><br><span class="line">   +<span class="number">0x008</span> Flags            : Uint4B</span><br><span class="line">   +<span class="number">0x00c</span> DriverStart      : Ptr32 Void</span><br><span class="line">   +<span class="number">0x010</span> DriverSize       : Uint4B</span><br><span class="line">   +<span class="number">0x014</span> DriverSection    : Ptr32 Void</span><br><span class="line">   +<span class="number">0x018</span> DriverExtension  : Ptr32 _DRIVER_EXTENSION</span><br><span class="line">   +<span class="number">0x01c</span> DriverName       : _UNICODE_STRING</span><br><span class="line">   +<span class="number">0x024</span> HardwareDatabase : Ptr32 _UNICODE_STRING</span><br><span class="line">   +<span class="number">0x028</span> FastIoDispatch   : Ptr32 _FAST_IO_DISPATCH</span><br><span class="line">   +<span class="number">0x02c</span> DriverInit       : Ptr32     <span class="type">long</span> </span><br><span class="line">   +<span class="number">0x030</span> DriverStartIo    : Ptr32     <span class="type">void</span> </span><br><span class="line">   +<span class="number">0x034</span> DriverUnload     : Ptr32     <span class="type">void</span> <span class="comment">//卸载函数</span></span><br><span class="line">   +<span class="number">0x038</span> MajorFunction    : [<span class="number">28</span>] Ptr32     <span class="type">long</span> <span class="comment">//派遣函数</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="8、注册派遣函数"><a href="#8、注册派遣函数" class="headerlink" title="8、注册派遣函数"></a>8、注册派遣函数</h2><p><strong>派遣函数种类：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">#define IRP_MJ_CREATE                   0x00</span><br><span class="line">#define IRP_MJ_CREATE_NAMED_PIPE        0x01</span><br><span class="line">#define IRP_MJ_CLOSE                    0x02</span><br><span class="line">#define IRP_MJ_READ                     0x03</span><br><span class="line">#define IRP_MJ_WRITE                    0x04</span><br><span class="line">#define IRP_MJ_QUERY_INFORMATION        0x05</span><br><span class="line">#define IRP_MJ_SET_INFORMATION          0x06</span><br><span class="line">#define IRP_MJ_QUERY_EA                 0x07</span><br><span class="line">#define IRP_MJ_SET_EA                   0x08</span><br><span class="line">#define IRP_MJ_FLUSH_BUFFERS            0x09</span><br><span class="line">#define IRP_MJ_QUERY_VOLUME_INFORMATION 0x0a</span><br><span class="line">#define IRP_MJ_SET_VOLUME_INFORMATION   0x0b</span><br><span class="line">#define IRP_MJ_DIRECTORY_CONTROL        0x0c</span><br><span class="line">#define IRP_MJ_FILE_SYSTEM_CONTROL      0x0d</span><br><span class="line">#define IRP_MJ_DEVICE_CONTROL           0x0e</span><br><span class="line">#define IRP_MJ_INTERNAL_DEVICE_CONTROL  0x0f</span><br><span class="line">#define IRP_MJ_SHUTDOWN                 0x10</span><br><span class="line">#define IRP_MJ_LOCK_CONTROL             0x11</span><br><span class="line">#define IRP_MJ_CLEANUP                  0x12</span><br><span class="line">#define IRP_MJ_CREATE_MAILSLOT          0x13</span><br><span class="line">#define IRP_MJ_QUERY_SECURITY           0x14</span><br><span class="line">#define IRP_MJ_SET_SECURITY             0x15</span><br><span class="line">#define IRP_MJ_POWER                    0x16</span><br><span class="line">#define IRP_MJ_SYSTEM_CONTROL           0x17</span><br><span class="line">#define IRP_MJ_DEVICE_CHANGE            0x18</span><br><span class="line">#define IRP_MJ_QUERY_QUOTA              0x19</span><br><span class="line">#define IRP_MJ_SET_QUOTA                0x1a</span><br><span class="line">#define IRP_MJ_PNP                      0x1b</span><br><span class="line">#define IRP_MJ_PNP_POWER                IRP_MJ_PNP      // Obsolete....</span><br><span class="line">#define IRP_MJ_MAXIMUM_FUNCTION         0x1b</span><br></pre></td></tr></table></figure>
+
+<p><strong>注册派遣函数格式：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">NTSTATUS <span class="title function_">DriverEntry</span><span class="params">( 。。。。)</span>  </span><br><span class="line">&#123;  </span><br><span class="line">    <span class="comment">//设置卸载函数   </span></span><br><span class="line">    pDriverObject-&gt;DriverUnload = 卸载函数;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">//设置派遣函数   </span></span><br><span class="line">    pDriverObject-&gt;MajorFunction[IRP_MJ_CREATE] 	= 派遣函数<span class="number">1</span>;  </span><br><span class="line">    pDriverObject-&gt;MajorFunction[IRP_MJ_CLOSE] 	= 派遣函数<span class="number">2</span>;  </span><br><span class="line">    pDriverObject-&gt;MajorFunction[IRP_MJ_WRITE] 	= 派遣函数<span class="number">3</span>;  </span><br><span class="line">    pDriverObject-&gt;MajorFunction[IRP_MJ_READ] 	= 派遣函数<span class="number">4</span>;  </span><br><span class="line">    pDriverObject-&gt;MajorFunction[IRP_MJ_CLEANUP] 	= 派遣函数<span class="number">5</span>;  </span><br><span class="line">    pDriverObject-&gt;MajorFunction[IRP_MJ_SET_INFORMATION] 	= 派遣函数<span class="number">6</span>;  </span><br><span class="line">    pDriverObject-&gt;MajorFunction[IRP_MJ_DEVICE_CONTROL] 	= 派遣函数<span class="number">7</span>;  </span><br><span class="line">    pDriverObject-&gt;MajorFunction[IRP_MJ_SHUTDOWN] 		= 派遣函数<span class="number">8</span>;  </span><br><span class="line">    pDriverObject-&gt;MajorFunction[IRP_MJ_SYSTEM_CONTROL] 	= 派遣函数<span class="number">9</span>;</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">IRP_MJ_MAXIMUM_FUNCTION   派遣函数的最大值</span><br></pre></td></tr></table></figure>
+
+<h2 id="9、派遣函数的格式"><a href="#9、派遣函数的格式" class="headerlink" title="9、派遣函数的格式"></a>9、派遣函数的格式</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//派遣函数的格式：</span></span><br><span class="line"></span><br><span class="line">NTSTATUS <span class="title function_">MyDispatchFunction</span><span class="params">(PDEVICE_OBJECT pDevObj, PIRP pIrp)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">//处理自己的业务...</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">//设置返回状态</span></span><br><span class="line">	pIrp-&gt;IoStatus.Status = STATUS_SUCCESS;	<span class="comment">//  getlasterror()得到的就是这个值</span></span><br><span class="line">	pIrp-&gt;IoStatus.Information = <span class="number">0</span>;		<span class="comment">//  返回给3环多少数据 没有填0</span></span><br><span class="line">	IoCompleteRequest(pIrp, IO_NO_INCREMENT);</span><br><span class="line">	<span class="keyword">return</span> STATUS_SUCCESS;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="10、通过IRP-MJ-DEVICE-CONTROL交互数据"><a href="#10、通过IRP-MJ-DEVICE-CONTROL交互数据" class="headerlink" title="10、通过IRP_MJ_DEVICE_CONTROL交互数据"></a>10、通过IRP_MJ_DEVICE_CONTROL交互数据</h2><p>应用层调用DeviceControl函数会产生此IRP.</p>
+<h2 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h2><h3 id="Demo代码"><a href="#Demo代码" class="headerlink" title="Demo代码"></a>Demo代码</h3><p>驱动代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;ntifs.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> Deivce_Name <span class="string">L&quot;\\Device\\hackflame1&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> Symbol_Name <span class="string">L&quot;\\??\\hackflame1&quot;</span></span></span><br><span class="line"></span><br><span class="line">NTSTATUS <span class="title function_">dispatchCreate</span><span class="params">(PDEVICE_OBJECT DeviceObject, PIRP Irp)</span> &#123;</span><br><span class="line">	DbgBreakPoint();</span><br><span class="line">	DbgPrint(<span class="string">&quot;dispatchCreate执行成功\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">	Irp-&gt;IoStatus.Status = STATUS_SUCCESS;</span><br><span class="line">	Irp-&gt;IoStatus.Information = <span class="number">0</span>;</span><br><span class="line">	IoCompleteRequest(Irp,IO_NO_INCREMENT);</span><br><span class="line">	<span class="keyword">return</span> STATUS_SUCCESS;</span><br><span class="line">&#125;</span><br><span class="line">NTSTATUS <span class="title function_">dispatchClose</span><span class="params">(PDEVICE_OBJECT DeviceObject, PIRP Irp)</span> &#123;</span><br><span class="line">	DbgBreakPoint();</span><br><span class="line">	DbgPrint(<span class="string">&quot;dispatchClose执行成功\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">	Irp-&gt;IoStatus.Status = STATUS_SUCCESS;</span><br><span class="line">	Irp-&gt;IoStatus.Information = <span class="number">0</span>;</span><br><span class="line">	IoCompleteRequest(Irp, IO_NO_INCREMENT);</span><br><span class="line">	<span class="keyword">return</span> STATUS_SUCCESS;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">NTSTATUS <span class="title function_">dispatchDeviceControl</span><span class="params">(PDEVICE_OBJECT DeviceObject, PIRP Irp)</span> &#123;</span><br><span class="line">	DbgBreakPoint();</span><br><span class="line">	DbgPrint(<span class="string">&quot;dispatchDeviceControl执行成功\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">	Irp-&gt;IoStatus.Status = STATUS_SUCCESS;</span><br><span class="line">	Irp-&gt;IoStatus.Information = <span class="number">0</span>;</span><br><span class="line">	IoCompleteRequest(Irp, IO_NO_INCREMENT);</span><br><span class="line">	<span class="keyword">return</span> STATUS_SUCCESS;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">VOID <span class="title function_">DriverUnload</span><span class="params">(PDRIVER_OBJECT pDriver)</span></span><br><span class="line">&#123;</span><br><span class="line">	UNICODE_STRING symName;</span><br><span class="line">	RtlInitUnicodeString(&amp;symName, Symbol_Name);</span><br><span class="line">	IoDeleteSymbolicLink(&amp;symName);</span><br><span class="line">	<span class="keyword">if</span> (pDriver-&gt;DeviceObject) IoDeleteDevice(pDriver-&gt;DeviceObject);</span><br><span class="line">	DbgPrintEx(<span class="number">77</span>, <span class="number">0</span>, <span class="string">&quot;驱动卸载完成&quot;</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">NTSTATUS <span class="title function_">DriverEntry</span><span class="params">(PDRIVER_OBJECT pDriver, PUNICODE_STRING pReg)</span></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">	UNICODE_STRING deviceName = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">	UNICODE_STRING symName = &#123; <span class="number">0</span> &#125;;</span><br><span class="line"></span><br><span class="line">	RtlInitUnicodeString(&amp;deviceName, Deivce_Name);</span><br><span class="line">	RtlInitUnicodeString(&amp;symName, Symbol_Name);</span><br><span class="line"></span><br><span class="line">	PDEVICE_OBJECT pDevice = <span class="literal">NULL</span>;  <span class="comment">//这里是设备类型 PDEVICE_OBJECT 不是 PDRIVER_OBJECT</span></span><br><span class="line"></span><br><span class="line">	NTSTATUS status = IoCreateDevice(pDriver, <span class="number">0</span>, &amp;deviceName, FILE_DEVICE_UNKNOWN, FILE_DEVICE_SECURE_OPEN, FALSE, &amp;pDevice);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (!NT_SUCCESS(status))</span><br><span class="line">	&#123;</span><br><span class="line">		KdPrintEx((<span class="number">77</span>, <span class="number">0</span>, <span class="string">&quot;[db]:%x\r\n&quot;</span>, status));</span><br><span class="line">		<span class="keyword">return</span> status;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	status = IoCreateSymbolicLink(&amp;symName, &amp;deviceName);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (!NT_SUCCESS(status))</span><br><span class="line">	&#123;</span><br><span class="line">		IoDeleteDevice(pDriverObj);</span><br><span class="line">		KdPrintEx((<span class="number">77</span>, <span class="number">0</span>, <span class="string">&quot;[db]:%x\r\n&quot;</span>, status));</span><br><span class="line">		<span class="keyword">return</span> status;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	pDevice-&gt;Flags &amp;= ~DO_DEVICE_INITIALIZING;</span><br><span class="line">	pDevice-&gt;Flags |= DO_BUFFERED_IO;</span><br><span class="line"></span><br><span class="line">	pDriver-&gt;MajorFunction[IRP_MJ_CREATE] = dispatchCreate;</span><br><span class="line">	pDriver-&gt;MajorFunction[IRP_MJ_CLOSE] = dispatchClose;</span><br><span class="line">	pDriver-&gt;MajorFunction[IRP_MJ_DEVICE_CONTROL] = dispatchDeviceControl;</span><br><span class="line"></span><br><span class="line">	pDriver-&gt;DriverUnload = DriverUnload;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> status;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>3环代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;winioctl.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    HANDLE hfile = CreateFileA(<span class="string">&quot;\\\\.\\hackflame1&quot;</span>, GENERIC_READ | GENERIC_WRITE,<span class="number">0</span>, <span class="number">0</span>, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL,<span class="number">0</span>);</span><br><span class="line">    DWORD status = GetLastError();</span><br><span class="line">    <span class="keyword">if</span> (!hfile)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;status:%d\n&quot;</span>, status);</span><br><span class="line">        system(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;status:%d\n&quot;</span>, status);</span><br><span class="line">    CloseHandle(hfile);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="驱动通信案例代码"><a href="#驱动通信案例代码" class="headerlink" title="驱动通信案例代码"></a>驱动通信案例代码</h3><p><strong>驱动代码：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;ntifs.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> OPER CTL_CODE(FILE_DEVICE_UNKNOWN, 0x800, METHOD_BUFFERED, FILE_ANY_ACCESS)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> Deivce_Name <span class="string">L&quot;\\Device\\hackflame1&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> Symbol_Name <span class="string">L&quot;\\??\\hackflame1&quot;</span></span></span><br><span class="line"></span><br><span class="line">NTSTATUS <span class="title function_">dispatchCreate</span><span class="params">(PDEVICE_OBJECT DeviceObject, PIRP Irp)</span> &#123;</span><br><span class="line">	DbgPrint(<span class="string">&quot;dispatchCreate执行成功\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">	Irp-&gt;IoStatus.Status = STATUS_SUCCESS;</span><br><span class="line">	Irp-&gt;IoStatus.Information = <span class="number">0</span>;</span><br><span class="line">	IoCompleteRequest(Irp,IO_NO_INCREMENT);</span><br><span class="line">	<span class="keyword">return</span> STATUS_SUCCESS;</span><br><span class="line">&#125;</span><br><span class="line">NTSTATUS <span class="title function_">dispatchClose</span><span class="params">(PDEVICE_OBJECT DeviceObject, PIRP Irp)</span> &#123;</span><br><span class="line">	DbgPrint(<span class="string">&quot;dispatchClose执行成功\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">	Irp-&gt;IoStatus.Status = STATUS_SUCCESS;</span><br><span class="line">	Irp-&gt;IoStatus.Information = <span class="number">0</span>;</span><br><span class="line">	IoCompleteRequest(Irp, IO_NO_INCREMENT);</span><br><span class="line">	<span class="keyword">return</span> STATUS_SUCCESS;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">NTSTATUS <span class="title function_">dispatchDeviceControl</span><span class="params">(PDEVICE_OBJECT DeviceObject, PIRP Irp)</span> &#123;</span><br><span class="line">	DbgBreakPoint();</span><br><span class="line">	DbgPrint(<span class="string">&quot;dispatchDeviceControl执行成功\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">	ULONG uRead, uWrite;</span><br><span class="line">	NTSTATUS retStatus = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="comment">//拿到当前设备的堆栈</span></span><br><span class="line">	PIO_STACK_LOCATION pCurrentStack = IoGetCurrentIrpStackLocation(Irp);</span><br><span class="line">	<span class="comment">//获取操作码</span></span><br><span class="line">	ULONG code = pCurrentStack-&gt;Parameters.DeviceIoControl.IoControlCode;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//获取缓冲区</span></span><br><span class="line">	PVOID pIoBuffer = Irp-&gt;AssociatedIrp.SystemBuffer;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//判断操作码是否是对应的</span></span><br><span class="line">	<span class="keyword">switch</span> (code)</span><br><span class="line">	&#123;</span><br><span class="line">	<span class="keyword">case</span> OPER:</span><br><span class="line">		<span class="comment">//从3环向0环写</span></span><br><span class="line">		<span class="built_in">memcpy</span>(&amp;uRead,pIoBuffer,<span class="number">4</span>);</span><br><span class="line">		DbgPrint(<span class="string">&quot;uRead: %x \n&quot;</span>, uRead);</span><br><span class="line"></span><br><span class="line">		<span class="comment">//从0环向3环写</span></span><br><span class="line">		uWrite = <span class="number">0x123456</span>;</span><br><span class="line">		<span class="built_in">memcpy</span>(pIoBuffer, &amp;uWrite, <span class="number">4</span>);</span><br><span class="line">		Irp-&gt;IoStatus.Information = <span class="number">4</span>;</span><br><span class="line">		retStatus = STATUS_SUCCESS;</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	<span class="keyword">default</span>:</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	Irp-&gt;IoStatus.Status = retStatus == STATUS_SUCCESS ? retStatus : STATUS_SUCCESS;</span><br><span class="line">	IoCompleteRequest(Irp, IO_NO_INCREMENT);</span><br><span class="line">	<span class="keyword">return</span> STATUS_SUCCESS;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">VOID <span class="title function_">DriverUnload</span><span class="params">(PDRIVER_OBJECT pDriver)</span></span><br><span class="line">&#123;</span><br><span class="line">	UNICODE_STRING symName;</span><br><span class="line">	RtlInitUnicodeString(&amp;symName, Symbol_Name);</span><br><span class="line">	IoDeleteSymbolicLink(&amp;symName);</span><br><span class="line">	<span class="keyword">if</span> (pDriver-&gt;DeviceObject) IoDeleteDevice(pDriver-&gt;DeviceObject);</span><br><span class="line">	DbgPrintEx(<span class="number">77</span>, <span class="number">0</span>, <span class="string">&quot;驱动卸载完成&quot;</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">NTSTATUS <span class="title function_">DriverEntry</span><span class="params">(PDRIVER_OBJECT pDriver, PUNICODE_STRING pReg)</span></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">	UNICODE_STRING deviceName = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">	UNICODE_STRING symName = &#123; <span class="number">0</span> &#125;;</span><br><span class="line"></span><br><span class="line">	RtlInitUnicodeString(&amp;deviceName, Deivce_Name);</span><br><span class="line">	RtlInitUnicodeString(&amp;symName, Symbol_Name);</span><br><span class="line"></span><br><span class="line">	PDEVICE_OBJECT pDevice = <span class="literal">NULL</span>;  <span class="comment">//这里是设备类型 PDEVICE_OBJECT 不是 PDRIVER_OBJECT</span></span><br><span class="line"></span><br><span class="line">	NTSTATUS status = IoCreateDevice(pDriver, <span class="number">0</span>, &amp;deviceName, FILE_DEVICE_UNKNOWN, FILE_DEVICE_SECURE_OPEN, FALSE, &amp;pDevice);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (!NT_SUCCESS(status))</span><br><span class="line">	&#123;</span><br><span class="line">		KdPrintEx((<span class="number">77</span>, <span class="number">0</span>, <span class="string">&quot;[db]:%x\r\n&quot;</span>, status));</span><br><span class="line">		<span class="keyword">return</span> status;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	status = IoCreateSymbolicLink(&amp;symName, &amp;deviceName);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (!NT_SUCCESS(status))</span><br><span class="line">	&#123;</span><br><span class="line">		IoDeleteDevice(pDevice);</span><br><span class="line">		KdPrintEx((<span class="number">77</span>, <span class="number">0</span>, <span class="string">&quot;[db]:%x\r\n&quot;</span>, status));</span><br><span class="line">		<span class="keyword">return</span> status;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	pDevice-&gt;Flags &amp;= ~DO_DEVICE_INITIALIZING;</span><br><span class="line">	pDevice-&gt;Flags |= DO_BUFFERED_IO;</span><br><span class="line"></span><br><span class="line">	pDriver-&gt;MajorFunction[IRP_MJ_CREATE] = dispatchCreate;</span><br><span class="line">	pDriver-&gt;MajorFunction[IRP_MJ_CLOSE] = dispatchClose;</span><br><span class="line">	pDriver-&gt;MajorFunction[IRP_MJ_DEVICE_CONTROL] = dispatchDeviceControl;</span><br><span class="line"></span><br><span class="line">	pDriver-&gt;DriverUnload = DriverUnload;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> status;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>三环代码：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// demoR3.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;winioctl.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> OPER CTL_CODE(FILE_DEVICE_UNKNOWN, 0x800, METHOD_BUFFERED, FILE_ANY_ACCESS)</span></span><br><span class="line">HANDLE g_hDevice;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    HANDLE g_hDevice = CreateFileA(<span class="string">&quot;\\\\.\\hackflame1&quot;</span>, GENERIC_READ | GENERIC_WRITE,<span class="number">0</span>, <span class="number">0</span>, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL,<span class="number">0</span>);</span><br><span class="line">    DWORD code = GetLastError();</span><br><span class="line">    <span class="keyword">if</span> (code != <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;status:%d\n&quot;</span>, code);</span><br><span class="line">        system(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    LPVOID inBuffer , outBuffer;</span><br><span class="line">    inBuffer = (LPVOID)<span class="number">0x223456</span>;</span><br><span class="line">    DWORD size = <span class="number">4</span>;</span><br><span class="line">    DWORD dwLen;</span><br><span class="line">    <span class="comment">//向0环写入数据</span></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">		_In_ HANDLE hDevice,</span></span><br><span class="line"><span class="comment">	_In_ DWORD dwIoControlCode,</span></span><br><span class="line"><span class="comment">	_In_reads_bytes_opt_(nInBufferSize) LPVOID lpInBuffer,</span></span><br><span class="line"><span class="comment">	_In_ DWORD nInBufferSize,</span></span><br><span class="line"><span class="comment">	_Out_writes_bytes_to_opt_(nOutBufferSize,*lpBytesReturned) LPVOID lpOutBuffer,</span></span><br><span class="line"><span class="comment">	_In_ DWORD nOutBufferSize,</span></span><br><span class="line"><span class="comment">	_Out_opt_ LPDWORD lpBytesReturned,</span></span><br><span class="line"><span class="comment">	_Inout_opt_ LPOVERLAPPED lpOverlapped</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    DeviceIoControl(g_hDevice, OPER,&amp;inBuffer,<span class="number">0x10</span>,&amp;outBuffer,<span class="number">0x10</span>,&amp;dwLen,<span class="literal">NULL</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;outBuffer:%x \n&quot;</span>, outBuffer);</span><br><span class="line">    CloseHandle(g_hDevice);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<div class="article-footer fs14">
+    <section id="license">
+      <div class="header"><span>许可协议</span></div>
+      <div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div>
+    </section>
+    
+    <section id="share">
+      <div class="header"><span>分享文章</span></div>
+      <div class="body">
+        <div class="link"><input class="copy-area" readonly="true" id="copy-link" value="https://gbk.cx/p/692eb761/" /></div>
+        <div class="social-wrap dis-select"><a class="social share-item wechat" onclick="util.toggle(&quot;qrcode-wechat&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/b32ef3da1162a.svg" /></a><a class="social share-item weibo" target="_blank" rel="external nofollow noopener noreferrer" href="https://service.weibo.com/share/share.php?url=https://gbk.cx/p/692eb761/&title=驱动开发 - RuntimeBroker Blog's&summary=开发环境环境配置1、配置使用的是VS2019
+前提条件：
+
+VS2019安装正确
+安装WDK
+
+安装WDK之前一定要看清楚，对应当前VS2019安装的windows SDK版本
+
+123456789101112131415161718..."><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/80c07e4dbb303.svg" /></a><a class="social share-item email" href="mailto:?subject=驱动开发 - RuntimeBroker Blog's&amp;body=https://gbk.cx/p/692eb761/"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/a1b00e20f425d.svg" /></a><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;复制成功&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/8411ed322ced6.svg" /></a></div>
+        
+        <div class="qrcode" id="qrcode-wechat" style="opacity:0;height:0">
+          <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=https://gbk.cx/p/692eb761/"/>
+        </div>
+        
+      </div>
+    </section>
+    </div>
+</article>
+<div class="related-wrap" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/p/4f5d4e8d/">系统调用</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/p/86acdf67/">windbg常用命令</a></div></section></div>
+
+
+
+
+
+
+<footer class="page-footer footnote"><hr><div class="sitemap"><div class="sitemap-group"><span class="fs15">博客</span><a href="/">近期</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></div><div class="sitemap-group"><span class="fs15">项目</span><a href="/">开源库</a></div><div class="sitemap-group"><span class="fs15">社交</span><a href="/friends">友链</a><a href="/">留言板</a></div><div class="sitemap-group"><span class="fs15">更多</span><a href="/">关于本站</a><a target="_blank" rel="noopener" href="https://github.com/RuntimeBroker">GitHub</a></div></div><div class="text"><div style="text-align: center;">
+<p>
+    本站由 <a href="/">RuntimeBroker</a> 使用 <a href="/">Stellar</a> 主题创建。<br />
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。
+</p>
+</div>
+<!--不蒜子计数器-->
+<center>
+<script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js?id=Kb5KNSz05b5WZNTV&ck=Kb5KNSz05b5WZNTV"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!--添加一个访问量-->
+<span>
+       本"<span style="color: hsl(192 98% 55%); font-weight: bold;">页面</ a></span>"访问 <span id="busuanzi_value_page_pv" style="color: hsl(192 98% 55%); font-weight: bold;"></span> 次 | 👀总访问 <span id="busuanzi_value_site_pv" style="color: hsl(192 98% 55%); font-weight: bold;"></span>       次 | 总访客 <span id="busuanzi_value_site_uv" style="color: hsl(192 98% 55%); font-weight: bold;"></span> 人
+</span></br>
+<span id="runtime_span"></span>
+<script type="text/javascript">
+    function show_runtime() {
+        window.setTimeout("show_runtime()", 1000);
+        X = new Date("2024/09/20 17:00:00");
+        Y = new Date();
+        T = (Y.getTime() - X.getTime());
+        M = 24 * 60 * 60 * 1000;
+        a = T / M;
+        A = Math.floor(a);
+        b = (a - A) * 24;
+        B = Math.floor(b);
+        c = (b - B) * 60;
+        C = Math.floor((b - B) * 60);
+        D = Math.floor((c - C) * 60);
+        runtime_span.innerHTML = "⏱️本站已运行 " + A + "天" + B + "小时" + C + "分" + D + "秒"
+    }
+    show_runtime();
+</script>
+</center>
+</div></footer>
+<div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right">
+<div class="widgets">
+
+
+
+<widget class="widget-wrapper toc" id="data-toc" collapse="false"><div class="widget-header dis-select"><span class="name">本文目录</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83"><span class="toc-text">开发环境</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="toc-text">环境配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE"><span class="toc-text">项目配置</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BC%96%E5%86%99%E7%AC%AC%E4%B8%80%E4%B8%AA%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F"><span class="toc-text">编写第一个驱动程序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B0%83%E8%AF%95%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F"><span class="toc-text">调试驱动程序</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E9%85%8D%E7%BD%AE%E8%B0%83%E8%AF%95"><span class="toc-text">1、配置调试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81PDB%E6%96%87%E4%BB%B6"><span class="toc-text">2、PDB文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81windbg%E5%A6%82%E4%BD%95%E6%89%BE%E5%88%B0pdb%E6%96%87%E4%BB%B6"><span class="toc-text">3、windbg如何找到pdb文件</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%86%85%E6%A0%B8%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80"><span class="toc-text">内核编程基础</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E5%86%85%E6%A0%B8API%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-text">1、内核API的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81%E6%9C%AA%E5%AF%BC%E5%87%BA%E5%87%BD%E6%95%B0%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-text">2、未导出函数的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">3、基本数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%E3%80%81%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="toc-text">4、返回值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5%E3%80%81%E5%86%85%E6%A0%B8%E4%B8%AD%E7%9A%84%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="toc-text">5、内核中的异常处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6%E3%80%81%E5%B8%B8%E7%94%A8%E7%9A%84%E5%86%85%E6%A0%B8%E5%86%85%E5%AD%98%E5%87%BD%E6%95%B0"><span class="toc-text">6、常用的内核内存函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7%E3%80%81%E5%86%85%E6%A0%B8%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%A7%8D%E7%B1%BB"><span class="toc-text">7、内核字符串种类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8%E3%80%81%E5%86%85%E6%A0%B8%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0"><span class="toc-text">8、内核字符串常用函数</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%86%85%E6%A0%B8%E7%A9%BA%E9%97%B4%E4%B8%8E%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97"><span class="toc-text">内核空间与内核模块</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E5%86%85%E6%A0%B8%E7%A9%BA%E9%97%B4"><span class="toc-text">1、内核空间</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97"><span class="toc-text">2、内核模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81DRIVER-OBJECT"><span class="toc-text">3、DRIVER_OBJECT</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%E3%80%81%E6%89%93%E5%8D%B0DRIVER-OBJECT%E5%9C%B0%E5%9D%80"><span class="toc-text">4、打印DRIVER_OBJECT地址</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5%E3%80%81%E9%81%8D%E5%8E%86%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97"><span class="toc-text">5、遍历内核模块</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0%E7%8E%AF%E4%B8%8E3%E7%8E%AF%E9%80%9A%E4%BF%A1-%E5%B8%B8%E8%A7%84%E6%96%B9%E5%BC%8F"><span class="toc-text">0环与3环通信(常规方式)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E8%AE%BE%E5%A4%87%E5%AF%B9%E8%B1%A1"><span class="toc-text">1、设备对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81%E5%88%9B%E5%BB%BA%E8%AE%BE%E5%A4%87%E5%AF%B9%E8%B1%A1"><span class="toc-text">2、创建设备对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81%E8%AE%BE%E7%BD%AE%E4%BA%A4%E4%BA%92%E6%95%B0%E6%8D%AE%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="toc-text">3、设置交互数据的方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%E3%80%81%E5%88%9B%E5%BB%BA%E7%AC%A6%E5%8F%B7%E9%93%BE%E6%8E%A5"><span class="toc-text">4、创建符号链接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5%E3%80%81IRP%E4%B8%8E%E6%B4%BE%E9%81%A3%E5%87%BD%E6%95%B0"><span class="toc-text">5、IRP与派遣函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6%E3%80%81IRP%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="toc-text">6、IRP的类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7%E3%80%81%E6%B4%BE%E9%81%A3%E5%87%BD%E6%95%B0%E6%B3%A8%E5%86%8C%E4%BD%8D%E7%BD%AE"><span class="toc-text">7、派遣函数注册位置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8%E3%80%81%E6%B3%A8%E5%86%8C%E6%B4%BE%E9%81%A3%E5%87%BD%E6%95%B0"><span class="toc-text">8、注册派遣函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9%E3%80%81%E6%B4%BE%E9%81%A3%E5%87%BD%E6%95%B0%E7%9A%84%E6%A0%BC%E5%BC%8F"><span class="toc-text">9、派遣函数的格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10%E3%80%81%E9%80%9A%E8%BF%87IRP-MJ-DEVICE-CONTROL%E4%BA%A4%E4%BA%92%E6%95%B0%E6%8D%AE"><span class="toc-text">10、通过IRP_MJ_DEVICE_CONTROL交互数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%EF%BC%9A"><span class="toc-text">代码：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Demo%E4%BB%A3%E7%A0%81"><span class="toc-text">Demo代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A9%B1%E5%8A%A8%E9%80%9A%E4%BF%A1%E6%A1%88%E4%BE%8B%E4%BB%A3%E7%A0%81"><span class="toc-text">驱动通信案例代码</span></a></li></ol></li></ol></li></ol></div><div class="widget-footer">
+
+<a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12c0-4.714 0-7.071 1.464-8.536C4.93 2 7.286 2 12 2c4.714 0 7.071 0 8.535 1.464C22 4.93 22 7.286 22 12c0 4.714 0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12Z"/><path stroke-linecap="round" stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/></g></svg><span>回到顶部</span></a></div></widget>
+</div></aside><div class='float-panel blur'>
+  <button type='button' style='display:none' class='laptop-only rightbar-toggle mobile' onclick='sidebar.rightbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type='button' style='display:none' class='mobile-only leftbar-toggle mobile' onclick='sidebar.leftbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+</div><div class="scripts">
+<script type="text/javascript">
+  const ctx = {
+    date_suffix: {
+      just: `刚刚`,
+      min: `分钟前`,
+      hour: `小时前`,
+      day: `天前`,
+    },
+    root : `/`,
+  };
+
+  // required plugins (only load if needs)
+  if (`local_search`) {
+    ctx.search = {};
+    ctx.search.service = `local_search`;
+    if (ctx.search.service == 'local_search') {
+      let service_obj = Object.assign({}, `{"field":"all","path":"/search.json","content":true,"sort":"-date"}`);
+      ctx.search[ctx.search.service] = service_obj;
+    }
+  }
+  const def = {
+    avatar: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/3442075.svg`,
+    cover: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/cover/76b86c0226ffd.svg`,
+  };
+  const deps = {
+    jquery: `https://pic.gitlab.cx/npm/jquery@3.7.1/dist/jquery.min.js`,
+    marked: `https://pic.gitlab.cx/npm/marked@13.0.1/lib/marked.umd.min.js`
+  }
+  
+
+</script>
+
+<script type="text/javascript">
+  const utils = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    css: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    js: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = ctx.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    jq: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        utils.js(deps.jquery).then(fn)
+      } else {
+        fn()
+      }
+    },
+    
+    onLoading: (el) => {
+      if (el) {
+        $(el).append('<div class="loading-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" stroke-opacity=".3" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="1.3s" values="60;0"/></path><path stroke-dasharray="15" stroke-dashoffset="15" d="M12 3C16.9706 3 21 7.02944 21 12"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="15;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></g></svg></div>');
+      }
+    },
+    onLoadSuccess: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap').remove();
+      }
+    },
+    onLoadFailure: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap svg').remove();
+        $(el).find('.loading-wrap').append('<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3L21 20H3L12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="6" stroke-dashoffset="6" d="M12 10V14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="6;0"/></path></g><circle cx="12" cy="17" r="1" fill="currentColor" fill-opacity="0"><animate fill="freeze" attributeName="fill-opacity" begin="0.8s" dur="0.4s" values="0;1"/></circle></svg>');
+        $(el).find('.loading-wrap').addClass('error');
+      }
+    },
+    request: (el, url, callback, onFailure) => {
+      let retryTimes = 3;
+      utils.onLoading(el);
+      function req() {
+        return new Promise((resolve, reject) => {
+          let status = 0; // 0 等待 1 完成 2 超时
+          let timer = setTimeout(() => {
+            if (status === 0) {
+              status = 2;
+              timer = null;
+              reject('请求超时');
+              if (retryTimes == 0) {
+                onFailure();
+              }
+            }
+          }, 5000);
+          fetch(url).then(function(response) {
+            if (status !== 2) {
+              clearTimeout(timer);
+              resolve(response);
+              timer = null;
+              status = 1;
+            }
+            if (response.ok) {
+              return response.json();
+            }
+            throw new Error('Network response was not ok.');
+          }).then(function(data) {
+            retryTimes = 0;
+            utils.onLoadSuccess(el);
+            callback(data);
+          }).catch(function(error) {
+            if (retryTimes > 0) {
+              retryTimes -= 1;
+              setTimeout(() => {
+                req();
+              }, 5000);
+            } else {
+              utils.onLoadFailure(el);
+              onFailure();
+            }
+          });
+        });
+      }
+      req();
+    },
+  };
+</script>
+
+<script>
+  const sidebar = {
+    leftbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    rightbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('rightbar');
+        l_body.removeAttribute('leftbar');
+      }
+    },
+    dismiss: () => {
+      if (l_body) {
+        l_body.removeAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    toggleTOC: () => {
+      document.querySelector('#data-toc').classList.toggle('collapse');
+    }
+  }
+</script>
+<script type="text/javascript">
+  (() => {
+    const tagSwitchers = document.querySelectorAll('.tag-subtree.parent-tag > a > .tag-switcher-wrapper')
+    for (const tagSwitcher of tagSwitchers) {
+      tagSwitcher.addEventListener('click', (e) => {
+        const parent = e.target.closest('.tag-subtree.parent-tag')
+        parent.classList.toggle('expanded')
+        e.preventDefault()
+      })
+    }
+
+    // Get active tag from query string, then activate it.
+    const urlParams = new URLSearchParams(window.location.search)
+    const activeTag = urlParams.get('tag')
+    if (activeTag) {
+      let tag = document.querySelector(`.tag-subtree[data-tag="${activeTag}"]`)
+      if (tag) {
+        tag.querySelector('a').classList.add('active')
+        
+        while (tag) {
+          tag.classList.add('expanded')
+          tag = tag.parentElement.closest('.tag-subtree.parent-tag')
+        }
+      }
+    }
+  })()
+</script>
+
+
+<!-- required -->
+<script src="/js/main.js?v=1.29.1" defer></script>
+
+<script type="text/javascript">
+  const applyTheme = (theme) => {
+    if (theme === 'auto') {
+      document.documentElement.removeAttribute('data-theme')
+    } else {
+      document.documentElement.setAttribute('data-theme', theme)
+    }
+
+    applyThemeToGiscus(theme)
+  }
+
+  const applyThemeToGiscus = (theme) => {
+    theme = theme === 'auto' ? 'preferred_color_scheme' : theme
+
+    const cmt = document.getElementById('giscus')
+    if (cmt) {
+      // This works before giscus load.
+      cmt.setAttribute('data-theme', theme)
+    }
+
+    const iframe = document.querySelector('#comments > section.giscus > iframe')
+    if (iframe) {
+      // This works after giscus loaded.
+      const src = iframe.src
+      const newSrc = src.replace(/theme=[\w]+/, `theme=${theme}`)
+      iframe.src = newSrc
+    }
+  }
+
+  const switchTheme = () => {
+    // light -> dark -> auto -> light -> ...
+    const currentTheme = document.documentElement.getAttribute('data-theme')
+    let newTheme;
+    switch (currentTheme) {
+      case 'light':
+        newTheme = 'dark'
+        break
+      case 'dark':
+        newTheme = 'auto'
+        break
+      default:
+        newTheme = 'light'
+    }
+    applyTheme(newTheme)
+    window.localStorage.setItem('Stellar.theme', newTheme)
+
+    const messages = {
+      light: `切换到浅色模式`,
+      dark: `切换到深色模式`,
+      auto: `切换到跟随系统配色`,
+    }
+    hud?.toast?.(messages[newTheme])
+  }
+
+  (() => {
+    // Apply user's preferred theme, if any.
+    const theme = window.localStorage.getItem('Stellar.theme')
+    if (theme !== null) {
+      applyTheme(theme)
+    }
+  })()
+</script>
+
+
+<!-- optional -->
+
+
+
+<script defer>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.services = Object.assign({}, JSON.parse(`{"mdrender":{"js":"/js/services/mdrender.js"},"siteinfo":{"js":"/js/services/siteinfo.js","api":null},"ghinfo":{"js":"/js/services/ghinfo.js"},"sites":{"js":"/js/services/sites.js"},"friends":{"js":"/js/services/friends.js"},"timeline":{"js":"/js/services/timeline.js"},"fcircle":{"js":"/js/services/fcircle.js"},"weibo":{"js":"/js/services/weibo.js"},"memos":{"js":"/js/services/memos.js"}}`));
+    for (let id of Object.keys(ctx.services)) {
+      const js = ctx.services[id].js;
+      if (id == 'siteinfo') {
+        ctx.cardlinks = document.querySelectorAll('a.link-card[cardlink]');
+        if (ctx.cardlinks?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            setCardLink(ctx.cardlinks);
+          });
+        }
+      } else {
+        const els = document.getElementsByClassName(`ds-${id}`);
+        if (els?.length > 0) {
+          utils.jq(() => {
+            if (id == 'timeline' || 'memos' || 'marked') {
+              utils.js(deps.marked).then(function () {
+                utils.js(js, { defer: true });
+              });
+            } else {
+              utils.js(js, { defer: true });
+            }
+          });
+        }
+      }
+    }
+  });
+</script>
+
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.search = {
+      path: `/search.json`,
+    }
+    utils.js('/js/search/local-search.js', { defer: true });
+  });
+</script><script>
+  window.FPConfig = {
+    delay: 0,
+    ignoreKeywords: [],
+    maxRPS: 5,
+    hoverDelay: 25
+  };
+</script>
+<script defer src="https://pic.gitlab.cx/npm/flying-pages@2/flying-pages.min.js"></script><script defer src="https://pic.gitlab.cx/npm/vanilla-lazyload@19.1.3/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazy",
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    window.lazyLoadInstance?.update();
+  });
+</script><script>
+  ctx.fancybox = {
+    selector: `.timenode p>img`,
+    css: `https://pic.gitlab.cx/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css`,
+    js: `https://pic.gitlab.cx/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js`
+  };
+  var selector = '[data-fancybox]:not(.error)';
+  if (ctx.fancybox.selector) {
+    selector += `, ${ctx.fancybox.selector}`
+  }
+  var needFancybox = document.querySelectorAll(selector).length !== 0;
+  if (!needFancybox) {
+    const els = document.getElementsByClassName('ds-memos');
+    if (els != undefined && els.length > 0) {
+      needFancybox = true;
+    }
+  }
+  if (needFancybox) {
+    utils.css(ctx.fancybox.css);
+    utils.js(ctx.fancybox.js, { defer: true }).then(function () {
+      Fancybox.bind(selector, {
+        hideScrollbar: false,
+        Thumbs: {
+          autoStart: false,
+        },
+        caption: (fancybox, slide) => {
+          return slide.triggerEl.alt || slide.triggerEl.dataset.caption || null
+        }
+      });
+    })
+  }
+</script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const swiper_api = document.getElementById('swiper-api');
+    if (swiper_api != undefined) {
+      utils.css(`https://unpkg.com/swiper@10.3.1/swiper-bundle.min.css`);
+      utils.js(`https://unpkg.com/swiper@10.3.1/swiper-bundle.min.js`, { defer: true }).then(function () {
+        const effect = swiper_api.getAttribute('effect') || '';
+        var swiper = new Swiper('.swiper#swiper-api', {
+          slidesPerView: 'auto',
+          spaceBetween: 8,
+          centeredSlides: true,
+          effect: effect,
+          rewind: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      })
+    }
+  });
+</script>
+<script defer type="text/javascript" src="https://pic.gitlab.cx/npm/mermaid@v9/dist/mermaid.min.js"></script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    var mermaid_config = {
+      startOnLoad: true,
+      theme:
+        "" == "auto" &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "neutral",
+      logLevel: 3,
+      themeVariables: {
+        darkMode: true
+      },
+      flowchart: {
+        useMaxWidth: false,
+        htmlLabels: true,
+        curve: "linear"
+      },
+      gantt: {
+        axisFormat: "%Y/%m/%d"
+      },
+      sequence: {
+        actorMargin: 50
+      }
+    }
+    mermaid.initialize(mermaid_config);
+  });
+</script><script>
+  document.addEventListener('DOMContentLoaded', function () {
+    window.codeElements = document.querySelectorAll('.code');
+    if (window.codeElements.length > 0) {
+      ctx.copycode = {
+        default_text: `Copy`,
+        success_text: `Copied`,
+        toast: `复制成功`,
+      };
+      utils.js('/js/plugins/copycode.js');
+    }
+  });
+</script>
+
+
+<!-- inject -->
+
+</div></body></html>
